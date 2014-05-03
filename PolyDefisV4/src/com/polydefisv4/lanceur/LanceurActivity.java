@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.polydefisv3.R;
+import com.polydefisv4.accueil.AccueilFragment;
+import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.fenetre_principale.MainActivity;
 import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.metier.Specialite;

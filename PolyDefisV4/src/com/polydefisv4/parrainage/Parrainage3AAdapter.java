@@ -2,7 +2,6 @@ package com.polydefisv4.parrainage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import android.content.Context;
 import android.view.View;
@@ -72,7 +71,7 @@ public class Parrainage3AAdapter extends ArrayAdapter<Etudiant> implements
 					results.count = list.size();
 				}
 			} else {
-				final String prefixString = prefix.toString().toLowerCase();
+				String prefixString = prefix.toString().toLowerCase();
 
 				ArrayList<Etudiant> values = mOriginalValues;
 				int count = values.size();

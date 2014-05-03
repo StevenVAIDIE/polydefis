@@ -76,4 +76,8 @@ public class Etudiant implements Serializable {
 	public boolean isAdmin() {
 		return respo;
 	}
+
+	public static Etudiant getEtudiant() {
+		return new Etudiant("GUERRE", "Martin", 3, Specialite.INFO, false);
+	}
 }
