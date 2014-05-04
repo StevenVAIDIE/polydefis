@@ -1,4 +1,4 @@
-package com.polydefisv4.accueil;
+package com.polydefisv4.menu_principal;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,29 +14,20 @@ import android.widget.Button;
 import com.polydefisv3.R;
 import com.polydefisv4.metier.Etudiant;
 
-public class AccueilAdapter extends BaseAdapter {
-	Integer[] listeBouton3A = { R.string.listeDefisRealise,
-			R.string.listeDefisARealiser, R.string.profil,
-			R.string.classement3A, R.string.classement4A };
-	Integer[] listeBouton4A = { R.string.listeDefisRealise,
-			R.string.proposerDefis, R.string.profil, R.string.classement3A,
-			R.string.classement4A };
-	Integer[] listeBouton4AAdmin = { R.string.listeDefisRealise,
-			R.string.proposerDefis, R.string.profil, R.string.classement3A,
-			R.string.classement4A, R.string.administration };
+public class MenuPrincipalAdapter extends BaseAdapter {
 
-	List<Integer> listeBouton;
+	List<String> listeBouton;
 	private Activity contexte;
 
-	public AccueilAdapter(Activity contexte, Etudiant etudiant) {
+	public MenuPrincipalAdapter(Activity contexte, Etudiant etudiant) {
 		this.contexte = contexte;
 		
 		if (etudiant.getAnnee() == 4 && etudiant.isAdmin()) {
-			listeBouton = Arrays.asList(listeBouton4AAdmin);
+			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu4AAdmin));
 		} else if (etudiant.getAnnee() == 4) {
-			listeBouton = Arrays.asList(listeBouton4A);
+			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu4A));
 		} else if (etudiant.getAnnee() == 3) {
-			listeBouton = Arrays.asList(listeBouton3A);
+			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu3A));
 		}
 	}
 

@@ -18,13 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.polydefisv3.R;
-import com.polydefisv4.accueil.AccueilFragment;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
+import com.polydefisv4.menu_principal.MenuPrincipalFragment;
 import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.profil.ProfilFragment;
 
-public class MainActivity extends Activity implements OnItemClickListener {
+public class FenetrePrincipaleActivity extends Activity implements OnItemClickListener {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -36,21 +36,30 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_fenetre_principale);
 
 		mTitle = mDrawerTitle = getTitle();
 		
 		etudiant = (Etudiant) getIntent().getSerializableExtra("etudiant");
 		
 		// load slide menu items
-		navMenuTitles = getResources().getStringArray(R.array.menu3A);
+		if (etudiant.getAnnee() == 3) {
+			navMenuTitles = getResources().getStringArray(R.array.menuLateral3A);
+		} else if (etudiant.getAnnee() == 4 && etudiant.isAdmin()) {
+			navMenuTitles = getResources().getStringArray(R.array.menuLateral4AAdmin);
+		} else if (etudiant.getAnnee() == 4) {
+			navMenuTitles = getResources().getStringArray(R.array.menuLateral4A);
+		} else {
+			Log.e("FenetrePrincipaleAcctivity", "L'etudiant n'est ni 3A ni 4A");
+		}
+		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
 		// Recycle the typed array
 		mDrawerList.setOnItemClickListener(this);
 
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.activity_list_item,android.R.id.text1, navMenuTitles);
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.menu_lateral_list_item, navMenuTitles);
 		mDrawerList.setAdapter(adapter);
 	
 		// enabling action bar app icon and behaving it as toggle button
@@ -98,7 +107,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 				return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
 	private void quitter() {
 		finish();
 		System.exit(0);
@@ -123,7 +132,7 @@ public class MainActivity extends Activity implements OnItemClickListener {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new AccueilFragment();
+			fragment = new MenuPrincipalFragment();
 			break;
 		case 1:
 			fragment = new ListeDefisRealiseFragment();

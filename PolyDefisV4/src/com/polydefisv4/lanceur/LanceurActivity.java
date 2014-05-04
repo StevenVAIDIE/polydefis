@@ -8,9 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.polydefisv3.R;
-import com.polydefisv4.accueil.AccueilFragment;
-import com.polydefisv4.classement.ClassementFragment;
-import com.polydefisv4.fenetre_principale.MainActivity;
+import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
 import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.metier.Specialite;
 
@@ -33,7 +31,7 @@ public class LanceurActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		Button selection = (Button) v;
-		Intent intent = new Intent(LanceurActivity.this, MainActivity.class);
+		Intent intent = new Intent(LanceurActivity.this, FenetrePrincipaleActivity.class);
 		if(selection.getText().toString().equals(getResources().getString(R.string.connexion_troisieme_annee))) {
 			intent.putExtra("etudiant", new Etudiant("VAIDIE", "Steven",3,Specialite.INFO,false));
 		} else if(selection.getText().equals(getResources().getString(R.string.connexion_quatrieme_annee))) {

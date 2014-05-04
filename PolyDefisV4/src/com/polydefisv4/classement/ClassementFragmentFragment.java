@@ -32,7 +32,7 @@ public class ClassementFragmentFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_classement, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_fragment_classement, container, false);
 		
 		getArguments().getInt(ARG_SECTION_NUMBER);
 		ListView gridView = (ListView) rootView.findViewById(R.id.listViewClassement);

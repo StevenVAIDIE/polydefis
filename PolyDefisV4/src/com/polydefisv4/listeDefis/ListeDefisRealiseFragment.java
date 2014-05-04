@@ -26,6 +26,8 @@ public class ListeDefisRealiseFragment extends Fragment implements OnItemClickLi
         etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 	    
 	    ListView listViewDefis = (ListView) rootView.findViewById(R.id.listViewDefis);
+	    
+	    //listeDefisEtudiant = SQLManager.getDefis(etudiant);
 	    listeDefisEtudiant = Defis.getAllDefis();
 	    listViewDefis.setAdapter(new ListeDefisAdapter(this.getActivity(),Defis.getAllDefis()));
 	    listViewDefis.setOnItemClickListener(this);

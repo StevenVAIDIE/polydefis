@@ -34,11 +34,12 @@ public class ClassementFragment extends Fragment implements TabListener {
 	private ActionBar actionBar;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_test_swip, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_classement, container, false);
 	    
 	    actionBar = getActivity().getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
+	    actionBar.removeAllTabs();
+	    
 	    adapter = new SectionsPagerAdapter(getFragmentManager());
 	    
 	    viewPager = (ViewPager) rootView.findViewById(R.id.pager);
@@ -54,10 +55,12 @@ public class ClassementFragment extends Fragment implements TabListener {
 				actionBar.setSelectedNavigationItem(position);
 			}
 		});
-		
         return rootView;
     }
+	
 
+
+	
 	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
 		viewPager.setCurrentItem(tab.getPosition());

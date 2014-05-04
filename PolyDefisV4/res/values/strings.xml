@@ -3,26 +3,12 @@
 
     <string name="app_name">PolyDefisv4</string>
     <string name="action_settings">Setting</string>
-    <string name="listeDefisRealise">Liste des défis réalise</string>
-    <string name="listeDefisARealiser">Liste défis à réaliser</string>
-    <string name="profil">Profil</string>
-    <string name="classement3A">Classement des 3A</string>
-    <string name="classement4A">Classement des 4A</string>
-    <string name="title_activity_liste_defis_realise">ListeDefisRealise</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_classement">ClassementActivity</string>
-    <string name="title_activity_profil">ProfilActivity</string>
-    <string name="title_activity_header">HeaderActivity</string>
     <string name="parrainage">Parrainage</string>
     <string name="administration">Administration</string>
     <string name="proposerDefis">Proposer un défis</string>
-    <string name="title_activity_parrainage">ParrainageActivity</string>
-    <string name="title_activity_ajout_administrateur">AjoutAdministrateurActivity</string>
-    <string name="title_activity_administration">AdministrationActivity</string>
     <string name="validerPropositionDefis">Proposition de defis à accepter</string>
     <string name="validerDefisRealise">Défis réalisés à valider</string>
     <string name="ajoutRespo">Ajouter un responsable de promo</string>
-    <string name="title_activity_lanceur">Lanceur</string>
     <string name="connexion_troisieme_annee">Connexion en tant que 3A</string>
     <string name="connexion_quatrieme_annee">Connexion en tant que 4A</string>
     <string name="connexion_responsable">Connexion en tant que respo</string>
@@ -30,9 +16,33 @@
     <string name="accepter">Accepter</string>
     <string name="demandeDeParrainage">Demander le parrainage</string>
     <string name="connexion">Se connecter</string>
-    <string name="title_activity_drawer">Drawer</string>
-
+	
     <string-array name="menu3A">
+        <item>Liste des défis réalise</item>
+        <item>Liste défis à réaliser</item>
+        <item>Profil</item>
+        <item>Classement des 3A</item>
+        <item>Classement des 4A</item>
+    </string-array>
+    
+   	<string-array name="menu4A">
+        <item>Liste des défis réalise</item>
+        <item>Proposer un défis</item>
+        <item>Profil</item>
+        <item>Classement des 3A</item>
+        <item>Classement des 4A</item>
+    </string-array>
+
+   	<string-array name="menu4AAdmin">
+        <item>Liste des défis réalise</item>
+        <item>Proposer un défis</item>
+        <item>Profil</item>
+        <item>Classement des 3A</item>
+        <item>Classement des 4A</item>
+        <item>Administration</item>
+    </string-array>
+    		
+    <string-array name="menuLateral3A">
         <item>Accueil</item>
         <item>Liste des défis réalise</item>
         <item>Liste défis à réaliser</item>
@@ -41,8 +51,28 @@
         <item>Classement des 4A</item>
         <item>Quitter</item>
     </string-array>
+    
+   	<string-array name="menuLateral4A">
+        <item>Accueil</item>
+        <item>Liste des défis réalise</item>
+        <item>Proposer un défis</item>
+        <item>Profil</item>
+        <item>Classement des 3A</item>
+        <item>Classement des 4A</item>
+        <item>Quitter</item>
+    </string-array>
 
-    <string name="title_activity_test_swip">TestSwip</string>
+   	<string-array name="menuLateral4AAdmin">
+        <item>Accueil</item>
+        <item>Liste des défis réalise</item>
+        <item>Proposer un défis</item>
+        <item>Profil</item>
+        <item>Classement des 3A</item>
+        <item>Classement des 4A</item>
+        <item>Administration</item>
+        <item>Quitter</item>
+    </string-array>
+    
     <string name="titreClassementTotal">Total</string>
     <string name="titreClassementINFO">INFO</string>
     <string name="titreClassementETN">ETN</string>
