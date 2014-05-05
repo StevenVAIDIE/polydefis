@@ -16,7 +16,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
-import com.polydefisv4.administration.AjoutAdministrateurFragment;
+import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.metier.Etudiant;

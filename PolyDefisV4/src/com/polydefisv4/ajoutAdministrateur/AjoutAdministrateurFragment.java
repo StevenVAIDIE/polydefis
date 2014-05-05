@@ -1,4 +1,4 @@
-package com.polydefisv4.administration;
+package com.polydefisv4.ajoutAdministrateur;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class AjoutAdministrateurFragment extends Fragment implements OnClickList
 		nomParrain = (AutoCompleteTextView) rootView.findViewById(R.id.nomResponsable);
 		nomParrain.setThreshold(2);
 		
-		Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity().getApplicationContext(),
+		Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity(),
 				android.R.layout.simple_dropdown_item_1line,
 				android.R.id.text1, Etudiant.getAllEtudiant());
 		

@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
-import com.polydefisv4.administration.AjoutAdministrateurFragment;
+import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
@@ -61,7 +61,7 @@ public class FenetrePrincipaleActivity extends Activity implements
 		listViewMenuLateral.setOnItemClickListener(this);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.menu_lateral_list_item, itemMenuLateral);
+				R.layout.item_menu_lateral, itemMenuLateral);
 		listViewMenuLateral.setAdapter(adapter);
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -115,7 +115,11 @@ public class FenetrePrincipaleActivity extends Activity implements
 
 	@Override
 	public void onBackPressed() {
-		displayView(getString(R.string.accueil));
+		if (getTitle().equals(getString(R.string.accueil))) {
+			quitter();
+		} else {
+			displayView(getString(R.string.accueil));
+		}
 	}
 
 	private void quitter() {

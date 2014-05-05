@@ -50,7 +50,7 @@ public class MenuPrincipalAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Button buttonItem;
 		if (convertView == null) {
-			buttonItem = (Button) LayoutInflater.from(contexte).inflate(R.layout.accueil_liste_item, parent, false);
+			buttonItem = (Button) LayoutInflater.from(contexte).inflate(R.layout.item_accueil, parent, false);
 		} else {
 			buttonItem = (Button) convertView;
 		}

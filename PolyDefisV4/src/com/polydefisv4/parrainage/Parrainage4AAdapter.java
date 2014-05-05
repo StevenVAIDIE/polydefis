@@ -41,7 +41,7 @@ public class Parrainage4AAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LinearLayout layoutItem;
 		if (convertView == null) {
-			layoutItem = (LinearLayout) LayoutInflater.from(contexte.getActivity()).inflate(R.layout.parrainage4a_liste_item, parent, false);
+			layoutItem = (LinearLayout) LayoutInflater.from(contexte.getActivity()).inflate(R.layout.item_parrainage4a, parent, false);
 		} else {
 			layoutItem = (LinearLayout) convertView;
 		}

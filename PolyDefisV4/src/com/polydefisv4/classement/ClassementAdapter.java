@@ -46,7 +46,7 @@ public class ClassementAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LinearLayout layoutItem;
 		if (convertView == null) {
-			layoutItem =(LinearLayout) View.inflate(contexte.getActivity(), R.layout.classement_liste_item, null);
+			layoutItem =(LinearLayout) View.inflate(contexte.getActivity(), R.layout.item_classement, null);
 		} else {
 			layoutItem = (LinearLayout) convertView;
 		}

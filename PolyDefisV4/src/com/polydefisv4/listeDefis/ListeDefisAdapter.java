@@ -48,7 +48,7 @@ public class ListeDefisAdapter extends BaseAdapter {
 		LinearLayout layoutItem;
 		if (convertView == null) {
 			layoutItem = (LinearLayout) LayoutInflater.from(contexte).inflate(
-					R.layout.defis_realise_liste_item, parent, false);
+					R.layout.item_defis_realise, parent, false);
 		} else {
 			layoutItem = (LinearLayout) convertView;
 		}
