@@ -30,7 +30,7 @@
       android:layout_gravity="center"
       android:layout_marginBottom="20dp"
       android:gravity="center_vertical|center_horizontal"
-      android:text="@string/demandeDeParrainage"         
+      android:text="@string/demande_Parrainage"         
       android:background="@drawable/bouton_application"/>
 
 </LinearLayout>

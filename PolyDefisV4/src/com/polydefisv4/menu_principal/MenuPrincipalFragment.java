@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.polydefisv3.R;
+import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.metier.Etudiant;
@@ -45,18 +47,26 @@ public class MenuPrincipalFragment extends Fragment implements
 		Button boutonclique = (Button) view;
 
 		Fragment fragment = null;
-		if (boutonclique.getText().toString().equals("Liste des défis réalise")) {
+		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_realises))) {
 			fragment = new ListeDefisRealiseFragment();
-		} else if (boutonclique.getText().toString().equals("Liste défis à réaliser")) {
+		} else if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
-		} else if (boutonclique.getText().toString().equals("Profil")) {
+		} else if (boutonclique.getText().toString().equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
-		} else if (boutonclique.getText().toString().equals("Classement des 3A")) {
+		} else if (boutonclique.getText().toString().equals(getString(R.string.classement_des_3a))) {
 			fragment = new ClassementFragment();
-		} else if (boutonclique.getText().toString().equals("Classement des 4A")) {
+		} else if (boutonclique.getText().toString().equals(getString(R.string.classement_des_4a))) {
 			fragment = new ClassementFragment();
+		} else if (boutonclique.getText().toString().equals(getString(R.string.proposer_defi))) {
+			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_proposition_defis))) {
+			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_defis_realise))) {
+			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+		} else if (boutonclique.getText().toString().equals(getString(R.string.ajout_respo))) {
+			fragment = new AjoutAdministrateurFragment();
 		}
-
+		
 		if (fragment != null) {
 			getActivity().setTitle(boutonclique.getText());
 

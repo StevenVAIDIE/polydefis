@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/validerPropositionDefis"
+        android:text="@string/valider_proposition_defis"
         android:background="@drawable/bouton_application"/>
 
     <Button
@@ -18,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/validerDefisRealise" 
+        android:text="@string/valider_defis_realise" 
         android:background="@drawable/bouton_application"/>
 
     <Button
@@ -26,6 +26,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/ajoutRespo"
+        android:text="@string/ajout_respo"
         android:background="@drawable/bouton_application"/>
 </LinearLayout>

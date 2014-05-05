@@ -16,76 +16,81 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.polydefisv3.R;
+import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
 import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.profil.ProfilFragment;
 
-public class FenetrePrincipaleActivity extends Activity implements OnItemClickListener {
-	private DrawerLayout mDrawerLayout;
-	private ListView mDrawerList;
+public class FenetrePrincipaleActivity extends Activity implements
+		OnItemClickListener {
+	private DrawerLayout layoutMenuLateral;
+	private ListView listViewMenuLateral;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private CharSequence mDrawerTitle;
-	private CharSequence mTitle;
-	private String[] navMenuTitles;	
+	private CharSequence titreMenuLateral;
+	private CharSequence titreActionBar;
+	private String[] itemMenuLateral;
 	private Etudiant etudiant;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fenetre_principale);
-
-		mTitle = mDrawerTitle = getTitle();
-		
+		titreActionBar = titreMenuLateral = getTitle();
 		etudiant = (Etudiant) getIntent().getSerializableExtra("etudiant");
-		
-		// load slide menu items
+
 		if (etudiant.getAnnee() == 3) {
-			navMenuTitles = getResources().getStringArray(R.array.menuLateral3A);
+			itemMenuLateral = getResources().getStringArray(
+					R.array.menuLateral3A);
 		} else if (etudiant.getAnnee() == 4 && etudiant.isAdmin()) {
-			navMenuTitles = getResources().getStringArray(R.array.menuLateral4AAdmin);
+			itemMenuLateral = getResources().getStringArray(
+					R.array.menuLateral4AAdmin);
 		} else if (etudiant.getAnnee() == 4) {
-			navMenuTitles = getResources().getStringArray(R.array.menuLateral4A);
+			itemMenuLateral = getResources().getStringArray(
+					R.array.menuLateral4A);
 		} else {
 			Log.e("FenetrePrincipaleAcctivity", "L'etudiant n'est ni 3A ni 4A");
 		}
-		
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
 
-		// Recycle the typed array
-		mDrawerList.setOnItemClickListener(this);
+		listViewMenuLateral = (ListView) findViewById(R.id.list_slidermenu);
+		listViewMenuLateral.setOnItemClickListener(this);
 
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.menu_lateral_list_item, navMenuTitles);
-		mDrawerList.setAdapter(adapter);
-	
-		// enabling action bar app icon and behaving it as toggle button
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				R.layout.menu_lateral_list_item, itemMenuLateral);
+		listViewMenuLateral.setAdapter(adapter);
+
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setHomeButtonEnabled(true);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
+		layoutMenuLateral = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerToggle = new ActionBarDrawerToggle(this, layoutMenuLateral,
+				R.drawable.ic_drawer, R.string.app_name, R.string.app_name) {
 			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(mTitle);
+				getActionBar().setTitle(titreActionBar);
 				invalidateOptionsMenu();
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(mDrawerTitle);
+				getActionBar().setTitle(titreMenuLateral);
 				invalidateOptionsMenu();
 			}
 		};
-		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		layoutMenuLateral.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			displayView(0);
+			displayView(getString(R.string.accueil));
 		}
 	}
 
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		displayView(position);
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		TextView bouton = (TextView) view;
+		displayView(bouton.getText().toString());
 	}
 
 	@Override
@@ -100,61 +105,59 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 			return true;
 		}
 		switch (item.getItemId()) {
-			case R.id.menu_quitter:
-				quitter();
-				return true;
-			default:
-				return super.onOptionsItemSelected(item);
+		case R.id.menu_quitter:
+			quitter();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		displayView(getString(R.string.accueil));
+	}
+
 	private void quitter() {
 		finish();
 		System.exit(0);
 	}
 
-	/* *
-	 * Called when invalidateOptionsMenu() is triggered
-	 */
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// if nav drawer is opened, hide the action items
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-		menu.findItem(R.id.menu_quitter).setVisible(!drawerOpen);
+		boolean menuLateralOuvert = layoutMenuLateral
+				.isDrawerOpen(listViewMenuLateral);
+		menu.findItem(R.id.menu_quitter).setVisible(!menuLateralOuvert);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	/**
-	 * Diplaying fragment view for selected nav drawer list item
-	 * */
-	private void displayView(int position) {
-		// update the main content by replacing fragments
+	private void displayView(String nomFragment) {
 		Fragment fragment = null;
-		switch (position) {
-		case 0:
+
+		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
-			break;
-		case 1:
+		} else if (nomFragment
+				.equals(getString(R.string.liste_des_defis_realises))) {
 			fragment = new ListeDefisRealiseFragment();
-			break;
-		case 2:
+		} else if (nomFragment
+				.equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
-			break;
-		case 3:
+		} else if (nomFragment.equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
-			break;
-		case 4:
+		} else if (nomFragment.equals(getString(R.string.classement_des_3a))) {
 			fragment = new ClassementFragment();
-			break;
-		case 5:
+		} else if (nomFragment.equals(getString(R.string.classement_des_4a))) {
 			fragment = new ClassementFragment();
-			break;
-
-		case 6:
+		} else if (nomFragment.equals(getString(R.string.proposer_defi))) {
+			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+		} else if (nomFragment.equals(getString(R.string.ajout_respo))) {
+			fragment = new AjoutAdministrateurFragment();
+		} else if (nomFragment.equals(getString(R.string.valider_proposition_defis))) {
+			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+		} else if (nomFragment.equals(getString(R.string.valider_defis_realise))) {
+			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+		} else if (nomFragment.equals(getString(R.string.quitter))) {
 			quitter();
-
-		default:
-			break;
 		}
 
 		if (fragment != null) {
@@ -162,47 +165,40 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 			bundle.putSerializable("etudiant", etudiant);
 
 			fragment.setArguments(bundle);
-			
+
 			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			FragmentTransaction fragmentTransaction = fragmentManager
+					.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
 			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();
-			
+
 			// update selected item and title, then close the drawer
-			mDrawerList.setItemChecked(position, true);
-			mDrawerList.setSelection(position);
-			setTitle(navMenuTitles[position]);
-			mDrawerLayout.closeDrawer(mDrawerList);
+			listViewMenuLateral.setItemChecked(3, true);
+			listViewMenuLateral.setSelection(4);
+			setTitle(nomFragment);
+			layoutMenuLateral.closeDrawer(listViewMenuLateral);
 		} else {
-			// error in creating fragment
-			Log.e("MainActivity", "Error in creating fragment");
+			Log.e("FenetrePrincipaleActivity",
+					"Erreur lors de la creation du fragment");
 		}
 	}
 
 	@Override
 	public void setTitle(CharSequence title) {
-		mTitle = title;
-		getActionBar().setTitle(mTitle);
+		titreActionBar = title;
+		getActionBar().setTitle(titreActionBar);
 	}
-
-	/**
-	 * When using the ActionBarDrawerToggle, you must call it during
-	 * onPostCreate() and onConfigurationChanged()...
-	 */
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
 		mDrawerToggle.syncState();
 	}
 
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		// Pass any configuration change to the drawer toggls
-		mDrawerToggle.onConfigurationChanged(newConfig);
+	public void onConfigurationChanged(Configuration configuration) {
+		super.onConfigurationChanged(configuration);
+		mDrawerToggle.onConfigurationChanged(configuration);
 	}
-
 }

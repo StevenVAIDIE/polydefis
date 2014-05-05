@@ -47,7 +47,7 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		Button selection = (Button) v;
-		if(selection.getText().toString().equals(getResources().getString(R.string.demandeDeParrainage))) {
+		if(selection.getText().toString().equals(getResources().getString(R.string.demande_Parrainage))) {
 			Toast.makeText(ParrainageFragment.this.getActivity(), "Ajout du nouveau parain : "+nomParrain.getText().toString(), Toast.LENGTH_LONG).show();
 		//} else if(selection.getText().equals(getResources().getString(R.string.listeDefisARealiser))) {
 
