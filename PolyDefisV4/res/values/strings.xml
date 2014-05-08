@@ -84,5 +84,7 @@
     <string name="titreClassementETN">ETN</string>
     <string name="titreClassementTE">TE</string>
     <string name="titreClassementMAT">MAT</string>
+    <string name="title_activity_activity_test_martin">ActivityTestMartin</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

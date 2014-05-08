@@ -64,6 +64,10 @@ public class DefiBDD {
 	public SQLiteDatabase getBDD(){
 		return bdd;
 	}
+	
+	public SQL_Defi getSQL(){
+		return SQLDefi;
+	}
  
 	public long insertDefi(Defi defi, int type){
 		ContentValues values = new ContentValues();

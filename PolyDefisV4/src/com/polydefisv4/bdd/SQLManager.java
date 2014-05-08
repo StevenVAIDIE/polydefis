@@ -96,11 +96,35 @@ public class SQLManager {
 		return (result);		
 	}
 	
+	public void create()
+	{
+		this.etudiants.open();
+		this.etudiants.getSQL().onCreate(this.etudiants.getBDD());
+		this.etudiants.close();
+		
+		this.connexions.open();
+		this.connexions.getSQL().onCreate(this.connexions.getBDD());
+		this.connexions.close();
+		
+		this.connexions.open();
+		this.defis.getSQL().onCreate(this.defis.getBDD());
+		this.connexions.close();
+	}
+	
 	public void upgrade()
 	{
 		this.etudiants.open();
 		this.etudiants.getSQL().onUpgrade(this.etudiants.getBDD(), 1, 2);
 		this.etudiants.close();
+		
+		this.connexions.open();
+		this.connexions.getSQL().onUpgrade(this.connexions.getBDD(), 1, 2);
+		this.connexions.close();
+		
+		this.defis.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(), 1, 2);
+		this.defis.close();
+		
 	}
 	
 	public void insererJeuDeTest()

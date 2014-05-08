@@ -50,6 +50,10 @@ public class ConnexionBDD {
 	public SQLiteDatabase getBDD(){
 		return bdd;
 	}
+	
+	public SQL_Connexion getSQL(){
+		return SQLConnexion;
+	}
  
 	public long insertConnexion(Connexion connexion){
 		ContentValues values = new ContentValues();
