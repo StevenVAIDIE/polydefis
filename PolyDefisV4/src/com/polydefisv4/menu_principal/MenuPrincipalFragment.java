@@ -17,9 +17,9 @@ import android.widget.Toast;
 
 import com.polydefisv3.R;
 import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
-import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.profil.ProfilFragment;
 
 public class MenuPrincipalFragment extends Fragment implements

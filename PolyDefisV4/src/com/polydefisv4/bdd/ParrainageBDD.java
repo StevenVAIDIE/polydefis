@@ -2,13 +2,13 @@ package com.polydefisv4.bdd;
 
 import java.util.ArrayList;
 
-import com.polydefisv4.bean.Parrainage;
-import com.polydefisv4.sql.SQL_Parrainage;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.polydefisv4.bean.Parrainage;
+import com.polydefisv4.sql.SQL_Parrainage;
 
 public class ParrainageBDD {
 

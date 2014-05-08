@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class MenuPrincipalAdapter extends BaseAdapter {
 
@@ -22,11 +22,11 @@ public class MenuPrincipalAdapter extends BaseAdapter {
 	public MenuPrincipalAdapter(Activity contexte, Etudiant etudiant) {
 		this.contexte = contexte;
 		
-		if (etudiant.getAnnee() == 4 && etudiant.isAdmin()) {
+		if (etudiant.getAnneePromo() == 4 && etudiant.isRespo()) {
 			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu4AAdmin));
-		} else if (etudiant.getAnnee() == 4) {
+		} else if (etudiant.getAnneePromo() == 4) {
 			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu4A));
-		} else if (etudiant.getAnnee() == 3) {
+		} else if (etudiant.getAnneePromo() == 3) {
 			listeBouton = Arrays.asList(contexte.getResources().getStringArray(R.array.menu3A));
 		}
 	}

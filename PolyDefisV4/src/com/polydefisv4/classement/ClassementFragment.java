@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class ClassementFragment extends Fragment implements TabListener {
 	private ClassementPageAdapter adapter;

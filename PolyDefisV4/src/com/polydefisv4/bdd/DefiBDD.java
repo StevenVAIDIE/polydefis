@@ -1,14 +1,11 @@
 package com.polydefisv4.bdd;
 
-import java.util.ArrayList;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.sql.SQL_Defi;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 public class DefiBDD {
 

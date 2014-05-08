@@ -2,11 +2,11 @@ package com.polydefisv4.bdd;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+
 import com.polydefisv4.bean.Connexion;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Photo;
-
-import android.content.Context;
 
 public class SQLManager {
 
@@ -14,8 +14,7 @@ public class SQLManager {
 	private EtudiantBDD etudiants;
 	private DefiBDD defis;
 	
-	public SQLManager (Context context)
-	{
+	public SQLManager (Context context) {
 		this.connexions = new ConnexionBDD(context);
 		this.etudiants = new EtudiantBDD(context);
 		this.defis = new DefiBDD(context);

@@ -21,10 +21,10 @@ import android.widget.Toast;
 
 import com.polydefisv3.R;
 import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
-import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.profil.ProfilFragment;
 
 public class FenetrePrincipaleActivity extends Activity implements
@@ -44,13 +44,13 @@ public class FenetrePrincipaleActivity extends Activity implements
 		titreActionBar = titreMenuLateral = getTitle();
 		etudiant = (Etudiant) getIntent().getSerializableExtra("etudiant");
 
-		if (etudiant.getAnnee() == 3) {
+		if (etudiant.getAnneePromo() == 3) {
 			itemMenuLateral = getResources().getStringArray(
 					R.array.menuLateral3A);
-		} else if (etudiant.getAnnee() == 4 && etudiant.isAdmin()) {
+		} else if (etudiant.getAnneePromo() == 4 && etudiant.isRespo()) {
 			itemMenuLateral = getResources().getStringArray(
 					R.array.menuLateral4AAdmin);
-		} else if (etudiant.getAnnee() == 4) {
+		} else if (etudiant.getAnneePromo() == 4) {
 			itemMenuLateral = getResources().getStringArray(
 					R.array.menuLateral4A);
 		} else {

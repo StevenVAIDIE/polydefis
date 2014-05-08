@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class ParrainageFragment extends Fragment implements OnClickListener {
 	private AutoCompleteTextView nomParrain = null;
@@ -24,7 +24,7 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 	    etudiant = (Etudiant) i.getSerializable("etudiant");
 	    
 	    View rootView;
-		if(etudiant.getAnnee() == 3) {
+		if(etudiant.getAnneePromo() == 3) {
 	        rootView = inflater.inflate(R.layout.fragment_parrainage3a, container, false);
 			nomParrain = (AutoCompleteTextView) rootView.findViewById(R.id.nomParrain);
 			nomParrain.setThreshold(2);

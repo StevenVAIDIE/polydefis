@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class Parrainage4AAdapter extends BaseAdapter{
 	private List<Etudiant> listeEtudiant;

@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.parrainage.ParrainageFragment;
 
 public class ProfilFragment extends Fragment {
@@ -38,22 +38,22 @@ public class ProfilFragment extends Fragment {
 		nomEtudiant.setText(etudiant.getNom()+" "+etudiant.getPrenom());
 		
 		promotion = (TextView) rootView.findViewById(R.id.promotion);
-		promotion.setText(etudiant.getAnnee() + "A " +  etudiant.getSpecialite());
+		promotion.setText(etudiant.getAnneePromo() + "A " +  etudiant.getDepartement());
 		
 		nbPoint = (TextView) rootView.findViewById(R.id.nombrePoint);
-		nbPoint.setText(String.valueOf(etudiant.getNbPoint()));
+		nbPoint.setText(String.valueOf(etudiant.getPoints()));
 		
 		nbPointPhoto = (TextView) rootView.findViewById(R.id.point_photo);
-		nbPointPhoto.setText(String.valueOf(etudiant.getNbPointPhoto()));
+		nbPointPhoto.setText(String.valueOf(0));
 
 		nbPointQuizz = (TextView) rootView.findViewById(R.id.point_quizz);
-		nbPointQuizz.setText(String.valueOf(etudiant.getNbPointQuizz()));
+		nbPointQuizz.setText(String.valueOf(0));
 
 		nbPointGeolocalisation = (TextView) rootView.findViewById(R.id.point_geolocalisation);
-		nbPointGeolocalisation.setText(String.valueOf(etudiant.getNbPointGeolocalisation()));
+		nbPointGeolocalisation.setText(String.valueOf(0));
 
 		nbPointQrCode = (TextView) rootView.findViewById(R.id.point_qr_code);
-		nbPointQrCode.setText(String.valueOf(etudiant.getNbPointQrCode()));		
+		nbPointQrCode.setText(String.valueOf(0));		
 	
 		boutonParrainage = (Button) rootView.findViewById(R.id.bouton_parrainage);
 		boutonParrainage.setOnClickListener(new OnClickListener() {

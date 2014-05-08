@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.parrainage.Parrainage3AAdapter;
 
 public class AjoutAdministrateurFragment extends Fragment implements OnClickListener {

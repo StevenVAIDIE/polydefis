@@ -13,8 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.metier.Defis;
-import com.polydefisv4.metier.Etudiant;
 
 public class ListeDefisRealiseFragment extends Fragment implements OnItemClickListener {
 	private Etudiant etudiant;

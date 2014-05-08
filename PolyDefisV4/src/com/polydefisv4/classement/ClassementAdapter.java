@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class ClassementAdapter extends BaseAdapter{
 	private List <Etudiant> listeEtudiant;
@@ -55,7 +55,7 @@ public class ClassementAdapter extends BaseAdapter{
 		nom.setText(listeEtudiant.get(position).getNom() + " " + listeEtudiant.get(position).getPrenom());
 		
 		TextView nbPoint = (TextView) layoutItem.findViewById(R.id.nbPoint);
-		nbPoint.setText(String.valueOf(listeEtudiant.get(position).getNbPoint()));
+		nbPoint.setText(String.valueOf(listeEtudiant.get(position).getPoints()));
 		
 		if (listeEtudiant.get(position).equals(etudiantConcerne)) {
 			layoutItem.setBackgroundColor(Color.BLUE);

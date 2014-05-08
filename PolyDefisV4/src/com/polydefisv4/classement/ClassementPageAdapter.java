@@ -8,7 +8,7 @@ import android.content.Context;
 import android.support.v13.app.FragmentPagerAdapter;
 
 import com.polydefisv3.R;
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class ClassementPageAdapter extends FragmentPagerAdapter {
 

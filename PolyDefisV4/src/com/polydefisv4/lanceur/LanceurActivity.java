@@ -8,8 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.polydefisv3.R;
+import com.polydefisv4.bdd.SQLManager;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
-import com.polydefisv4.metier.Etudiant;
 import com.polydefisv4.metier.Specialite;
 
 public class LanceurActivity extends Activity implements OnClickListener {	
@@ -18,6 +19,10 @@ public class LanceurActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lanceur);
 	    
+		SQLManager manager = new SQLManager(this);
+		manager.create();
+		manager.insererJeuDeTest();
+		
 	    Button bouton3A = (Button) findViewById(R.id.bouton_3_A);
 	    bouton3A.setOnClickListener(this);
 	    
@@ -33,11 +38,11 @@ public class LanceurActivity extends Activity implements OnClickListener {
 		Button selection = (Button) v;
 		Intent intent = new Intent(LanceurActivity.this, FenetrePrincipaleActivity.class);
 		if(selection.getText().toString().equals(getResources().getString(R.string.connexion_troisieme_annee))) {
-			intent.putExtra("etudiant", new Etudiant("VAIDIE", "Steven",3,Specialite.INFO,false));
+			intent.putExtra("etudiant", new Etudiant("E116143S", "VAIDIE", "Steven", Etudiant.INFO, 3, false,10));
 		} else if(selection.getText().equals(getResources().getString(R.string.connexion_quatrieme_annee))) {
-			intent.putExtra("etudiant", new Etudiant("VAIDIE", "Steven",4,Specialite.INFO,false));
+			intent.putExtra("etudiant", new Etudiant("E116143S", "VAIDIE", "Steven", Etudiant.INFO, 4, false,10));
 		} else if(selection.getText().equals(getResources().getString(R.string.connexion_responsable))) {
-			intent.putExtra("etudiant", new Etudiant("VAIDIE", "Steven",4,Specialite.INFO,true));
+			intent.putExtra("etudiant", new Etudiant("E116143S", "VAIDIE", "Steven", Etudiant.INFO, 4, true,10));
 		} 
 		startActivity(intent);
 	}

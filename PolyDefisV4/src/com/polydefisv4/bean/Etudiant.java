@@ -1,7 +1,10 @@
 package com.polydefisv4.bean;
 
-public class Etudiant {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+public class Etudiant implements Serializable {
 	public static final String INFO = "INFO";
 	public static final String MAT = "MAT";
 	public static final String TE = "TE";
@@ -38,6 +41,18 @@ public class Etudiant {
 
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	public static List<Etudiant> getAllEtudiant() {
+		List<Etudiant> listeEtudiants = new ArrayList<Etudiant>();
+		listeEtudiants.add(new Etudiant("E116143S", "VAIDIE", "Steven", INFO, 3, false,10));
+		listeEtudiants.add(new Etudiant("E110001M", "PAYEN", "Mathieu", INFO, 3, false,19));
+		listeEtudiants.add(new Etudiant("E110151M", "GUERRE", "Martin", INFO, 3, false,13));
+		listeEtudiants.add(new Etudiant("E113001M", "KODELJA", "Dorian", INFO, 3, false,12));
+		listeEtudiants.add(new Etudiant("E1101601M", "GUINARD", "Arnaud", INFO, 3, false,12));
+		listeEtudiants.add(new Etudiant("E110081M", "GOUDAUX", "Thomas", INFO, 3, false,9));
+		
+		return listeEtudiants;
 	}
 
 	public String getPrenom() {

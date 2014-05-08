@@ -2,13 +2,13 @@ package com.polydefisv4.bdd;
 
 import java.util.ArrayList;
 
-import com.polydefisv4.bean.Etudiant;
-import com.polydefisv4.sql.SQL_Etudiant;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.sql.SQL_Etudiant;
 
 public class EtudiantBDD {
 

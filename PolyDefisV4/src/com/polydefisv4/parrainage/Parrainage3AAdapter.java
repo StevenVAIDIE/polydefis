@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 
-import com.polydefisv4.metier.Etudiant;
+import com.polydefisv4.bean.Etudiant;
 
 public class Parrainage3AAdapter extends ArrayAdapter<Etudiant> implements
 		Filterable {
