@@ -29,7 +29,7 @@ public class ClassementFragment extends Fragment implements TabListener {
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.removeAllTabs();
 	    
-	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager());
+	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager(), etudiant);
 	    
 	    viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		viewPager.setAdapter(adapter);
