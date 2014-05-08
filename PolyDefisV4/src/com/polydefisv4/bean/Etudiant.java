@@ -21,7 +21,7 @@ public class Etudiant implements Serializable {
 	public Etudiant(String idEtudiant, String nom, String prenom, String departement, int anneePromo, boolean respo,int points) {
 		super();
 		
-		this.nom = nom;
+		this.nom =  nom;
 		this.prenom = prenom;
 		this.idEtudiant = idEtudiant;
 		if(anneePromo == 3)
