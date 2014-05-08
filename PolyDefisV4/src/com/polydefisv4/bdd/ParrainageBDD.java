@@ -3,6 +3,7 @@ package com.polydefisv4.bdd;
 import java.util.ArrayList;
 
 import com.polydefisv4.bean.Parrainage;
+import com.polydefisv4.sql.SQL_Etudiant;
 import com.polydefisv4.sql.SQL_Parrainage;
 
 import android.content.ContentValues;
@@ -99,6 +100,10 @@ public class ParrainageBDD {
 	{
 		// A FAIRE
 		return null;
+	}
+
+	public SQL_Parrainage getSQL() {
+		return SQLParrainage;
 	}
 	
 	
