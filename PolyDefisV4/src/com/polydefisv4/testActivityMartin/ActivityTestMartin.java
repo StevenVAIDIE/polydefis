@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.polydefisv3.R;
 import com.polydefisv4.bdd.SQLManager;
+import com.polydefisv4.bean.Etudiant;
 
 public class ActivityTestMartin extends Activity {
 
@@ -72,6 +73,8 @@ public class ActivityTestMartin extends Activity {
 				if(connexion == true)
 				{
 					Toast.makeText(ActivityTestMartin.this,"Connexion réussie !", Toast.LENGTH_LONG).show();
+					Etudiant etu = bdd.getEtudiant(id);
+					i.putExtra("etudiant", etu);
 					/*if(cb.isChecked())
 					{
 						String newline = id + "\n";
