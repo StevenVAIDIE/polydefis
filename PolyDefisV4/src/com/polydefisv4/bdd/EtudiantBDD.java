@@ -156,6 +156,31 @@ public class EtudiantBDD {
 			return etudiant;
 	}
 	
+	public ArrayList<Etudiant> getEtudiantsAnnee(int annee)
+	{
+		   Cursor cursor =
+		    		bdd.query(TABLE_ETUDIANT, // table
+		    		new String[] {COL_IDENTIFIANT, COL_NOM, COL_PRENOM, COL_DEPARTEMENT, COL_ANNEE,  COL_RESPO, COL_POINTS}, // column names
+		    		COL_ANNEE + " = ?", // selections
+		            new String[] { String.valueOf(annee) }, // args
+		            null, // group by
+		            null, // having
+		            null, // order by
+		            null); // limit		
+		   
+		    cursor.moveToFirst();
+		    ArrayList<Etudiant> etudiant = new ArrayList<Etudiant>();
+		    while(!cursor.isAfterLast())
+		    {
+				if(cursor.getInt(NUM_COL_RESPO) == 1)
+					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS)));
+				else
+					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS)));			
+				cursor.moveToNext();
+		    }
+			return etudiant;
+	}
+	
 	public int getNumberOfEtudiantsPromo(String departement, int annee)
 	{
 		   Cursor cursor =

@@ -45,7 +45,7 @@ public class SQL_Defi extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		//On peut faire ce qu'on veut ici moi j'ai décidé de supprimer la table et de la recréer
 		//comme ça lorsque je change la version les id repartent de 0
-		db.execSQL("DROP TABLE " + TABLE_DEFI + ";");
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEFI + ";");
 		onCreate(db);
 	}
 	

@@ -13,11 +13,13 @@ public class SQLManager {
 	private ConnexionBDD connexions;
 	private EtudiantBDD etudiants;
 	private DefiBDD defis;
+	private ParrainageBDD parrainage;
 	
 	public SQLManager (Context context) {
 		this.connexions = new ConnexionBDD(context);
 		this.etudiants = new EtudiantBDD(context);
 		this.defis = new DefiBDD(context);
+		this.parrainage = new ParrainageBDD(context);
 	}
 	
 	public long insertConnexion(Connexion connexion)
@@ -66,6 +68,14 @@ public class SQLManager {
 		Etudiant result = this.etudiants.getEtudiant(id);
 		this.etudiants.close();
 		return (result);		
+	}
+	
+	public ArrayList<Etudiant> getEtudiantAnnee(int annee)
+	{
+		this.etudiants.open();
+		ArrayList<Etudiant> result = this.etudiants.getEtudiantsAnnee(annee);
+		this.etudiants.close();
+		return (result);	
 	}
 	
 	public ArrayList<Etudiant> getEtudiantPromo(String departement, int annee)
@@ -123,6 +133,10 @@ public class SQLManager {
 		this.defis.open();
 		this.defis.getSQL().onUpgrade(this.defis.getBDD(), 1, 2);
 		this.defis.close();
+		
+		this.parrainage.open();
+		this.parrainage.getSQL().onCreate(this.parrainage.getBDD());
+		this.parrainage.close();
 		
 	}
 	

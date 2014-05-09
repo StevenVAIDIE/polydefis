@@ -1,9 +1,20 @@
 package com.polydefisv4.testActivityMartin;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import com.polydefisv3.R;
+import com.polydefisv4.bdd.SQLManager;
+import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +25,7 @@ import com.polydefisv4.bdd.SQLManager;
 public class ActivityTestMartin extends Activity {
 
 	Button bouton = null;
-	TextView tv = null;
+	CheckBox cb = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +35,30 @@ public class ActivityTestMartin extends Activity {
 		
 		final SQLManager bdd = new SQLManager(this);
 		//Connexion connexion = new Connexion("e111111s","123");
-		//final Intent i = new Intent(this, TestActivity.class);
+		final Intent i = new Intent(this, FenetrePrincipaleActivity.class);
 		
+		FileInputStream fis;
+		
+		/*Debug.Log("before");
+		try {
+			fis = new FileInputStream("conn_auto");
+			Debug.Log("avant");
+			Debug.Log(String.valueOf(fis.read()));
+			fis.close();
+		} 
+		catch (FileNotFoundException e) 
+		{
+			Debug.Log(e.getMessage());
+		}
+		catch (IOException e) {
+			Debug.Log(e.getMessage());
+		}
+		
+		Debug.Log("after");
+		*/
+		bdd.insererJeuDeTest();
 		bouton = (Button) findViewById(R.id.button1);
+		cb = (CheckBox) findViewById(R.id.checkBox1);
 		bouton.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -36,12 +68,32 @@ public class ActivityTestMartin extends Activity {
 				EditText et2 = (EditText) findViewById(R.id.editText2);
 				String pw = et2.getText().toString();
 				
-				//Toast.makeText(MainActivity.this, id + " " + pw, Toast.LENGTH_SHORT).show();
 				boolean connexion = bdd.bonMdp(id, pw);
 				if(connexion == true)
 				{
 					Toast.makeText(ActivityTestMartin.this,"Connexion réussie !", Toast.LENGTH_LONG).show();
-					//startActivity(i);
+					/*if(cb.isChecked())
+					{
+						String newline = id + "\n";
+						FileOutputStream fos;
+						try {
+							fos = openFileOutput("data/data/conn_auto", Context.MODE_PRIVATE);
+							fos.write(id.getBytes());
+							fos.write("\n".getBytes());
+							fos.write(pw.getBytes());
+							fos.close();
+						} 
+						catch (FileNotFoundException e) 
+						{
+							e.printStackTrace();
+						}
+						catch (IOException e) {
+							e.printStackTrace();
+						}
+
+
+					}*/
+					startActivity(i);
 
 				}
 				else

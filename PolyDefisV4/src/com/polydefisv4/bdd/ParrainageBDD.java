@@ -100,6 +100,10 @@ public class ParrainageBDD {
 		// A FAIRE
 		return null;
 	}
+
+	public SQL_Parrainage getSQL() {
+		return SQLParrainage;
+	}
 	
 	
 }
