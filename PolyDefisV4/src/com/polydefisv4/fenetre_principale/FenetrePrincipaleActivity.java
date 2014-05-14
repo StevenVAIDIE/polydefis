@@ -137,6 +137,7 @@ public class FenetrePrincipaleActivity extends Activity implements
 
 	private void displayView(String nomFragment) {
 		Fragment fragment = null;
+		Bundle bundle = new Bundle();
 
 		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
@@ -149,8 +150,10 @@ public class FenetrePrincipaleActivity extends Activity implements
 		} else if (nomFragment.equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
 		} else if (nomFragment.equals(getString(R.string.classement_des_3a))) {
+			bundle.putInt("anneeClassement", 3);
 			fragment = new ClassementFragment();
 		} else if (nomFragment.equals(getString(R.string.classement_des_4a))) {
+			bundle.putInt("anneeClassement", 4);
 			fragment = new ClassementFragment();
 		} else if (nomFragment.equals(getString(R.string.proposer_defi))) {
 			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
@@ -165,7 +168,6 @@ public class FenetrePrincipaleActivity extends Activity implements
 		}
 
 		if (fragment != null) {
-			Bundle bundle = new Bundle();
 			bundle.putSerializable("etudiant", etudiant);
 
 			fragment.setArguments(bundle);

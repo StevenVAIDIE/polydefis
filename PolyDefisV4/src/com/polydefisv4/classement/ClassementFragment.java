@@ -20,20 +20,23 @@ public class ClassementFragment extends Fragment implements TabListener {
 	private ViewPager viewPager;
 	private ActionBar actionBar;
 	private Etudiant etudiant;
+	private int anneeClassement;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_classement, container, false);
         etudiant = (Etudiant) getArguments().getSerializable("etudiant");
+        anneeClassement = getArguments().getInt("anneeClassement");
         
 	    actionBar = getActivity().getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    actionBar.removeAllTabs();
 	    
-	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager(), etudiant);
+	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager(), etudiant, anneeClassement);
 	    
 	    viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		viewPager.setAdapter(adapter);
-		
+	    viewPager.setCurrentItem(2);
+
 		for (int i = 0; i < adapter.getCount(); i++) {
 			actionBar.addTab(actionBar.newTab().setText(adapter.getPageTitle(i)).setTabListener(this));
 		}

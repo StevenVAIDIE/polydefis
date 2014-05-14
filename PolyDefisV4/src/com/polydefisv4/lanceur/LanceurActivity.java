@@ -8,20 +8,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.polydefisv3.R;
-import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
-import com.polydefisv4.metier.Specialite;
 
 public class LanceurActivity extends Activity implements OnClickListener {	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lanceur);
-	    
-		SQLManager manager = new SQLManager(this);
-		manager.create();
-		manager.insererJeuDeTest();
 		
 	    Button bouton3A = (Button) findViewById(R.id.bouton_3_A);
 	    bouton3A.setOnClickListener(this);

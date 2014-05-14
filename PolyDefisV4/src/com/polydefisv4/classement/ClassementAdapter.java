@@ -38,7 +38,6 @@ public class ClassementAdapter extends BaseAdapter{
 
 	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 

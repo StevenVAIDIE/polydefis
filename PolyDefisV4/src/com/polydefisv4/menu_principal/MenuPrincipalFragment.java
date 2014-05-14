@@ -47,6 +47,8 @@ public class MenuPrincipalFragment extends Fragment implements
 		Button boutonclique = (Button) view;
 
 		Fragment fragment = null;
+		Bundle bundle = new Bundle();
+
 		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_realises))) {
 			fragment = new ListeDefisRealiseFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
@@ -54,8 +56,10 @@ public class MenuPrincipalFragment extends Fragment implements
 		} else if (boutonclique.getText().toString().equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.classement_des_3a))) {
+			bundle.putInt("anneeClassement", 3);
 			fragment = new ClassementFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.classement_des_4a))) {
+			bundle.putInt("anneeClassement", 4);
 			fragment = new ClassementFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.proposer_defi))) {
 			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
@@ -70,7 +74,6 @@ public class MenuPrincipalFragment extends Fragment implements
 		if (fragment != null) {
 			getActivity().setTitle(boutonclique.getText());
 
-			Bundle bundle = new Bundle();
 			bundle.putSerializable("etudiant", etudiant);
 			fragment.setArguments(bundle);
 

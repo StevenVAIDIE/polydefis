@@ -1,4 +1,5 @@
 package com.polydefisv4.testActivityMartin;
+
 import android.util.Log;
 
 public class Debug {

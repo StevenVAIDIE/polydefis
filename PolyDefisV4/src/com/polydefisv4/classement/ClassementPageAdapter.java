@@ -5,7 +5,10 @@ import java.util.Locale;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.polydefisv3.R;
 import com.polydefisv4.bean.Etudiant;
@@ -14,16 +17,25 @@ public class ClassementPageAdapter extends FragmentPagerAdapter {
 
 	private Context contexte;
 	private Etudiant etudiant;
+	private int anneeClassement;
 	
-	public ClassementPageAdapter(Context contexte, FragmentManager fm, Etudiant etudiant) {
+	public ClassementPageAdapter(Context contexte, FragmentManager fm, Etudiant etudiant, int anneeClassement) {
 		super(fm);
 		this.contexte = contexte;
 		this.etudiant = etudiant;
+		this.anneeClassement = anneeClassement;
 	}
-
+	
 	@Override
 	public Fragment getItem(int position) {
-		return ClassementFragmentFragment.newInstance(position + 1, etudiant);
+		Bundle bundle = new Bundle();
+		ClassementFragmentFragment classementFragmentFragment = new ClassementFragmentFragment();
+		bundle.putInt("section_number", position);
+		bundle.putSerializable("etudiant", etudiant);
+		bundle.putInt("anneePromotion", anneeClassement);
+		classementFragmentFragment.setArguments(bundle);
+		Log.d("getItem", "Année classement " + anneeClassement);
+		return classementFragmentFragment;
 	}
 
 	@Override
@@ -46,7 +58,6 @@ public class ClassementPageAdapter extends FragmentPagerAdapter {
 		} else if (position == PlaceClassement.placeClassementMAT.getEmplacement()) {
 			return contexte.getString(R.string.titreClassementMAT).toUpperCase(l);
 		}
-
 		return null;
 	}
 }

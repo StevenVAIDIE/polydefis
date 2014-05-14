@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.polydefisv3.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.metier.Defis;
 
