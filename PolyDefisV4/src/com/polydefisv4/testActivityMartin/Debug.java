@@ -11,3 +11,4 @@ public class Debug {
 		Log.e(TAG, log);
 	}
 }
+	

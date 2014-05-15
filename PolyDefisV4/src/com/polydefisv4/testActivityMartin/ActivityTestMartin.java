@@ -1,9 +1,9 @@
 package com.polydefisv4.testActivityMartin;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.polydefisv3.R;
 import com.polydefisv4.bdd.SQLManager;
@@ -16,12 +16,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
-import com.polydefisv4.bdd.SQLManager;
+
+import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.bean.Portee;
+import com.polydefisv4.bean.defis.Geolocalisation;
 
 public class ActivityTestMartin extends Activity {
 
@@ -33,13 +34,15 @@ public class ActivityTestMartin extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_activity_test_martin);
 
-		
 		final SQLManager bdd = new SQLManager(this);
 		//Connexion connexion = new Connexion("e111111s","123");
 		final Intent i = new Intent(this, FenetrePrincipaleActivity.class);
 		
-		FileInputStream fis;
+		//FileInputStream fis;
 		
+		Geolocalisation geoloc = new Geolocalisation(1,"e111111s","Test Defi Geoloc","Descriptioooooon",null,Defi.ETAT_EN_COURS_ACCEPTATION,6,Portee.Promotion,68.45, 687.25);
+		Debug.Log(geoloc.getDateFin().toString());
+		bdd.insertGeolocalisation(geoloc);
 		/*Debug.Log("before");
 		try {
 			fis = new FileInputStream("conn_auto");

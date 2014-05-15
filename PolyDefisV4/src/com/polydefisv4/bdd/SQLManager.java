@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import android.content.Context;
 
 import com.polydefisv4.bean.Connexion;
+import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
 
 public class SQLManager {
@@ -13,6 +15,7 @@ public class SQLManager {
 	private ConnexionBDD connexions;
 	private EtudiantBDD etudiants;
 	private DefiBDD defis;
+	private DefiGeolocalisationBDD geolocalisations;
 	private ParrainageBDD parrainage;
 	
 	public SQLManager (Context context) {
@@ -20,6 +23,7 @@ public class SQLManager {
 		this.etudiants = new EtudiantBDD(context);
 		this.defis = new DefiBDD(context);
 		this.parrainage = new ParrainageBDD(context);
+		this.geolocalisations = new DefiGeolocalisationBDD(context);
 	}
 	
 	public long insertConnexion(Connexion connexion)
@@ -100,7 +104,7 @@ public class SQLManager {
 	public long insertDefiPhoto(Photo photo)
 	{
 		this.defis.open();
-		long result = this.defis.insertDefi(photo, 1);
+		long result = this.defis.insertDefi(photo, Defi.TYPE_PHOTO);
 		this.defis.close();
 		return (result);		
 	}
@@ -115,9 +119,21 @@ public class SQLManager {
 		this.connexions.getSQL().onCreate(this.connexions.getBDD());
 		this.connexions.close();
 		
-		this.connexions.open();
+		this.defis.open();
 		this.defis.getSQL().onCreate(this.defis.getBDD());
-		this.connexions.close();
+		this.defis.close();
+	}
+	
+	public void insertGeolocalisation(Geolocalisation geoloc)
+	{
+		this.defis.open();
+		this.geolocalisations.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(geoloc, Defi.TYPE_GEOLOCALIATION);
+		this.geolocalisations.insertGeolocalisation(geoloc);
+		this.defis.close();
+		this.geolocalisations.close();
 	}
 	
 	public void upgrade()

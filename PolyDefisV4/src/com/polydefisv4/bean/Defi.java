@@ -5,6 +5,14 @@ import java.util.Date;
 
 public abstract class Defi {
 
+	public static final int ETAT_EN_COURS_ACCEPTATION = 0;
+	public static final int ETAT_ACCEPTE = 1;
+	
+	public static final int TYPE_PHOTO = 1;
+	public static final int TYPE_GEOLOCALIATION = 2;
+	public static final int TYPE_QRCODE = 3;
+	public static final int TYPE_QUIZZ = 4;
+	
 	private int id;
 	private String idEtudiant;
 	private String intitule;

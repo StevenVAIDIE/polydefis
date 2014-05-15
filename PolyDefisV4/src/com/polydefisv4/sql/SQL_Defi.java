@@ -26,9 +26,9 @@ public class SQL_Defi extends SQLiteOpenHelper {
 					COL_INTITULE + " TEXT NOT NULL, " + 
 					COL_DESCRIPTION + " TEXT NOT NULL, " + 
 					COL_TYPE_DEFI + " INTEGER NOT NULL, " + 
-					COL_DATE_FIN + " DATE, " + 
+					COL_DATE_FIN + " TEXT, " + 
 					COL_POINTS + " INTEGER NOT NULL, " + 
-					COL_PORTEE + " INTEGER NOT NULL, " + 
+					COL_PORTEE + " TEXT NOT NULL, " + 
 					COL_ETAT_ACCEPTE + " INTEGER NOT NULL);";
  
 	public SQL_Defi(Context context, String name, CursorFactory factory, int version) {
