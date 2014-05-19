@@ -1,20 +1,19 @@
 package com.polydefisv4.bean.defis;
 
 import java.util.Date;
-
 import com.polydefisv4.bean.Defi;
-import com.polydefisv4.bean.Portee;
 
 public class Geolocalisation extends Defi {
 
 	private double latitude;
 	private double longitude;
 	
-	public Geolocalisation(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee, double latitude, double longitude) {
+	public Geolocalisation(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, double latitude, double longitude) {
 		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
+
 
 	public double getLatitude() {
 		return latitude;

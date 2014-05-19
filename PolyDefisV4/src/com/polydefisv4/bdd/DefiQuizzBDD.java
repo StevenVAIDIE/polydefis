@@ -9,41 +9,47 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.sql.SQL_DefiGeolocalisation;
+import com.polydefisv4.sql.SQL_DefiQuizz;
 import com.polydefisv4.testActivityMartin.Debug;
 import com.polydefisv4.testActivityMartin.Util;
 
-public class DefiGeolocalisationBDD {
+public class DefiQuizzBDD {
 
 	private static final int VERSION_BDD = 1;
 	private static final String NOM_BDD = "polydefi.db";
- 
-	private static final String TABLE_GEOLOCALISATION = "D_GEOLOCALISATION";
-	private static final String COL_IDENTIFIANT = "Identifiant";
-	private static final String COL_LATITUDE = "Latitude";
-	private static final String COL_LONGITUDE = "Longitude";
+	private static final String TABLE_QUIZZ = "D_GEOLOCALISATION";
+	private static final String COL_IDENTIFIANT = "IdDefi";
+	private static final String COL_NUMERO_QUESTION = "NumeroQuestion";
+	private static final String COL_BONNE_REPONSE_1 = "BonneReponse1";
+	private static final String COL_MAUVAISE_REPONSE_2 = "BonneReponse2";
+	private static final String COL_MAUVAISE_REPONSE_3 = "BonneReponse3";
+	private static final String COL_MAUVAISE_REPONSE_4 = "BonneReponse3";
 	
-	//private static final int NUM_COL_IDENTIFIANT = 0;
-	private static final int NUM_COL_LATITUDE = 1;
-	private static final int NUM_COL_LONGITUDE = 2;
+	private static final int NUM_COL_IDENTIFIANT = 0;
+	private static final int NUM_COL_NUMERO_QUESTION = 1;
+	private static final int NUM_COL_BONNE_REPONSE_1 = 2;
+	private static final int NUM_COL_MAUVAISE_REPONSE_2 = 3;
+	private static final int NUM_COL_MAUVAISE_REPONSE_3 = 4;	
+	private static final int NUM_COL_MAUVAISE_REPONSE_4 = 5;
 	
 	private SQLiteDatabase bdd;
  
-	private SQL_DefiGeolocalisation SQLDefiGeolocalisation;
+	private SQL_DefiQuizz SQLDefiQuizz;
  
-	public DefiGeolocalisationBDD(Context context)
+	public DefiQuizzBDD(Context context)
 	{
 		//On crée la BDD et sa table
-		SQLDefiGeolocalisation = new SQL_DefiGeolocalisation(context, NOM_BDD, null, VERSION_BDD);
+		SQLDefiQuizz = new SQL_DefiQuizz(context, NOM_BDD, null, VERSION_BDD);
 	}
  
 	public void open(){
 		//on ouvre la BDD en écriture
-		bdd = SQLDefiGeolocalisation.getWritableDatabase();
+		bdd = SQLDefiQuizz.getWritableDatabase();
 	}
 	
 	public void openReadable(){
 		//on ouvre la BDD en lecture
-		bdd = SQLDefiGeolocalisation.getReadableDatabase();
+		bdd = SQLDefiQuizz.getReadableDatabase();
 	}
  
 	public void close(){
@@ -55,18 +61,18 @@ public class DefiGeolocalisationBDD {
 		return bdd;
 	}
 	
-	public SQL_DefiGeolocalisation getSQL(){
-		return SQLDefiGeolocalisation;
+	public SQL_DefiQuizz getSQL(){
+		return SQLDefiQuizz;
 	}
- 
-	public long insertGeolocalisation(Geolocalisation geoloc){
+	/*
+	public long insertQuizz(Geolocalisation geoloc){
 		ContentValues values = new ContentValues();
 		values.put(COL_IDENTIFIANT, geoloc.getId());
 		values.put(COL_LATITUDE, geoloc.getLatitude());
 		values.put(COL_LONGITUDE, geoloc.getLongitude());
 		return bdd.insert(TABLE_GEOLOCALISATION, null, values);
 	}
- 
+	
 	
 	public int updateGeolocalisation(int identifiant, Geolocalisation geoloc){
 		ContentValues values = new ContentValues();
@@ -118,5 +124,5 @@ public class DefiGeolocalisationBDD {
 			   cursor.getDouble(NUM_COL_LONGITUDE + DefiBDD.NUMBER_OF_COLUMS));
 	    return geolocalisation;
 	}
-	
+	*/
 }

@@ -1,5 +1,6 @@
 package com.polydefisv4.bdd;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -17,6 +18,7 @@ public class SQLManager {
 	private DefiBDD defis;
 	private DefiGeolocalisationBDD geolocalisations;
 	private ParrainageBDD parrainage;
+	private DefiRealiseBDD realise;
 	
 	public SQLManager (Context context) {
 		this.connexions = new ConnexionBDD(context);
@@ -24,6 +26,7 @@ public class SQLManager {
 		this.defis = new DefiBDD(context);
 		this.parrainage = new ParrainageBDD(context);
 		this.geolocalisations = new DefiGeolocalisationBDD(context);
+		this.realise = new DefiRealiseBDD(context);
 	}
 	
 	public long insertConnexion(Connexion connexion)
@@ -101,6 +104,30 @@ public class SQLManager {
 			return false;
 	}
 	
+	public Geolocalisation getGeolocalisation(int id)
+	{
+		this.geolocalisations.open();
+		Geolocalisation geoloc = null;
+		try {
+			geoloc = this.geolocalisations.getGeolocalisation(id);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.geolocalisations.close();
+		return geoloc;
+	}
+	
+	public void removeGeolocalisation(int id)
+	{
+		this.geolocalisations.open();
+		this.geolocalisations.removeGeolocalisation(id);
+		this.geolocalisations.close();
+		this.defis.open();
+		this.defis.removeDefi(id);
+		this.defis.close();
+	}
+	
 	public long insertDefiPhoto(Photo photo)
 	{
 		this.defis.open();
@@ -122,6 +149,26 @@ public class SQLManager {
 		this.defis.open();
 		this.defis.getSQL().onCreate(this.defis.getBDD());
 		this.defis.close();
+		
+		this.geolocalisations.open();
+		this.geolocalisations.getSQL().onCreate(this.geolocalisations.getBDD());
+		this.geolocalisations.close();
+		
+		this.realise.open();
+		this.realise.getSQL().onCreate(this.realise.getBDD());
+		this.realise.close();
+		
+		this.parrainage.open();
+		this.parrainage.getSQL().onCreate(this.defis.getBDD());
+		this.parrainage.close();
+	}
+	
+	public void etudiantRealiseDefi(String idEtu, int idDefi)
+	{
+		this.etudiants.open();
+		Etudiant etudiant = this.etudiants.getEtudiant(idEtu);
+		this.etudiants.close();
+		// A FAIRE
 	}
 	
 	public void insertGeolocalisation(Geolocalisation geoloc)
@@ -151,8 +198,16 @@ public class SQLManager {
 		this.defis.close();
 		
 		this.parrainage.open();
-		this.parrainage.getSQL().onCreate(this.parrainage.getBDD());
+		this.parrainage.getSQL().onUpgrade(this.parrainage.getBDD(), 1, 2);
 		this.parrainage.close();
+		
+		this.geolocalisations.open();
+		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(), 1, 2);
+		this.geolocalisations.close();
+		
+		this.realise.open();
+		this.realise.getSQL().onUpgrade(this.realise.getBDD(), 1, 2);
+		this.realise.close();
 		
 	}
 	

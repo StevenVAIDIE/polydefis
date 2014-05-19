@@ -7,8 +7,19 @@ import com.polydefisv4.bean.Portee;
 
 public class QrCode extends Defi {
 
-	public QrCode(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee) {
+	private String qrCode; 
+	
+	public QrCode(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, String qrCode) {
 		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
+		this.qrCode = qrCode;
+	}
+
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
 	}
 
 }

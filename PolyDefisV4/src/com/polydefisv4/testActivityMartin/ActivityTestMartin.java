@@ -38,11 +38,21 @@ public class ActivityTestMartin extends Activity {
 		//Connexion connexion = new Connexion("e111111s","123");
 		final Intent i = new Intent(this, FenetrePrincipaleActivity.class);
 		
-		//FileInputStream fis;
+		bdd.upgrade();
+		Date date = null;
+		try {
+			date = Util.dateFormat.parse("2014-05-15");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Geolocalisation geoloc = new Geolocalisation(1,"e111111s","Test Defi Geoloc","Descriptioooooon",null,Defi.ETAT_EN_COURS_ACCEPTATION,6,Portee.Promotion,68.45, 687.25);
-		Debug.Log(geoloc.getDateFin().toString());
+		//FileInputStream fis;
+		bdd.removeGeolocalisation(1);
+		Geolocalisation geoloc = new Geolocalisation(1,"e111111s","Test Defi Geoloc","Descriptioooooon",date,Defi.ETAT_EN_COURS_ACCEPTATION,6,Defi.PORTEE_PROMO,47.2440713, -1.5292213);
 		bdd.insertGeolocalisation(geoloc);
+		Geolocalisation geoloc2 = bdd.getGeolocalisation(1);
+		Debug.Log(geoloc2.getDescription());
 		/*Debug.Log("before");
 		try {
 			fis = new FileInputStream("conn_auto");

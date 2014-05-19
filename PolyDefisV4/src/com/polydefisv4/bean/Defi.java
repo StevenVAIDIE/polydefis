@@ -13,6 +13,10 @@ public abstract class Defi {
 	public static final int TYPE_QRCODE = 3;
 	public static final int TYPE_QUIZZ = 4;
 	
+	public static final String PORTEE_ALL = "Tous";
+	public static final String PORTEE_PROMO = "Promo";
+	public static final String PORTEE_FILLEUL = "Filleul";
+	
 	private int id;
 	private String idEtudiant;
 	private String intitule;
@@ -20,9 +24,9 @@ public abstract class Defi {
 	private Date dateFin;
 	private int etatAcceptation;
 	private int nombrePoint;
-	private Portee portee;
+	private String portee;
 	
-	public Defi(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee) {
+	public Defi(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee) {
 		this.id = id;
 		this.idEtudiant = idEtudiant;
 		this.intitule = intitule;
@@ -89,11 +93,11 @@ public abstract class Defi {
 		this.nombrePoint = nombrePoint;
 	}
 
-	public Portee getPortee() {
+	public String getPortee() {
 		return portee;
 	}
 
-	public void setPortee(Portee portee) {
+	public void setPortee(String portee) {
 		this.portee = portee;
 	}
 	

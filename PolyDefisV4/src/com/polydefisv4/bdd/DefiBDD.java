@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.sql.SQL_Defi;
+import com.polydefisv4.testActivityMartin.Debug;
 import com.polydefisv4.testActivityMartin.Util;
 
 public class DefiBDD {
@@ -13,27 +14,29 @@ public class DefiBDD {
 	private static final int VERSION_BDD = 1;
 	private static final String NOM_BDD = "polydefi.db";
  
-	private static final String TABLE_DEFI = "D_DEFI";
-	private static final String COL_IDENTIFIANT_DEFI = "IdentifiantDefi";
-	private static final String COL_IDENTIFIANT_ETUDIANT = "IdentifiantEtudiant";
-	private static final String COL_INTITULE = "Intitule";
-	private static final String COL_DESCRIPTION = "Description";
-	private static final String COL_TYPE_DEFI = "TypeDefi";
-	private static final String COL_DATE_FIN = "DateFin";
-	private static final String COL_POINTS = "Points";
-	private static final String COL_PORTEE = "Portee";
-	private static final String COL_ETAT_ACCEPTE = "EtatAccepte";
+	public static final String TABLE_DEFI = "D_DEFI";
+	public static final String COL_IDENTIFIANT_DEFI = "IdentifiantDefi";
+	public static final String COL_IDENTIFIANT_ETUDIANT = "IdentifiantEtudiant";
+	public static final String COL_INTITULE = "Intitule";
+	public static final String COL_DESCRIPTION = "Description";
+	public static final String COL_TYPE_DEFI = "TypeDefi";
+	public static final String COL_DATE_FIN = "DateFin";
+	public static final String COL_POINTS = "Points";
+	public static final String COL_PORTEE = "Portee";
+	public static final String COL_ETAT_ACCEPTE = "EtatAccepte";
 	
-	private static final int NUM_COL_IDENTIFIANT_DEFI = 0;
-	private static final int NUM_COL_IDENTIFIANT_ETUDIANT = 1;
-	private static final int NUM_COL_INTITULE = 2;
-	private static final int NUM_COL_DESCRIPTION = 3;
-	private static final int NUM_COL_TYPE_DEFI = 4;
-	private static final int NUM_COL_DATE_FIN = 5;
-	private static final int NUM_COL_POINTS = 6;
-	private static final int NUM_COL_PORTEE = 7;
-	private static final int NUM_COL_ETAT_ACCEPTE = 8;
+	public static final int NUM_COL_IDENTIFIANT_DEFI = 0;
+	public static final int NUM_COL_IDENTIFIANT_ETUDIANT = 1;
+	public static final int NUM_COL_INTITULE = 2;
+	public static final int NUM_COL_DESCRIPTION = 3;
+	public static final int NUM_COL_TYPE_DEFI = 4;
+	public static final int NUM_COL_DATE_FIN = 5;
+	public static final int NUM_COL_POINTS = 6;
+	public static final int NUM_COL_PORTEE = 7;
+	public static final int NUM_COL_ETAT_ACCEPTE = 8;
  
+	public static final int NUMBER_OF_COLUMS = 9;
+	
 	private SQLiteDatabase bdd;
  
 	private SQL_Defi SQLDefi;
@@ -73,6 +76,7 @@ public class DefiBDD {
 		values.put(COL_INTITULE, defi.getIntitule());
 		values.put(COL_DESCRIPTION, defi.getDescription());
 		values.put(COL_TYPE_DEFI, type);
+		Debug.Log(defi.getDateFin().toString());
 		values.put(COL_DATE_FIN, Util.dateFormat.format(defi.getDateFin()));
 		values.put(COL_POINTS, defi.getNombrePoint());
 		values.put(COL_PORTEE, String.valueOf(defi.getPortee()));
