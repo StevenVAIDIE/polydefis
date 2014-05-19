@@ -10,6 +10,8 @@ import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.bean.defis.QrCode;
+import com.polydefisv4.bean.defis.Quizz;
 
 public class SQLManager {
 
@@ -17,6 +19,9 @@ public class SQLManager {
 	private EtudiantBDD etudiants;
 	private DefiBDD defis;
 	private DefiGeolocalisationBDD geolocalisations;
+	private DefiPhotoBDD photos;
+	private DefiQrCodeBDD qrcodes;
+	private DefiQuizzBDD quizz;
 	private ParrainageBDD parrainage;
 	private DefiRealiseBDD realise;
 	
@@ -26,6 +31,9 @@ public class SQLManager {
 		this.defis = new DefiBDD(context);
 		this.parrainage = new ParrainageBDD(context);
 		this.geolocalisations = new DefiGeolocalisationBDD(context);
+		this.photos = new DefiPhotoBDD(context);
+		this.quizz = new DefiQuizzBDD(context);
+		this.qrcodes = new DefiQrCodeBDD(context);
 		this.realise = new DefiRealiseBDD(context);
 	}
 	
@@ -75,6 +83,13 @@ public class SQLManager {
 		Etudiant result = this.etudiants.getEtudiant(id);
 		this.etudiants.close();
 		return (result);		
+	}
+	
+	public void accepterDefi(int id)
+	{
+		this.defis.open();
+		this.defis.accepterDefi(id);
+		this.defis.close();
 	}
 	
 	public ArrayList<Etudiant> getEtudiantAnnee(int annee)
@@ -181,6 +196,42 @@ public class SQLManager {
 		this.geolocalisations.insertGeolocalisation(geoloc);
 		this.defis.close();
 		this.geolocalisations.close();
+	}
+	
+	public void insertPhoto(Photo photo)
+	{
+		this.defis.open();
+		this.photos.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.photos.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(photo, Defi.TYPE_GEOLOCALIATION);
+		this.photos.insertPhoto(photo);
+		this.defis.close();
+		this.photos.close();
+	}
+	
+	public void insertQrCode(QrCode qrcode)
+	{
+		this.defis.open();
+		this.qrcodes.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.qrcodes.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(qrcode, Defi.TYPE_GEOLOCALIATION);
+		this.qrcodes.insertQrCode(qrcode);
+		this.defis.close();
+		this.photos.close();
+	}
+	
+	public void insertQuizz(Quizz quizz)
+	{
+		this.defis.open();
+		this.quizz.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.quizz.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(quizz, Defi.TYPE_GEOLOCALIATION);
+		this.quizz.insertQuizz(quizz);
+		this.defis.close();
+		this.photos.close();
 	}
 	
 	public void upgrade()

@@ -38,7 +38,7 @@ public class ActivityTestMartin extends Activity {
 		//Connexion connexion = new Connexion("e111111s","123");
 		final Intent i = new Intent(this, FenetrePrincipaleActivity.class);
 		
-		bdd.upgrade();
+		
 		Date date = null;
 		try {
 			date = Util.dateFormat.parse("2014-05-15");
@@ -53,6 +53,7 @@ public class ActivityTestMartin extends Activity {
 		bdd.insertGeolocalisation(geoloc);
 		Geolocalisation geoloc2 = bdd.getGeolocalisation(1);
 		Debug.Log(geoloc2.getDescription());
+		bdd.accepterDefi(1);
 		/*Debug.Log("before");
 		try {
 			fis = new FileInputStream("conn_auto");

@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.bean.defis.Quizz;
 import com.polydefisv4.sql.SQL_DefiGeolocalisation;
 import com.polydefisv4.sql.SQL_DefiQuizz;
 import com.polydefisv4.testActivityMartin.Debug;
@@ -125,4 +126,5 @@ public class DefiQuizzBDD {
 	    return geolocalisation;
 	}
 	*/
+
 }
