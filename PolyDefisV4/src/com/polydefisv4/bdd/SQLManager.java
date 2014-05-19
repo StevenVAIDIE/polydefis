@@ -229,7 +229,7 @@ public class SQLManager {
 		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
 		this.quizz.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
 		this.defis.insertDefi(quizz, Defi.TYPE_GEOLOCALIATION);
-		this.quizz.insertQuizz(quizz);
+		//this.quizz.insertQuizz(quizz);
 		this.defis.close();
 		this.photos.close();
 	}
