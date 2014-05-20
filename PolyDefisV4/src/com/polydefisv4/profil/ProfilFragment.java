@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.parrainage.ParrainageFragment;
 

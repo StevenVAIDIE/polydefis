@@ -1,5 +1,7 @@
 package com.polydefisv4.parrainage;
 
+import java.util.ArrayList;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +13,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 
 public class ParrainageFragment extends Fragment implements OnClickListener {
@@ -29,7 +32,9 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 			nomParrain = (AutoCompleteTextView) rootView.findViewById(R.id.nomParrain);
 			nomParrain.setThreshold(2);
 			
-			Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, Etudiant.getAllEtudiant());
+			SQLManager manager = new SQLManager(getActivity());
+			ArrayList<Etudiant> listeParrain = manager.getEtudiantAnnee(4);
+			Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listeParrain);
 			nomParrain.setAdapter(adapter);
 	    
 			Button boutonDemandeParrainage = (Button) rootView.findViewById(R.id.boutonDemandeParrainage);

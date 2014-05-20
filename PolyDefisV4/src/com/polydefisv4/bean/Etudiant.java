@@ -43,6 +43,17 @@ public class Etudiant implements Serializable {
 		this.nom = nom;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Etudiant) {
+			Etudiant etu = (Etudiant) this;
+			if (etu.nom.equals(this.nom) && etu.prenom.equals(this.prenom)) {
+				return true;
+			}
+		}
+		return true;
+	}
+	
 	public static List<Etudiant> getAllEtudiant() {
 		List<Etudiant> listeEtudiants = new ArrayList<Etudiant>();
 		listeEtudiants.add(new Etudiant("E116143S", "VAIDIE", "Steven", INFO, 3, false,10));
@@ -105,7 +116,7 @@ public class Etudiant implements Serializable {
 
 	public String toString()
 	{
-		return(this.prenom + " " + this.nom + " " + this.departement + this.anneePromo + " " + this.points + " points.");
+		return(this.prenom + " " + this.nom);
 	}
 	
 }

@@ -1,6 +1,5 @@
 package com.polydefisv4.menu_principal;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,8 +14,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
 import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
@@ -32,7 +32,6 @@ public class MenuPrincipalFragment extends Fragment implements
 		View rootView = inflater.inflate(R.layout.fragment_acceuil, container,
 				false);
 		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
-		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);  
 
 		GridView gridView = (GridView) rootView.findViewById(R.id.gridviewS);
 		gridView.setAdapter(new MenuPrincipalAdapter(getActivity(), etudiant));
@@ -62,7 +61,7 @@ public class MenuPrincipalFragment extends Fragment implements
 			bundle.putInt("anneeClassement", 4);
 			fragment = new ClassementFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.proposer_defi))) {
-			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+			fragment = new AjoutDefiFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_proposition_defis))) {
 			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_defis_realise))) {
@@ -78,8 +77,7 @@ public class MenuPrincipalFragment extends Fragment implements
 			fragment.setArguments(bundle);
 
 			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager
-					.beginTransaction();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
 			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();

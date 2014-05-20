@@ -1,13 +1,6 @@
 package com.polydefisv4.testActivityMartin;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
-import com.polydefisv3.R;
-import com.polydefisv4.bdd.SQLManager;
-import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,12 +9,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
 
 public class ActivityTestMartin extends Activity {
 

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="title_activity_ajout_defi">AjoutDefiActivity</string>
+    <string name="title_activity_ajout_defi_core">AjoutDefiCore</string>
+    <string name="title_activity_ajout_defi_final">AjoutDefiFinalActivity</string>
+    <string name="title_activity_ajout_defi_gpsactivity">AjoutDefiGPSACtivity</string>
+    <string name="title_activity_ajout_defi_gps">AjoutDefiGPSActivity</string>
+    <string name="title_activity_ajout_defi_qrcode">AjoutDefiQRCodeActivity</string>
+    <string name="title_activity_ajout_defi_quizz">AjoutDefiQuizzActivity</string>
+    <string name="title_activity_profil">ProfilActivity</string>
+    <string name="title_activity_valider_defi">ValiderDefiActivity</string>
     <string name="app_name">PolyDefisv4</string>
     <string name="action_settings">Setting</string>
     <string name="liste_des_defis_realises">Liste des défis réalisés</string>
@@ -88,5 +97,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_activity_test">ActivityTest</string>
-
+    <string name="photo">Photo</string>
+    <string name="geo">Geolocalisation</string>
+    <string name="quizz">Quizz</string>
+    <string name="qrcode">QRcode</string>
+    <string name="retour">Retour</string>
+    <string name="prendrephoto">Prendre Photo</string>
+    <string name="scan">Scan</string>
+    <string name="envoyerqrcode">Prendre QRcode</string>
+    <string name="envoyerpositiongeo">Envoyer la position actuelle</string>
+    <string name="envoyerrep">Question suivante</string>
+    <string name="afficherdefi">Afficher un Defi</string>
 </resources>

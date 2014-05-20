@@ -1,9 +1,16 @@
 package com.polydefisv4.bean;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
+import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.bean.defis.QrCode;
+import com.polydefisv4.bean.defis.Quizz;
 
-public abstract class Defi {
+
+public abstract class Defi implements Serializable {
 
 	private int id;
 	private String idEtudiant;
@@ -14,6 +21,14 @@ public abstract class Defi {
 	private int nombrePoint;
 	private Portee portee;
 	
+	public Defi (String idEtudiant, String intitule, String description, int etatAcceptation, Portee portee) {
+		this.idEtudiant = idEtudiant;
+		this.intitule = intitule;
+		this.description = description;
+		this.portee = portee;
+		this.etatAcceptation = etatAcceptation;
+	}
+
 	public Defi(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee) {
 		this.id = id;
 		this.idEtudiant = idEtudiant;
@@ -24,7 +39,32 @@ public abstract class Defi {
 		this.nombrePoint = nombrePoint;
 		this.portee = portee;
 	}
+	
+	public static ArrayList<Defi> getAllDefis() {
+		ArrayList<Defi> listeDefis = new ArrayList<Defi>();
+		
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 20, Portee.Promotion, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, Portee.Tous, ""));
+		listeDefis.add(Quizz.getQuizz());
+		listeDefis.add(new QrCode(3, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, Portee.Tous, ""));
 
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 24, Portee.Promotion, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 21, Portee.Tous, ""));
+		listeDefis.add(Quizz.getQuizz());
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, Portee.Tous, ""));
+
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 12, Portee.Promotion, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 14, Portee.Tous, ""));
+		listeDefis.add(Quizz.getQuizz());
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 11, Portee.Tous, ""));
+
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, Portee.Promotion, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 2, Portee.Tous, ""));
+		listeDefis.add(Quizz.getQuizz());
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 17, Portee.Tous, ""));
+		
+		return listeDefis;
+	}
 	public int getId() {
 		return id;
 	}
