@@ -12,6 +12,18 @@ import com.polydefisv4.bean.defis.Quizz;
 
 public abstract class Defi implements Serializable {
 
+	public static final int ETAT_EN_COURS_ACCEPTATION = 0;
+	public static final int ETAT_ACCEPTE = 1;
+	
+	public static final int TYPE_PHOTO = 1;
+	public static final int TYPE_GEOLOCALIATION = 2;
+	public static final int TYPE_QRCODE = 3;
+	public static final int TYPE_QUIZZ = 4;
+	
+	public static final String PORTEE_ALL = "Tous";
+	public static final String PORTEE_PROMO = "Promo";
+	public static final String PORTEE_FILLEUL = "Filleul";
+	
 	private int id;
 	private String idEtudiant;
 	private String intitule;
@@ -19,9 +31,9 @@ public abstract class Defi implements Serializable {
 	private Date dateFin;
 	private int etatAcceptation;
 	private int nombrePoint;
-	private Portee portee;
+	private String portee;
 	
-	public Defi (String idEtudiant, String intitule, String description, int etatAcceptation, Portee portee) {
+	public Defi (String idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
 		this.idEtudiant = idEtudiant;
 		this.intitule = intitule;
 		this.description = description;
@@ -29,7 +41,7 @@ public abstract class Defi implements Serializable {
 		this.etatAcceptation = etatAcceptation;
 	}
 
-	public Defi(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee) {
+	public Defi(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee) {
 		this.id = id;
 		this.idEtudiant = idEtudiant;
 		this.intitule = intitule;
@@ -43,25 +55,25 @@ public abstract class Defi implements Serializable {
 	public static ArrayList<Defi> getAllDefis() {
 		ArrayList<Defi> listeDefis = new ArrayList<Defi>();
 		
-		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 20, Portee.Promotion, 10, 20));
-		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, Portee.Tous, ""));
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 20, PORTEE_PROMO, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, PORTEE_ALL, ""));
 		listeDefis.add(Quizz.getQuizz());
-		listeDefis.add(new QrCode(3, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, Portee.Tous, ""));
+		listeDefis.add(new QrCode(3, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, PORTEE_ALL, ""));
 
-		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 24, Portee.Promotion, 10, 20));
-		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 21, Portee.Tous, ""));
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 24, PORTEE_PROMO, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 21, PORTEE_ALL, ""));
 		listeDefis.add(Quizz.getQuizz());
-		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, Portee.Tous, ""));
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, PORTEE_ALL, ""));
 
-		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 12, Portee.Promotion, 10, 20));
-		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 14, Portee.Tous, ""));
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 12, PORTEE_PROMO, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 14, PORTEE_ALL, ""));
 		listeDefis.add(Quizz.getQuizz());
-		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 11, Portee.Tous, ""));
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 11, PORTEE_ALL, ""));
 
-		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, Portee.Promotion, 10, 20));
-		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 2, Portee.Tous, ""));
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 30, PORTEE_PROMO, 10, 20));
+		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 2, PORTEE_ALL, ""));
 		listeDefis.add(Quizz.getQuizz());
-		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 17, Portee.Tous, ""));
+		listeDefis.add(new QrCode(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 17, PORTEE_ALL, ""));
 		
 		return listeDefis;
 	}
@@ -121,11 +133,11 @@ public abstract class Defi implements Serializable {
 		this.nombrePoint = nombrePoint;
 	}
 
-	public Portee getPortee() {
+	public String getPortee() {
 		return portee;
 	}
 
-	public void setPortee(Portee portee) {
+	public void setPortee(String portee) {
 		this.portee = portee;
 	}
 	

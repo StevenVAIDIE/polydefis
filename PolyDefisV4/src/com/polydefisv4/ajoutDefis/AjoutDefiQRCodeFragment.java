@@ -37,7 +37,7 @@ public class AjoutDefiQRCodeFragment extends Fragment {
 		if (scanningResult != null) {
 			String scanContent = scanningResult.getContents();
 			Toast.makeText(getActivity(), "Resultat du scan : "+scanContent, Toast.LENGTH_LONG).show();
-			qrCode.setUrl(scanContent);
+			qrCode.setQrCode(scanContent);
 			
 			Bundle bundle = new Bundle();
 			bundle.putSerializable("defi", qrCode);

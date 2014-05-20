@@ -6,18 +6,22 @@ import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Portee;
 
 public class Photo extends Defi {
-	private String url;
+	private String urlPhoto;
 
-	public Photo(String idEtudiant, String intitule, String description, int etatAcceptation, Portee portee) {
+	public Photo(String idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
 		super(idEtudiant, intitule, description, etatAcceptation, portee);
 	}
 	
-	public Photo(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee, String url) {
+	public Photo(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, String urlPhoto) {
 		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
-		this.url = url;
+		this.urlPhoto = urlPhoto;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getUrlPhoto() {
+		return urlPhoto;
+	}
+
+	public void setUrlPhoto(String urlPhoto) {
+		this.urlPhoto = urlPhoto;
 	}
 }

@@ -9,16 +9,16 @@ import com.polydefisv4.bean.Portee;
 public class Quizz extends Defi {
 	ArrayList<QuestionQuizz> listeQuestionQuizz;
 	
-	public Quizz(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee) {
+	public Quizz(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee) {
 		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
 		listeQuestionQuizz = new ArrayList<QuestionQuizz>();
 	}
 	
-	public Quizz(String idEtudiant, String intitule, String description, int etatAcceptation, Portee portee) {
+	public Quizz(String idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
 		super(idEtudiant, intitule, description, etatAcceptation, portee);
 		listeQuestionQuizz = new ArrayList<QuestionQuizz>();
 	}
-
+	
 	public QuestionQuizz getQuestions(int index) {
 		return listeQuestionQuizz.get(index);
 	}
@@ -32,7 +32,7 @@ public class Quizz extends Defi {
 	}
 
 	public static Defi getQuizz() {
-		Quizz quizz =  new Quizz (10, "E116143S", "Quizz de BG", "Exoooooo", new Date(2000, 02, 15), 1, 20, Portee.Promotion);
+		Quizz quizz =  new Quizz (10, "E116143S", "Quizz de BG", "Exoooooo", new Date(2000, 02, 15), 1, 20, Defi.PORTEE_ALL);
 		QuestionQuizz q = new QuestionQuizz("Quelle est la capitale de la France ? ", "Sable", "Nantes","Toulouse", "Le Mans : Réponse");
 		QuestionQuizz q2 = new QuestionQuizz("Qui est la copine de Dodo?", "Alice", "Emeline","Misshautaine", "Martinez : Réponse ");
 		QuestionQuizz q3 = new QuestionQuizz("Quelle est la réponse à la question ?", "La reponse D", "KOI? ","answer", "La réponse de la question : Réponse");

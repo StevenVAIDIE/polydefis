@@ -65,14 +65,14 @@ public class AjoutDefiFragment extends Fragment implements OnClickListener {
 			Defi defis = null;
 			String typeDefiChoisi = typeDefi.getSelectedItem().toString();
 			Fragment newFragment = null;
-			Portee porteDefis = null;
+			String porteDefis = null;
 
 			if (portee.getSelectedItem().toString() == "Filleul") {
-				porteDefis = Portee.Filleul;
+				porteDefis = Defi.PORTEE_FILLEUL;
 			} else if (portee.getSelectedItem().toString() == "Promo") {
-				porteDefis = Portee.Promotion;
+				porteDefis = Defi.PORTEE_PROMO;
 			} else if (portee.getSelectedItem().toString() == "Tous") {
-				porteDefis = Portee.Tous;
+				porteDefis = Defi.PORTEE_ALL;
 			} else {
 				Log.e(getClass().getName(),"Portee inconnue");
 			}

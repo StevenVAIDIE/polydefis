@@ -6,24 +6,33 @@ import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Portee;
 
 public class Geolocalisation extends Defi {
-	double longitude;
-	double latitude;
+	private double latitude;
+	private double longitude;
 	
-	public Geolocalisation(String idEtudiant, String intitule, String description, int etatAcceptation, Portee portee) {
+	public Geolocalisation(String idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
 		super(idEtudiant, intitule, description, etatAcceptation, portee);
-	}		
-	
-	public Geolocalisation(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, Portee portee, double longitude, double latitude) {
-		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
-		this.longitude = longitude;
-		this.latitude = latitude;
 	}
 	
+	public Geolocalisation(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, double latitude, double longitude) {
+		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+
+
 	public double getLatitude() {
 		return latitude;
 	}
-	
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
 	public double getLongitude() {
 		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 }

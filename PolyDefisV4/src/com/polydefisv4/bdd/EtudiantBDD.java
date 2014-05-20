@@ -140,7 +140,7 @@ public class EtudiantBDD {
 		            new String[] { String.valueOf(departement), String.valueOf(annee) }, // args
 		            null, // group by
 		            null, // having
-		            null, // order by
+		            COL_POINTS +" DESC", // order by
 		            null); // limit		
 		   
 		    cursor.moveToFirst();
@@ -165,7 +165,7 @@ public class EtudiantBDD {
 		            new String[] { String.valueOf(annee) }, // args
 		            null, // group by
 		            null, // having
-		            null, // order by
+		            COL_POINTS +" DESC", // order by
 		            null); // limit		
 		   
 		    cursor.moveToFirst();

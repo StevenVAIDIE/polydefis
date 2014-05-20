@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Etudiant implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	public static final String INFO = "INFO";
 	public static final String MAT = "MAT";
 	public static final String TE = "TE";

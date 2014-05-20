@@ -1,25 +1,40 @@
 package com.polydefisv4.bdd;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import android.content.Context;
 
 import com.polydefisv4.bean.Connexion;
+import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.bean.defis.QrCode;
+import com.polydefisv4.bean.defis.Quizz;
 
 public class SQLManager {
 
 	private ConnexionBDD connexions;
 	private EtudiantBDD etudiants;
 	private DefiBDD defis;
+	private DefiGeolocalisationBDD geolocalisations;
+	private DefiPhotoBDD photos;
+	private DefiQrCodeBDD qrcodes;
+	private DefiQuizzBDD quizz;
 	private ParrainageBDD parrainage;
+	private DefiRealiseBDD realise;
 	
 	public SQLManager (Context context) {
 		this.connexions = new ConnexionBDD(context);
 		this.etudiants = new EtudiantBDD(context);
 		this.defis = new DefiBDD(context);
 		this.parrainage = new ParrainageBDD(context);
+		this.geolocalisations = new DefiGeolocalisationBDD(context);
+		this.photos = new DefiPhotoBDD(context);
+		this.quizz = new DefiQuizzBDD(context);
+		this.qrcodes = new DefiQrCodeBDD(context);
+		this.realise = new DefiRealiseBDD(context);
 	}
 	
 	public long insertConnexion(Connexion connexion)
@@ -70,6 +85,13 @@ public class SQLManager {
 		return (result);		
 	}
 	
+	public void accepterDefi(int id)
+	{
+		this.defis.open();
+		this.defis.accepterDefi(id);
+		this.defis.close();
+	}
+	
 	public ArrayList<Etudiant> getEtudiantAnnee(int annee)
 	{
 		this.etudiants.open();
@@ -97,10 +119,34 @@ public class SQLManager {
 			return false;
 	}
 	
+	public Geolocalisation getGeolocalisation(int id)
+	{
+		this.geolocalisations.open();
+		Geolocalisation geoloc = null;
+		try {
+			geoloc = this.geolocalisations.getGeolocalisation(id);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.geolocalisations.close();
+		return geoloc;
+	}
+	
+	public void removeGeolocalisation(int id)
+	{
+		this.geolocalisations.open();
+		this.geolocalisations.removeGeolocalisation(id);
+		this.geolocalisations.close();
+		this.defis.open();
+		this.defis.removeDefi(id);
+		this.defis.close();
+	}
+	
 	public long insertDefiPhoto(Photo photo)
 	{
 		this.defis.open();
-		long result = this.defis.insertDefi(photo, 1);
+		long result = this.defis.insertDefi(photo, Defi.TYPE_PHOTO);
 		this.defis.close();
 		return (result);		
 	}
@@ -115,9 +161,77 @@ public class SQLManager {
 		this.connexions.getSQL().onCreate(this.connexions.getBDD());
 		this.connexions.close();
 		
-		this.connexions.open();
+		this.defis.open();
 		this.defis.getSQL().onCreate(this.defis.getBDD());
-		this.connexions.close();
+		this.defis.close();
+		
+		this.geolocalisations.open();
+		this.geolocalisations.getSQL().onCreate(this.geolocalisations.getBDD());
+		this.geolocalisations.close();
+		
+		this.realise.open();
+		this.realise.getSQL().onCreate(this.realise.getBDD());
+		this.realise.close();
+		
+		this.parrainage.open();
+		this.parrainage.getSQL().onCreate(this.defis.getBDD());
+		this.parrainage.close();
+	}
+	
+	public void etudiantRealiseDefi(String idEtu, int idDefi)
+	{
+		this.etudiants.open();
+		Etudiant etudiant = this.etudiants.getEtudiant(idEtu);
+		this.etudiants.close();
+		// A FAIRE
+	}
+	
+	public void insertGeolocalisation(Geolocalisation geoloc)
+	{
+		this.defis.open();
+		this.geolocalisations.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(geoloc, Defi.TYPE_GEOLOCALIATION);
+		this.geolocalisations.insertGeolocalisation(geoloc);
+		this.defis.close();
+		this.geolocalisations.close();
+	}
+	
+	public void insertPhoto(Photo photo)
+	{
+		this.defis.open();
+		this.photos.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.photos.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(photo, Defi.TYPE_GEOLOCALIATION);
+		this.photos.insertPhoto(photo);
+		this.defis.close();
+		this.photos.close();
+	}
+	
+	public void insertQrCode(QrCode qrcode)
+	{
+		this.defis.open();
+		this.qrcodes.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.qrcodes.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(qrcode, Defi.TYPE_GEOLOCALIATION);
+		this.qrcodes.insertQrCode(qrcode);
+		this.defis.close();
+		this.photos.close();
+	}
+	
+	public void insertQuizz(Quizz quizz)
+	{
+		this.defis.open();
+		this.quizz.open();
+		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
+		this.quizz.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
+		this.defis.insertDefi(quizz, Defi.TYPE_GEOLOCALIATION);
+		//this.quizz.insertQuizz(quizz);
+		this.defis.close();
+		this.photos.close();
 	}
 	
 	public void upgrade()
@@ -135,8 +249,16 @@ public class SQLManager {
 		this.defis.close();
 		
 		this.parrainage.open();
-		this.parrainage.getSQL().onCreate(this.parrainage.getBDD());
+		this.parrainage.getSQL().onUpgrade(this.parrainage.getBDD(), 1, 2);
 		this.parrainage.close();
+		
+		this.geolocalisations.open();
+		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(), 1, 2);
+		this.geolocalisations.close();
+		
+		this.realise.open();
+		this.realise.getSQL().onUpgrade(this.realise.getBDD(), 1, 2);
+		this.realise.close();
 		
 	}
 	
