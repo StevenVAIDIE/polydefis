@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/profilNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="20dp"
+        android:text="Intitulé"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/nomDefi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:ems="10"
+        android:maxLines="1" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/profilPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:text="Description"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/typeDefi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/typeDefi"
+        android:paddingTop="15dp" >
+    </Spinner>
+
+    <Spinner
+        android:id="@+id/portee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/portee"
+        android:paddingTop="15dp" />
+
+    <Button
+        android:id="@+id/validation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        android:background="@drawable/bouton_application"
+        android:text="Valider" />
+
+</LinearLayout>
