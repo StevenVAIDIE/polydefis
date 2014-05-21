@@ -3,28 +3,45 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.polydefisv4.R;
+import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bean.defis.Geolocalisation;
 /**
  * @author Dorian KODELJA
  *
  */
-public class AjoutDefiGeolocalisationFragment extends Fragment {
-
-	GoogleMap map;
+public class AjoutDefiGeolocalisationFragment extends Fragment implements OnClickListener {
+	private EditText longitude;
+	private EditText latitude;
+	Button boutonValider;
+	private Geolocalisation defi;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.activity_ajout_defi_gps, container, false);
-		//reprise module gps mathieu
+		defi = (Geolocalisation) getArguments().getSerializable("defis");
 		
-		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		map.setMyLocationEnabled(true);
+		longitude = ((EditText) rootView.findViewById(R.id.longitude));		
+		latitude = ((EditText) rootView.findViewById(R.id.latitude));
 		
+		boutonValider = ((Button) rootView.findViewById(R.id.boutonValider));
+		boutonValider.setOnClickListener(this);
 		return rootView;
+	}
+
+	@Override
+	public void onClick(View v) {
+		if (longitude.getText().toString().isEmpty() || latitude.getText().toString().isEmpty()) {
+			Toast.makeText(getActivity(), "Veuillez renseigner tous les champs", Toast.LENGTH_LONG).show();
+		} else {
+			defi.setLongitude(Double.valueOf(longitude.getText().toString()));
+			defi.setLatitude(Double.valueOf(latitude.getText().toString()));
+		}
 	}
 }

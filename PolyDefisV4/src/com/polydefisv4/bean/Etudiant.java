@@ -44,18 +44,46 @@ public class Etudiant implements Serializable {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Etudiant) {
-			Etudiant etu = (Etudiant) o;
-			if (etu.nom.equals(this.nom) && etu.prenom.equals(this.prenom)) {
-				return true;
-			}
-		}
-		return false;
-	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Etudiant other = (Etudiant) obj;
+		if (anneePromo != other.anneePromo)
+			return false;
+		if (departement == null) {
+			if (other.departement != null)
+				return false;
+		} else if (!departement.equals(other.departement))
+			return false;
+		if (idEtudiant == null) {
+			if (other.idEtudiant != null)
+				return false;
+		} else if (!idEtudiant.equals(other.idEtudiant))
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (points != other.points)
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (respo != other.respo)
+			return false;
+		return true;
+	}
+
+
 	public static List<Etudiant> getAllEtudiant() {
 		List<Etudiant> listeEtudiants = new ArrayList<Etudiant>();
 		listeEtudiants.add(new Etudiant("E116143S", "VAIDIE", "Steven", INFO, 3, false,10));

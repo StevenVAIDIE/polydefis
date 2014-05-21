@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 
 import com.polydefisv4.R;
 import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.listeDefis.TypeUtilisation;
 
 public class AffichagePhotoFragment extends Fragment {
 	
@@ -37,6 +39,7 @@ public class AffichagePhotoFragment extends Fragment {
 	
 	private Uri fileUri; // file url to store image/video
 	private Photo defis;
+	private TypeUtilisation typeUtilisation;
 	private Button btnCapturePicture;
 
 	@Override
@@ -44,12 +47,17 @@ public class AffichagePhotoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_afficher_defi_photo, container, false);
         
         defis = (Photo) getArguments().getSerializable("defis");
+        typeUtilisation = (TypeUtilisation) getArguments().getSerializable("typeUtilisation");
+
 		TextView titreDefis = (TextView) rootView.findViewById(R.id.intitule_defi);
 		titreDefis.setText(defis.getIntitule());
 
 		TextView descriptionDefi = (TextView) rootView.findViewById(R.id.description_defi);
 		descriptionDefi.setText(defis.getDescription());
 
+		TextView promo = (TextView) rootView.findViewById(R.id.promotion);		
+		promo.setText(defis.getPortee());
+        
 		TextView nbPoint = (TextView) rootView.findViewById(R.id.nb_point);
 		nbPoint.setText(defis.getNombrePoint() + " points");
 
@@ -73,6 +81,12 @@ public class AffichagePhotoFragment extends Fragment {
 			Toast.makeText(getActivity(), "Sorry! Your device doesn't support camera", Toast.LENGTH_LONG).show();
 			//finish();
 		}
+		
+		if (typeUtilisation == TypeUtilisation.VisualisationDefisARealiser) {
+			nbPoint.setBackgroundColor(Color.TRANSPARENT);
+		    nbPoint.setFocusable(false);
+		}
+		
 		return rootView;
 	}
 	
@@ -154,7 +168,6 @@ public class AffichagePhotoFragment extends Fragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
-	 
 	    // save file url in bundle as it will be null on scren orientation
 	    // changes
 	    outState.putParcelable("file_uri", fileUri);

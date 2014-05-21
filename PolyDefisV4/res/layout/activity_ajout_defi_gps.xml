@@ -4,56 +4,32 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_weight="0"
-        android:text="TextView" />
+        android:text="Longitude" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/longitude"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0" >
-
-        <EditText
-            android:id="@+id/editText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10" >
-
-            <requestFocus />
-        </EditText>
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content" 
+        android:singleLine="true">
+        <requestFocus />
+    </EditText>
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="TextView" />
-    
-    <fragment 
-        android:id="@+id/map"
+        android:text="Latitude" />
+
+    <EditText
+        android:id="@+id/latitude"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"
-        class="com.google.android.gms.maps.MapFragment" />
+        android:layout_height="wrap_content"
+        android:singleLine="true"/>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/boutonValider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
-        android:text="Button" />
-
+        android:text="Valider" />
 </LinearLayout>

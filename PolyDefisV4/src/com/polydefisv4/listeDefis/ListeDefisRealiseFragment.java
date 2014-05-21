@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,19 +27,29 @@ import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
 
-public class ListeDefisRealiseFragment extends Fragment implements OnItemClickListener {
+public class ListeDefisRealiseFragment extends Fragment implements OnItemClickListener {	
 	private Etudiant etudiant;
 	private ArrayList<Defi> listeDefisEtudiant;
+	private TypeUtilisation typeUtilisation;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_liste_defis_realise, container, false);
         etudiant = (Etudiant) getArguments().getSerializable("etudiant");
-	    
+        typeUtilisation = (TypeUtilisation) getArguments().getSerializable("typeUtilisation");
+
 	    ListView listViewDefis = (ListView) rootView.findViewById(R.id.listViewDefis);
 	    
-	    //listeDefisEtudiant = SQLManager.getDefis(etudiant);
-	    listeDefisEtudiant = Defi.getAllDefis();
+	    if (typeUtilisation == TypeUtilisation.AdministrationPropositionDefis) {
+		    listeDefisEtudiant = Defi.getAllDefis();
+	    } else if (typeUtilisation == TypeUtilisation.AdministrationValidationPhoto) {
+		    listeDefisEtudiant = Defi.getAllDefis();
+	    } else if (typeUtilisation == TypeUtilisation.VisualisationDefisARealiser){
+		    listeDefisEtudiant = Defi.getAllDefis();
+	    } else {
+	    	Log.e("ListeDefisRealiseFragment", "Type d'utilisation inconnu");
+	    }
+
 	    listViewDefis.setAdapter(new ListeDefisAdapter(this.getActivity(),listeDefisEtudiant));
 	    listViewDefis.setOnItemClickListener(this);
 		return rootView;
@@ -50,7 +61,8 @@ public class ListeDefisRealiseFragment extends Fragment implements OnItemClickLi
 		Bundle bundle = new Bundle();
 		
 		bundle.putSerializable("defis", listeDefisEtudiant.get(position));
-		
+		bundle.putSerializable("typeUtilisation", typeUtilisation);
+
 		if(listeDefisEtudiant.get(position) instanceof QrCode) {
 			newFragment = new AffichageQrCodeFragment();
 		} else if (listeDefisEtudiant.get(position) instanceof Photo) {
@@ -62,6 +74,7 @@ public class ListeDefisRealiseFragment extends Fragment implements OnItemClickLi
 		} else {
 			
 		}
+		
 		newFragment.setArguments(bundle);
 
 		FragmentManager fragmentManager = getFragmentManager();

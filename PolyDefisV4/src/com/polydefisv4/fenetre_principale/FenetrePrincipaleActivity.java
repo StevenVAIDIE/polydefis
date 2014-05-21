@@ -25,6 +25,7 @@ import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
+import com.polydefisv4.listeDefis.TypeUtilisation;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
 import com.polydefisv4.profil.ProfilFragment;
 
@@ -116,7 +117,7 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 
 	@Override
 	public void onBackPressed() {
-		if (getTitle().equals(getString(R.string.accueil))) {
+		if (getTitle().toString().equals(getString(R.string.accueil))) {
 			quitter();
 		} else {
 			displayView(getString(R.string.accueil));
@@ -142,9 +143,9 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 
 		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
-		} else if (nomFragment
-				.equals(getString(R.string.liste_des_defis_a_realiser))) {
+		} else if (nomFragment.equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.VisualisationDefisARealiser);
 		} else if (nomFragment.equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
 		} else if (nomFragment.equals(getString(R.string.classement_des_3a))) {
@@ -158,9 +159,11 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 		} else if (nomFragment.equals(getString(R.string.ajout_respo))) {
 			fragment = new AjoutAdministrateurFragment();
 		} else if (nomFragment.equals(getString(R.string.valider_proposition_defis))) {
-			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationPropositionDefis);
 		} else if (nomFragment.equals(getString(R.string.valider_defis_realise))) {
-			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationValidationPhoto);
 		} else if (nomFragment.equals(getString(R.string.quitter))) {
 			quitter();
 		} else {
@@ -172,8 +175,7 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 			fragment.setArguments(bundle);
 
 			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager
-					.beginTransaction();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
 			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();

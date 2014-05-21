@@ -21,6 +21,7 @@ import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
+import com.polydefisv4.listeDefis.TypeUtilisation;
 import com.polydefisv4.profil.ProfilFragment;
 
 public class MenuPrincipalFragment extends Fragment implements
@@ -30,8 +31,7 @@ public class MenuPrincipalFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_acceuil, container,
-				false);
+		View rootView = inflater.inflate(R.layout.fragment_acceuil, container, false);
 		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 
 		GridView gridView = (GridView) rootView.findViewById(R.id.gridviewS);
@@ -51,6 +51,7 @@ public class MenuPrincipalFragment extends Fragment implements
 
 		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.VisualisationDefisARealiser);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.classement_des_3a))) {
@@ -62,9 +63,11 @@ public class MenuPrincipalFragment extends Fragment implements
 		} else if (boutonclique.getText().toString().equals(getString(R.string.proposer_defi))) {
 			fragment = new AjoutDefiFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_proposition_defis))) {
-			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationPropositionDefis);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_defis_realise))) {
-			Toast.makeText(getActivity(), "Pas encore implementé voyons", Toast.LENGTH_LONG).show();
+			fragment = new ListeDefisRealiseFragment();
+			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationValidationPhoto);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.ajout_respo))) {
 			fragment = new AjoutAdministrateurFragment();
 		}

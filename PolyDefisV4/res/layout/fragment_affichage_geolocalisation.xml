@@ -23,6 +23,12 @@
         class="com.google.android.gms.maps.MapFragment" />
 
     <TextView
+        android:id="@+id/promotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+        
+    <EditText
         android:id="@+id/nb_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
