@@ -1,7 +1,6 @@
 package com.polydefisv4.bdd;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.ContentValues;
@@ -9,13 +8,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.polydefisv4.bean.Connexion;
 import com.polydefisv4.bean.Defi;
-import com.polydefisv4.bean.Etudiant;
-import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.sql.SQL_Defi;
 import com.polydefisv4.testActivityMartin.Debug;
 import com.polydefisv4.testActivityMartin.Util;
+
+
 
 public class DefiBDD {
 

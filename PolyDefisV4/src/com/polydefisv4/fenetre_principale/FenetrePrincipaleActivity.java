@@ -19,16 +19,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
-import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.R;
+import com.polydefisv4.administration.AjoutAdministrateurFragment;
+import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
 import com.polydefisv4.profil.ProfilFragment;
 
-public class FenetrePrincipaleActivity extends Activity implements
-		OnItemClickListener {
+public class FenetrePrincipaleActivity extends Activity implements OnItemClickListener {
 	private DrawerLayout layoutMenuLateral;
 	private ListView listViewMenuLateral;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -41,6 +41,7 @@ public class FenetrePrincipaleActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fenetre_principale);
+		
 		titreActionBar = titreMenuLateral = getTitle();
 		etudiant = (Etudiant) getIntent().getSerializableExtra("etudiant");
 
@@ -142,9 +143,6 @@ public class FenetrePrincipaleActivity extends Activity implements
 		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
 		} else if (nomFragment
-				.equals(getString(R.string.liste_des_defis_realises))) {
-			fragment = new ListeDefisRealiseFragment();
-		} else if (nomFragment
 				.equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
 		} else if (nomFragment.equals(getString(R.string.profil))) {
@@ -156,7 +154,7 @@ public class FenetrePrincipaleActivity extends Activity implements
 			bundle.putInt("anneeClassement", 4);
 			fragment = new ClassementFragment();
 		} else if (nomFragment.equals(getString(R.string.proposer_defi))) {
-			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
+			fragment = new AjoutDefiFragment();
 		} else if (nomFragment.equals(getString(R.string.ajout_respo))) {
 			fragment = new AjoutAdministrateurFragment();
 		} else if (nomFragment.equals(getString(R.string.valider_proposition_defis))) {
@@ -165,11 +163,12 @@ public class FenetrePrincipaleActivity extends Activity implements
 			Toast.makeText(this, "Pas implementé", Toast.LENGTH_LONG).show();
 		} else if (nomFragment.equals(getString(R.string.quitter))) {
 			quitter();
+		} else {
+			Log.e(getClass().getName(), "Fragment introuvable");
 		}
 
 		if (fragment != null) {
 			bundle.putSerializable("etudiant", etudiant);
-
 			fragment.setArguments(bundle);
 
 			FragmentManager fragmentManager = getFragmentManager();

@@ -1,5 +1,8 @@
 package com.polydefisv4.parrainage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +14,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
+import com.polydefisv4.adapter.AutoCompleteEtudiantAdapter;
+import com.polydefisv4.adapter.ListeAcceptationParrainnageAdapter;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 
 public class ParrainageFragment extends Fragment implements OnClickListener {
 	private AutoCompleteTextView nomParrain = null;
 	private Etudiant etudiant;
+	private List<Etudiant> listeEtudiant;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +36,9 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 			nomParrain = (AutoCompleteTextView) rootView.findViewById(R.id.nomParrain);
 			nomParrain.setThreshold(2);
 			
-			Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, Etudiant.getAllEtudiant());
+			SQLManager manager = new SQLManager(getActivity());
+			ArrayList<Etudiant> listeParrain = manager.getEtudiantAnnee(4);
+			AutoCompleteEtudiantAdapter adapter = new AutoCompleteEtudiantAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listeParrain);
 			nomParrain.setAdapter(adapter);
 	    
 			Button boutonDemandeParrainage = (Button) rootView.findViewById(R.id.boutonDemandeParrainage);
@@ -37,11 +46,12 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 		} else  {
 	        rootView = inflater.inflate(R.layout.fragment_parrainage4a, container, false);
 			ListView listeDemandeParrainage = (ListView) rootView.findViewById(R.id.listeDemandeParrainage);
-
-			Parrainage4AAdapter adapter = new Parrainage4AAdapter(this, Etudiant.getAllEtudiant());
+			
+			listeEtudiant = Etudiant.getAllEtudiant();
+			ListeAcceptationParrainnageAdapter adapter = new ListeAcceptationParrainnageAdapter(this, listeEtudiant);
 			listeDemandeParrainage.setAdapter(adapter);
 		}
-		return rootView;		
+		return rootView;
 	}
 	
 	@Override
@@ -49,10 +59,21 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 		Button selection = (Button) v;
 		if(selection.getText().toString().equals(getResources().getString(R.string.demande_Parrainage))) {
 			Toast.makeText(ParrainageFragment.this.getActivity(), "Ajout du nouveau parain : "+nomParrain.getText().toString(), Toast.LENGTH_LONG).show();
-		//} else if(selection.getText().equals(getResources().getString(R.string.listeDefisARealiser))) {
-
-		//} else if(selection.getText().equals(getResources().getString(R.string.listeDefisARealiser))) {
-		
+		} else {
+			int position = (Integer) v.getTag(); 
+			if(selection.getText().toString().equals(getResources().getString(R.string.accepter))) {
+				Toast.makeText(getActivity(), "Acceptation de la position " + position, Toast.LENGTH_LONG).show();
+			} else if(selection.getText().toString().equals(getResources().getString(R.string.refuser))) {
+				Toast.makeText(getActivity(), "Refus de la position " + position, Toast.LENGTH_LONG).show();
+			}
 		}
+	}
+	
+	public void annulerDemanderParrainage (Etudiant etudiant) {
+		
+	}
+	
+	public void accepterDemanderParrainage (Etudiant etudiant) {
+		
 	}
 }

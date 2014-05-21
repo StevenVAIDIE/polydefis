@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
+import com.polydefisv4.adapter.ClassementAdapter;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 
@@ -22,7 +23,7 @@ public class ClassementFragmentFragment extends Fragment {
 		int anneeClassement = getArguments().getInt("anneePromotion");
 		Etudiant etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 		
-		Log.d("ClassementFragmentFragment", anneeClassement + " " + numeroPage);
+		Log.e("", "Affichage des " + anneeClassement + "A page : "+numeroPage);
 		List<Etudiant> listeEtudiant = null;
 		
 		SQLManager manager = new SQLManager(getActivity());

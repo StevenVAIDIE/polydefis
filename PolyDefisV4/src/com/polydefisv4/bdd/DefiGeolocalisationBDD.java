@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.sql.SQL_DefiGeolocalisation;
-import com.polydefisv4.testActivityMartin.Debug;
 import com.polydefisv4.testActivityMartin.Util;
 
 public class DefiGeolocalisationBDD {

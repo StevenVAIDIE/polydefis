@@ -1,4 +1,4 @@
-package com.polydefisv4.classement;
+package com.polydefisv4.adapter;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
 import com.polydefisv4.bean.Etudiant;
 
 public class ClassementAdapter extends BaseAdapter{
@@ -26,13 +26,11 @@ public class ClassementAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return listeEtudiant.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return listeEtudiant.get(position);
 	}
 

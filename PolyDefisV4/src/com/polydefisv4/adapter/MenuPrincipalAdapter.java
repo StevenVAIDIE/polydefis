@@ -1,4 +1,4 @@
-package com.polydefisv4.menu_principal;
+package com.polydefisv4.adapter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import com.polydefisv3.R;
+import com.polydefisv4.R;
 import com.polydefisv4.bean.Etudiant;
 
 public class MenuPrincipalAdapter extends BaseAdapter {

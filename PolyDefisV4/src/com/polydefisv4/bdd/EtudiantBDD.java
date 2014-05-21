@@ -7,7 +7,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.sql.SQL_Etudiant;
 

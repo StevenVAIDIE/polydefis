@@ -1,4 +1,4 @@
-package com.polydefisv4.listeDefis;
+package com.polydefisv4.adapter;
 
 import java.util.ArrayList;
 
@@ -12,28 +12,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.polydefisv3.R;
-import com.polydefisv4.metier.Defis;
-import com.polydefisv4.metier.TypeDefis;
+import com.polydefisv4.R;
+import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.bean.defis.QrCode;
+import com.polydefisv4.bean.defis.Quizz;
 
 public class ListeDefisAdapter extends BaseAdapter {
-	private ArrayList<Defis> listeDefis;
+	private ArrayList<Defi> listeDefis;
 	private Context contexte;
 
-	public ListeDefisAdapter(Context contexte, ArrayList<Defis> listeDefis) {
+	public ListeDefisAdapter(Context contexte, ArrayList<Defi> listeDefis) {
 		this.contexte = contexte;
 		this.listeDefis = listeDefis;
 	}
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return listeDefis.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return listeDefis.get(position);
 	}
 
@@ -54,17 +55,17 @@ public class ListeDefisAdapter extends BaseAdapter {
 		}
 
 		Drawable img = null;
-		if (listeDefis.get(position).getTypeDefis() == TypeDefis.QUIZZ)
+		if (listeDefis.get(position) instanceof Quizz)
 			img = contexte.getResources().getDrawable(R.drawable.logo_quizz);
 
-		else if (listeDefis.get(position).getTypeDefis() == TypeDefis.PHOTO)
+		else if (listeDefis.get(position) instanceof Photo)
 			img = contexte.getResources().getDrawable(R.drawable.logo_photo);
 
-		else if (listeDefis.get(position).getTypeDefis() == TypeDefis.GEOLOCALISATION)
+		else if (listeDefis.get(position) instanceof Geolocalisation)
 			img = contexte.getResources().getDrawable(
 					R.drawable.logo_geolocalisation);
 
-		else if (listeDefis.get(position).getTypeDefis() == TypeDefis.QR_CODE)
+		else if (listeDefis.get(position) instanceof QrCode)
 			img = contexte.getResources().getDrawable(R.drawable.logo_qr_code);
 
 		ImageView typeDefis = (ImageView) layoutItem
@@ -75,8 +76,7 @@ public class ListeDefisAdapter extends BaseAdapter {
 		nomDefis.setText(listeDefis.get(position).getIntitule());
 
 		TextView nombrePoint = (TextView) layoutItem.findViewById(R.id.nbPoint);
-		nombrePoint.setText(String.valueOf(listeDefis.get(position)
-				.getNbPoint()));
+		nombrePoint.setText(String.valueOf(listeDefis.get(position).getNombrePoint()));
 
 		if (position % 2 == 0) {
 			layoutItem.setBackgroundColor(contexte.getResources().getColor(

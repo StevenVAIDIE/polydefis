@@ -1,13 +1,7 @@
 package com.polydefisv4.testActivityMartin;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.polydefisv3.R;
-import com.polydefisv4.bdd.SQLManager;
-import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,11 +12,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
+import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
-import com.polydefisv4.bean.Portee;
 import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.fenetre_principale.FenetrePrincipaleActivity;
 
 public class ActivityTestMartin extends Activity {
 

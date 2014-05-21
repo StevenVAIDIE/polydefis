@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <string name="title_activity_ajout_defi">AjoutDefiActivity</string>
+    <string name="title_activity_ajout_defi_core">AjoutDefiCore</string>
+    <string name="title_activity_ajout_defi_final">AjoutDefiFinalActivity</string>
+    <string name="title_activity_ajout_defi_gpsactivity">AjoutDefiGPSACtivity</string>
+    <string name="title_activity_ajout_defi_gps">AjoutDefiGPSActivity</string>
+    <string name="title_activity_ajout_defi_qrcode">AjoutDefiQRCodeActivity</string>
+    <string name="title_activity_ajout_defi_quizz">AjoutDefiQuizzActivity</string>
+    <string name="title_activity_profil">ProfilActivity</string>
+    <string name="title_activity_valider_defi">ValiderDefiActivity</string>
     <string name="app_name">PolyDefisv4</string>
     <string name="action_settings">Setting</string>
     <string name="liste_des_defis_realises">Liste des défis réalisés</string>
@@ -25,21 +34,18 @@
     <string name="connexion">Se connecter</string>
 
     <string-array name="menu3A">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/liste_des_defis_a_realiser</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
     </string-array>
     <string-array name="menu4A">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
     </string-array>
     <string-array name="menu4AAdmin">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -50,7 +56,6 @@
     </string-array>
     <string-array name="menuLateral3A">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/liste_des_defis_a_realiser</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -59,7 +64,6 @@
     </string-array>
     <string-array name="menuLateral4A">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -68,7 +72,6 @@
     </string-array>
     <string-array name="menuLateral4AAdmin">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -88,5 +91,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_activity_test">ActivityTest</string>
-
+    <string name="photo">Photo</string>
+    <string name="geo">Geolocalisation</string>
+    <string name="quizz">Quizz</string>
+    <string name="qrcode">QRcode</string>
+    <string name="retour">Retour</string>
+    <string name="prendrephoto">Prendre Photo</string>
+    <string name="scan">Scan</string>
+    <string name="envoyerqrcode">Prendre QRcode</string>
+    <string name="envoyerpositiongeo">Envoyer la position actuelle</string>
+    <string name="envoyerrep">Question suivante</string>
+    <string name="afficherdefi">Afficher un Defi</string>
 </resources>

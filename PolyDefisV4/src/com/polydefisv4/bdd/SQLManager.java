@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.content.Context;
-import android.os.SystemClock;
 
 import com.polydefisv4.bean.Connexion;
 import com.polydefisv4.bean.Defi;
@@ -15,7 +14,6 @@ import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
-import com.polydefisv4.testActivityMartin.Util;
 
 public class SQLManager {
 
