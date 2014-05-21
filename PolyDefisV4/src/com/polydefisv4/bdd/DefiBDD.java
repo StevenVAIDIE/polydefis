@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.Defi;
-import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.sql.SQL_Defi;
 import com.polydefisv4.testActivityMartin.Debug;
 import com.polydefisv4.testActivityMartin.Util;

@@ -9,17 +9,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:text="Intitulé"
-        android:textSize="30sp" />
+        android:text="Intitulé" />
 
     <EditText
         android:id="@+id/nomDefi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:ems="10"
-        android:maxLines="1" >
-
+        android:singleLine="true" >
         <requestFocus />
     </EditText>
 
@@ -29,8 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:text="Description"
-        android:textSize="30sp" />
+        android:text="Description" />
 
     <EditText
         android:id="@+id/description"
@@ -38,8 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:textSize="20sp" />
+        android:inputType="textMultiLine" />
 
     <Spinner
         android:id="@+id/typeDefi"

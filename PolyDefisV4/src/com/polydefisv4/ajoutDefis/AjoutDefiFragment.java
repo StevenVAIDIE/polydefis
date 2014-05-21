@@ -18,7 +18,6 @@ import com.polydefisv4.R;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.EtatAcceptation;
 import com.polydefisv4.bean.Etudiant;
-import com.polydefisv4.bean.Portee;
 import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;

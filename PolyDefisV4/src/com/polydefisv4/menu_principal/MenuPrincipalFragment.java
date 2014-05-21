@@ -15,6 +15,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.MenuPrincipalAdapter;
 import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;

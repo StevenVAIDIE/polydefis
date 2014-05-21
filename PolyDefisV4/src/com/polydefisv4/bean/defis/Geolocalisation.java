@@ -3,7 +3,6 @@ package com.polydefisv4.bean.defis;
 import java.util.Date;
 
 import com.polydefisv4.bean.Defi;
-import com.polydefisv4.bean.Portee;
 
 public class Geolocalisation extends Defi {
 	private double latitude;

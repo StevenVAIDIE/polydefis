@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
-import com.polydefisv4.sql.SQL_DefiPhoto;
 import com.polydefisv4.sql.SQL_DefiQrCode;
 import com.polydefisv4.testActivityMartin.Util;
 

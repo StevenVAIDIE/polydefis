@@ -41,6 +41,7 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fenetre_principale);
+		
 		titreActionBar = titreMenuLateral = getTitle();
 		etudiant = (Etudiant) getIntent().getSerializableExtra("etudiant");
 

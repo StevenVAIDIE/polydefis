@@ -1,10 +1,9 @@
-package com.polydefisv4.parrainage;
+package com.polydefisv4.adapter;
 
 import java.util.List;
 
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -13,12 +12,13 @@ import android.widget.TextView;
 
 import com.polydefisv4.R;
 import com.polydefisv4.bean.Etudiant;
+import com.polydefisv4.parrainage.ParrainageFragment;
 
-public class Parrainage4AAdapter extends BaseAdapter{
+public class ListeAcceptationParrainnageAdapter extends BaseAdapter{
 	private List<Etudiant> listeEtudiant;
 	private ParrainageFragment contexte;
 
-	public Parrainage4AAdapter(ParrainageFragment contexte, List<Etudiant> listeEtudiant) {
+	public ListeAcceptationParrainnageAdapter(ParrainageFragment contexte, List<Etudiant> listeEtudiant) {
 		this.contexte = contexte;
 		this.listeEtudiant = listeEtudiant;
 	}

@@ -48,12 +48,12 @@ public class Etudiant implements Serializable {
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Etudiant) {
-			Etudiant etu = (Etudiant) this;
+			Etudiant etu = (Etudiant) o;
 			if (etu.nom.equals(this.nom) && etu.prenom.equals(this.prenom)) {
 				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	public static List<Etudiant> getAllEtudiant() {

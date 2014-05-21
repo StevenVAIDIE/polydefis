@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.ListeDefisAdapter;
 import com.polydefisv4.affichageDefis.AffichageGeolocalisationFragment;
 import com.polydefisv4.affichageDefis.AffichagePhotoFragment;
 import com.polydefisv4.affichageDefis.AffichageQrCodeFragment;

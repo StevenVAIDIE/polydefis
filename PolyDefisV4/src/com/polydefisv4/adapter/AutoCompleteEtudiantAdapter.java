@@ -1,4 +1,4 @@
-package com.polydefisv4.parrainage;
+package com.polydefisv4.adapter;
 
 import java.util.ArrayList;
 
@@ -11,14 +11,14 @@ import android.widget.Filterable;
 
 import com.polydefisv4.bean.Etudiant;
 
-public class Parrainage3AAdapter extends ArrayAdapter<Etudiant> implements
+public class AutoCompleteEtudiantAdapter extends ArrayAdapter<Etudiant> implements
 		Filterable {
 
 	private ArrayList<Etudiant> fullList;
 	private ArrayList<Etudiant> mOriginalValues;
 	private ArrayFilter mFilter;
 
-	public Parrainage3AAdapter(Context context, int resource,
+	public AutoCompleteEtudiantAdapter(Context context, int resource,
 			int textViewResourceId, ArrayList<Etudiant> objects) {
 
 		super(context, resource, textViewResourceId, objects);

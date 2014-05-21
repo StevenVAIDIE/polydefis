@@ -1,112 +1,56 @@
 package com.polydefisv4.affichageDefis;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.polydefisv4.R;
 import com.polydefisv4.bean.defis.Quizz;
 
 public class AffichageQuizzFragment extends Fragment implements OnClickListener {
-	private int index;
-	private boolean donnerPoints;
-
-	private Quizz defis;
-
-	private TextView question;
-	private RadioGroup reponses;
-	private RadioButton c1;
-	private RadioButton c2;
-	private RadioButton c3;
-	private RadioButton c4;
-	private Button boutonEnvoieReponsesQuizz;
-
-	private ArrayList<String> monRandom = new ArrayList<String>();
-	private View rootView;
-
-	public AffichageQuizzFragment() {
-		index = 0;
-		donnerPoints = true;
-	}
-
+	private Quizz defi;
+	
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.fragment_afficher_defis_question, container, false);
-		defis = (Quizz) getArguments().getSerializable("defis");
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View rootView = inflater.inflate(R.layout.fragment_affichage_quizz, container, false);
+		defi = (Quizz) getArguments().getSerializable("defis");
+		
+		TextView titreDefis = (TextView) rootView.findViewById(R.id.intitule_defi);
+		titreDefis.setText(defi.getIntitule());
 
-		question = (TextView) rootView.findViewById(R.id.question);
-		reponses = (RadioGroup) rootView.findViewById(R.id.reponses);
-		c1 = (RadioButton) rootView.findViewById(R.id.rep1);
-		c2 = (RadioButton) rootView.findViewById(R.id.rep2);
-		c3 = (RadioButton) rootView.findViewById(R.id.rep3);
-		c4 = (RadioButton) rootView.findViewById(R.id.rep4);
+		TextView descriptionDefi = (TextView) rootView.findViewById(R.id.description_defi);
+		descriptionDefi.setText(defi.getDescription());
 
-		boutonEnvoieReponsesQuizz = (Button) rootView.findViewById(R.id.envoyer_rep);
-		boutonEnvoieReponsesQuizz.setOnClickListener(this);
+		TextView nbPoint = (TextView) rootView.findViewById(R.id.nb_point);
+		nbPoint.setText(defi.getNombrePoint() + " points");
 
-		melangerListe();
-
+		TextView dateLimite = (TextView) rootView.findViewById(R.id.date_limite);
+		dateLimite.setText(defi.getDateFin().toString());
+		
+		Button demarrageQuizz = (Button) rootView.findViewById(R.id.bouton_demarrage_quizz);
+		demarrageQuizz.setOnClickListener(this);
+		
 		return rootView;
 	}
 
-	public ArrayList<String> melanger(ArrayList<String> listeDepart) {
-		ArrayList<String> nouvelle = new ArrayList<String>(listeDepart);
-		Collections.shuffle(nouvelle);
-		return nouvelle;
-	}
-
-	public void melangerListe() {
-		monRandom.add(defis.getQuestions(index).getReponse());
-		monRandom.add(defis.getQuestions(index).getReponse2());
-		monRandom.add(defis.getQuestions(index).getReponse3());
-		monRandom.add(defis.getQuestions(index).getReponse4());
-		monRandom = melanger(monRandom);
-
-		question.setText(defis.getQuestions(index).getQuestion());
-		c1.setText(monRandom.get(1));
-		c2.setText(monRandom.get(2));
-		c3.setText(monRandom.get(3));
-		c4.setText(monRandom.get(0));
-
-		monRandom.clear();
-	}
-
 	@Override
-	public void onClick(View arg0) {
-		int selectedId = reponses.getCheckedRadioButtonId();
-		if (selectedId == -1) {
-			Toast.makeText(getActivity(), "Veuillez cochez une réponse", Toast.LENGTH_LONG).show();
-		} else {
-			RadioButton radioButton = (RadioButton) rootView.findViewById(selectedId);
-			if (!radioButton.getText().toString().equals(defis.getQuestions(index).getReponse())) {
-				donnerPoints = false;
-			}
-			index++;
-			radioButton.setChecked(false);
-			if (index < defis.getNbQuestions()) {
-				melangerListe();
-			}
-
-			else {
-				if (donnerPoints) {
-					Toast.makeText(getActivity(), "Quizz terminé : " + defis.getNombrePoint()	+ " points attribués", Toast.LENGTH_LONG).show();
-				} else {
-					Toast.makeText(getActivity(), "Quizz terminé : Pas de points attribués", Toast.LENGTH_LONG).show();
-				}
-			
-			}
-		}
+	public void onClick(View v) {
+		AffichageQuestionFragment newFragment = new AffichageQuestionFragment();
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("defis", defi);
+		newFragment.setArguments(bundle);
+		
+		FragmentManager fragmentManager = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(R.id.frame_container, newFragment);
+		fragmentTransaction.addToBackStack(null);
+		fragmentTransaction.commit();
 	}
 }

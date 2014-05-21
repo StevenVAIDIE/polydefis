@@ -55,7 +55,7 @@ public abstract class Defi implements Serializable {
 	public static ArrayList<Defi> getAllDefis() {
 		ArrayList<Defi> listeDefis = new ArrayList<Defi>();
 		
-		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 20, PORTEE_PROMO, 10, 20));
+		listeDefis.add(new Geolocalisation(1, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 20, PORTEE_PROMO, 47.282475, -1.5164999999999509));
 		listeDefis.add(new Photo(2, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, PORTEE_ALL, ""));
 		listeDefis.add(Quizz.getQuizz());
 		listeDefis.add(new QrCode(3, "E116143S", "Boire", "Description", new Date(2000, 10, 12), 1, 25, PORTEE_ALL, ""));

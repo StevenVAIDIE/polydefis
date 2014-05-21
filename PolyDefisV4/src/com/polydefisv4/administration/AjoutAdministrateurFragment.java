@@ -15,9 +15,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.AutoCompleteEtudiantAdapter;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
-import com.polydefisv4.parrainage.Parrainage3AAdapter;
 
 public class AjoutAdministrateurFragment extends Fragment implements OnClickListener, OnItemClickListener {
 	private AutoCompleteTextView nomParrain = null;
@@ -34,7 +34,7 @@ public class AjoutAdministrateurFragment extends Fragment implements OnClickList
 		
 		SQLManager sqlManager = new SQLManager(getActivity());
 		listePotencielAdministrateur = sqlManager.getEtudiantAnnee(4);
-		Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listePotencielAdministrateur);
+		AutoCompleteEtudiantAdapter adapter = new AutoCompleteEtudiantAdapter(getActivity(),android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listePotencielAdministrateur);
 		
 		nomParrain.setAdapter(adapter);
 
@@ -43,8 +43,6 @@ public class AjoutAdministrateurFragment extends Fragment implements OnClickList
 		
 		return rootView;
 	}
-	
-	
 
 	@Override
 	public void onClick(View v) {

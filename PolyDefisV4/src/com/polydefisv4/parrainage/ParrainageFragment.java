@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.AutoCompleteEtudiantAdapter;
+import com.polydefisv4.adapter.ListeAcceptationParrainnageAdapter;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 
@@ -36,7 +38,7 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 			
 			SQLManager manager = new SQLManager(getActivity());
 			ArrayList<Etudiant> listeParrain = manager.getEtudiantAnnee(4);
-			Parrainage3AAdapter adapter = new Parrainage3AAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listeParrain);
+			AutoCompleteEtudiantAdapter adapter = new AutoCompleteEtudiantAdapter(getActivity().getApplicationContext(), android.R.layout.simple_dropdown_item_1line, android.R.id.text1, listeParrain);
 			nomParrain.setAdapter(adapter);
 	    
 			Button boutonDemandeParrainage = (Button) rootView.findViewById(R.id.boutonDemandeParrainage);
@@ -46,7 +48,7 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 			ListView listeDemandeParrainage = (ListView) rootView.findViewById(R.id.listeDemandeParrainage);
 			
 			listeEtudiant = Etudiant.getAllEtudiant();
-			Parrainage4AAdapter adapter = new Parrainage4AAdapter(this, listeEtudiant);
+			ListeAcceptationParrainnageAdapter adapter = new ListeAcceptationParrainnageAdapter(this, listeEtudiant);
 			listeDemandeParrainage.setAdapter(adapter);
 		}
 		return rootView;

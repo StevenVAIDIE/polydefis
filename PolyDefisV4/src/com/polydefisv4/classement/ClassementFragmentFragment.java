@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.ClassementAdapter;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 
@@ -22,6 +23,7 @@ public class ClassementFragmentFragment extends Fragment {
 		int anneeClassement = getArguments().getInt("anneePromotion");
 		Etudiant etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 		
+		Log.e("", "Affichage des " + anneeClassement + "A page : "+numeroPage);
 		List<Etudiant> listeEtudiant = null;
 		
 		SQLManager manager = new SQLManager(getActivity());
@@ -39,8 +41,6 @@ public class ClassementFragmentFragment extends Fragment {
 			Log.e("ClassementFragmentFragment", "Ni ETN, INFO, TE, MAT ("+numeroPage+")");
 		}
 		
-		Log.e("ClassementFragmentFragment", "taille"+listeEtudiant.size()+"");
-
 		ListView listView = (ListView) rootView.findViewById(R.id.listViewClassement);
 		listView.setAdapter(new ClassementAdapter(this, listeEtudiant, etudiant));
 		

@@ -1,4 +1,4 @@
-package com.polydefisv4.classement;
+package com.polydefisv4.adapter;
 
 import java.util.List;
 

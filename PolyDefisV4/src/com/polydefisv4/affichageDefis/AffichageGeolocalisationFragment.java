@@ -70,7 +70,7 @@ public class AffichageGeolocalisationFragment extends Fragment implements OnClic
 			map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			map.setMyLocationEnabled(true);
 			map.getUiSettings().setCompassEnabled(true);
-			map.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
+			map.addMarker(new MarkerOptions().position(new LatLng(defis.getLatitude(), defis.getLongitude())));
 	    }
 	    
 		return rootView;

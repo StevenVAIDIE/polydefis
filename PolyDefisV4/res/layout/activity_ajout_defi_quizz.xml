@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical" >
 
     <TextView
@@ -9,14 +10,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_weight="1"
+        android:gravity="bottom"
         android:text="Intitulé de la question" />
 
     <EditText
         android:id="@+id/question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10" >
+        android:layout_gravity="top"
+        android:layout_weight="0"
+        android:singleLine="true" >
 
         <requestFocus />
     </EditText>
@@ -27,14 +30,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
+        android:gravity="bottom"
         android:text="Reponse attendue" />
 
     <EditText
         android:id="@+id/rep1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10" />
+        android:layout_weight="0"
+       	android:singleLine="true"/>
 
     <TextView
         android:id="@+id/nbrQuizz"
@@ -42,33 +46,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_weight="1"
+        android:gravity="bottom"
         android:text="Reponses fausses" />
 
     <EditText
         android:id="@+id/rep2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10" />
+        android:layout_weight="0"
+		android:singleLine="true"/>
 
     <EditText
         android:id="@+id/rep3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10" />
+        android:layout_weight="0" />
 
     <EditText
         android:id="@+id/rep4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10" />
+        android:layout_weight="0"
+        android:singleLine="true" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
+        android:layout_weight="0" >
 
         <Button
             android:id="@+id/buttonAddQuestion"
@@ -86,5 +90,4 @@
 			android:background="@drawable/bouton_application"
             android:text="Valider" />
     </LinearLayout>
-
 </LinearLayout>

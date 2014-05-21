@@ -8,11 +8,13 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.polydefisv4.R;
+import com.polydefisv4.adapter.ClassementPageAdapter;
 import com.polydefisv4.bean.Etudiant;
 
 public class ClassementFragment extends Fragment implements TabListener {
@@ -26,6 +28,8 @@ public class ClassementFragment extends Fragment implements TabListener {
         View rootView = inflater.inflate(R.layout.fragment_classement, container, false);
         etudiant = (Etudiant) getArguments().getSerializable("etudiant");
         anneeClassement = getArguments().getInt("anneeClassement");
+        
+        Log.e("","Creation d'un classement des " + anneeClassement+"A");
         
 	    actionBar = getActivity().getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
