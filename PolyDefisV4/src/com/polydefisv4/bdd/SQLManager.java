@@ -2,11 +2,13 @@ package com.polydefisv4.bdd;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.content.Context;
 
 import com.polydefisv4.bean.Connexion;
 import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bean.DefiRealise;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
@@ -90,6 +92,21 @@ public class SQLManager {
 		this.defis.open();
 		this.defis.accepterDefi(id);
 		this.defis.close();
+		
+	}
+	
+	public void validerDefi(int idDefi, String idEtu)
+	{
+		this.defis.open();
+		this.etudiants.open();
+		this.realise.open();
+		int nbPoints = this.defis.nbPointsDefis(idDefi);
+		this.etudiants.ajouterPoints(idEtu, nbPoints);
+		DefiRealise df = new DefiRealise(idDefi,idEtu,new Date());// DATE NOW
+		this.realise.insertDefiRealise(df);
+		this.realise.close();	
+		this.defis.close();	
+		this.etudiants.close();
 	}
 	
 	public ArrayList<Etudiant> getEtudiantAnnee(int annee)
@@ -106,6 +123,14 @@ public class SQLManager {
 		ArrayList<Etudiant> result = this.etudiants.getEtudiantsPromo(departement,annee);
 		this.etudiants.close();
 		return (result);				
+	}
+	
+	public void updateDefiDate()
+	{
+		this.defis.open();
+		this.defis.updateEtatDefiDate();
+		this.defis.close();
+		
 	}
 	
 	public boolean bonMdp(String pseudo, String password)
@@ -143,14 +168,6 @@ public class SQLManager {
 		this.defis.close();
 	}
 	
-	public long insertDefiPhoto(Photo photo)
-	{
-		this.defis.open();
-		long result = this.defis.insertDefi(photo, Defi.TYPE_PHOTO);
-		this.defis.close();
-		return (result);		
-	}
-	
 	public void create()
 	{
 		this.etudiants.open();
@@ -168,6 +185,18 @@ public class SQLManager {
 		this.geolocalisations.open();
 		this.geolocalisations.getSQL().onCreate(this.geolocalisations.getBDD());
 		this.geolocalisations.close();
+		
+		this.quizz.open();
+		this.quizz.getSQL().onCreate(this.quizz.getBDD());
+		this.quizz.close();
+		
+		this.qrcodes.open();
+		this.qrcodes.getSQL().onCreate(this.qrcodes.getBDD());
+		this.qrcodes.close();
+		
+		this.photos.open();
+		this.photos.getSQL().onCreate(this.photos.getBDD());
+		this.photos.close();
 		
 		this.realise.open();
 		this.realise.getSQL().onCreate(this.realise.getBDD());
@@ -190,9 +219,9 @@ public class SQLManager {
 	{
 		this.defis.open();
 		this.geolocalisations.open();
-		this.defis.getSQL().onUpgrade(this.defis.getBDD(),1,2);
-		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(),1,2);
 		this.defis.insertDefi(geoloc, Defi.TYPE_GEOLOCALIATION);
+		int id = this.defis.getLastId();
+		geoloc.setId(id);
 		this.geolocalisations.insertGeolocalisation(geoloc);
 		this.defis.close();
 		this.geolocalisations.close();
@@ -255,6 +284,18 @@ public class SQLManager {
 		this.geolocalisations.open();
 		this.geolocalisations.getSQL().onUpgrade(this.geolocalisations.getBDD(), 1, 2);
 		this.geolocalisations.close();
+		
+		this.quizz.open();
+		this.quizz.getSQL().onUpgrade(this.quizz.getBDD(), 1, 2);
+		this.quizz.close();
+		
+		this.photos.open();
+		this.photos.getSQL().onUpgrade(this.photos.getBDD(), 1, 2);
+		this.photos.close();
+		
+		this.qrcodes.open();
+		this.qrcodes.getSQL().onUpgrade(this.qrcodes.getBDD(), 1, 2);
+		this.qrcodes.close();
 		
 		this.realise.open();
 		this.realise.getSQL().onUpgrade(this.realise.getBDD(), 1, 2);

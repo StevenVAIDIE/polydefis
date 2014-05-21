@@ -14,6 +14,7 @@ public abstract class Defi implements Serializable {
 
 	public static final int ETAT_EN_COURS_ACCEPTATION = 0;
 	public static final int ETAT_ACCEPTE = 1;
+	public static final int ETAT_TERMINE = 2;
 	
 	public static final int TYPE_PHOTO = 1;
 	public static final int TYPE_GEOLOCALIATION = 2;

@@ -213,4 +213,11 @@ public class EtudiantBDD {
 			return cursor.getCount();
 	}
 	
+	public int ajouterPoints(String id, int nbPts)
+	{
+		ContentValues values = new ContentValues();
+		values.put(COL_POINTS, nbPts);
+		return bdd.update(TABLE_ETUDIANT, values, COL_IDENTIFIANT + " = " + id, null);
+	}
+	
 }

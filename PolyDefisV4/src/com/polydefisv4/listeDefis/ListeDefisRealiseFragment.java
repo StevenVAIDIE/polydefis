@@ -19,7 +19,6 @@ import com.polydefisv4.adapter.ListeDefisAdapter;
 import com.polydefisv4.affichageDefis.AffichageGeolocalisationFragment;
 import com.polydefisv4.affichageDefis.AffichagePhotoFragment;
 import com.polydefisv4.affichageDefis.AffichageQrCodeFragment;
-import com.polydefisv4.affichageDefis.AffichageQuizzFragment;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Geolocalisation;
@@ -70,7 +69,7 @@ public class ListeDefisRealiseFragment extends Fragment implements OnItemClickLi
 		} else if (listeDefisEtudiant.get(position) instanceof Geolocalisation) {
 			newFragment = new AffichageGeolocalisationFragment();
 		} else if (listeDefisEtudiant.get(position) instanceof Quizz) {
-			newFragment = new AffichageQuizzFragment();
+			//newFragment = new AffichageQuizzFragment();
 		} else {
 			
 		}
