@@ -34,21 +34,18 @@
     <string name="connexion">Se connecter</string>
 
     <string-array name="menu3A">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/liste_des_defis_a_realiser</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
     </string-array>
     <string-array name="menu4A">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
     </string-array>
     <string-array name="menu4AAdmin">
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -59,7 +56,6 @@
     </string-array>
     <string-array name="menuLateral3A">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/liste_des_defis_a_realiser</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -68,7 +64,6 @@
     </string-array>
     <string-array name="menuLateral4A">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
@@ -77,7 +72,6 @@
     </string-array>
     <string-array name="menuLateral4AAdmin">
         <item>@string/accueil</item>
-        <item>@string/liste_des_defis_realises</item>
         <item>@string/proposer_defi</item>
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>

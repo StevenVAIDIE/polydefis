@@ -15,7 +15,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
-import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
@@ -48,9 +48,7 @@ public class MenuPrincipalFragment extends Fragment implements
 		Fragment fragment = null;
 		Bundle bundle = new Bundle();
 
-		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_realises))) {
-			fragment = new ListeDefisRealiseFragment();
-		} else if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
+		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();

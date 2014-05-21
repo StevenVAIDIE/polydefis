@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
-import com.polydefisv4.ajoutAdministrateur.AjoutAdministrateurFragment;
+import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
@@ -141,9 +141,6 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 
 		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
-		} else if (nomFragment
-				.equals(getString(R.string.liste_des_defis_realises))) {
-			fragment = new ListeDefisRealiseFragment();
 		} else if (nomFragment
 				.equals(getString(R.string.liste_des_defis_a_realiser))) {
 			fragment = new ListeDefisRealiseFragment();

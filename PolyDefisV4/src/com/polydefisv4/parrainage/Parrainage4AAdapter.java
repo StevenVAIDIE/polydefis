@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -50,9 +51,11 @@ public class Parrainage4AAdapter extends BaseAdapter{
 		nom.setText(listeEtudiant.get(position).getNom() + " " + listeEtudiant.get(position).getPrenom());
 		
 		Button boutonValiderParrainage = (Button) layoutItem.findViewById(R.id.buttonAccepterParrainage);
+		boutonValiderParrainage.setTag(position);
 		boutonValiderParrainage.setOnClickListener(contexte);
 		
 		Button boutonRefuserParrainage = (Button) layoutItem.findViewById(R.id.buttonRefuserParrainage);
+		boutonRefuserParrainage.setTag(position);
 		boutonRefuserParrainage.setOnClickListener(contexte);
 				
 		return layoutItem;

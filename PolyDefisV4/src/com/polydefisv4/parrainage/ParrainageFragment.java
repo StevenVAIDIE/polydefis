@@ -1,6 +1,7 @@
 package com.polydefisv4.parrainage;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.polydefisv4.bean.Etudiant;
 public class ParrainageFragment extends Fragment implements OnClickListener {
 	private AutoCompleteTextView nomParrain = null;
 	private Etudiant etudiant;
+	private List<Etudiant> listeEtudiant;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,11 +44,12 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 		} else  {
 	        rootView = inflater.inflate(R.layout.fragment_parrainage4a, container, false);
 			ListView listeDemandeParrainage = (ListView) rootView.findViewById(R.id.listeDemandeParrainage);
-
-			Parrainage4AAdapter adapter = new Parrainage4AAdapter(this, Etudiant.getAllEtudiant());
+			
+			listeEtudiant = Etudiant.getAllEtudiant();
+			Parrainage4AAdapter adapter = new Parrainage4AAdapter(this, listeEtudiant);
 			listeDemandeParrainage.setAdapter(adapter);
 		}
-		return rootView;		
+		return rootView;
 	}
 	
 	@Override
@@ -54,10 +57,21 @@ public class ParrainageFragment extends Fragment implements OnClickListener {
 		Button selection = (Button) v;
 		if(selection.getText().toString().equals(getResources().getString(R.string.demande_Parrainage))) {
 			Toast.makeText(ParrainageFragment.this.getActivity(), "Ajout du nouveau parain : "+nomParrain.getText().toString(), Toast.LENGTH_LONG).show();
-		//} else if(selection.getText().equals(getResources().getString(R.string.listeDefisARealiser))) {
-
-		//} else if(selection.getText().equals(getResources().getString(R.string.listeDefisARealiser))) {
-		
+		} else {
+			int position = (Integer) v.getTag(); 
+			if(selection.getText().toString().equals(getResources().getString(R.string.accepter))) {
+				Toast.makeText(getActivity(), "Acceptation de la position " + position, Toast.LENGTH_LONG).show();
+			} else if(selection.getText().toString().equals(getResources().getString(R.string.refuser))) {
+				Toast.makeText(getActivity(), "Refus de la position " + position, Toast.LENGTH_LONG).show();
+			}
 		}
+	}
+	
+	public void annulerDemanderParrainage (Etudiant etudiant) {
+		
+	}
+	
+	public void accepterDemanderParrainage (Etudiant etudiant) {
+		
 	}
 }
