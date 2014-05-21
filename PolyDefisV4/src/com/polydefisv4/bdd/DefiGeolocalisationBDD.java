@@ -93,19 +93,6 @@ public class DefiGeolocalisationBDD {
 	    if(cursor.getCount() < 1)
 	    	return null;
 	    
-	    Debug.Log(cursor.getString(0));
-	    Debug.Log(cursor.getString(1));
-	    Debug.Log(cursor.getString(2));
-	    Debug.Log(cursor.getString(3));
-	    Debug.Log(cursor.getString(4));
-	    Debug.Log(cursor.getString(5));
-	    Debug.Log(cursor.getString(6));
-	    Debug.Log(cursor.getString(7));
-	    Debug.Log(cursor.getString(8));
-	    Debug.Log(cursor.getString(9));
-	    Debug.Log(cursor.getString(10));
-	    Debug.Log(cursor.getString(11));
-	    
 	   Geolocalisation geolocalisation = new Geolocalisation(cursor.getInt(DefiBDD.NUM_COL_IDENTIFIANT_DEFI), 
 			   cursor.getString(DefiBDD.NUM_COL_IDENTIFIANT_DEFI),
 			   cursor.getString(DefiBDD.NUM_COL_INTITULE),

@@ -7,13 +7,13 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 
 public class SQL_DefiQuizz extends SQLiteOpenHelper {
 
-	private static final String TABLE_QUIZZ = "D_GEOLOCALISATION";
+	private static final String TABLE_QUIZZ = "D_QUIZZ";
 	private static final String COL_IDENTIFIANT_DEFI = "IdDefi";
 	private static final String COL_NUMERO_QUESTION = "NumeroQuestion";
 	private static final String COL_BONNE_REPONSE_1 = "BonneReponse1";
 	private static final String COL_MAUVAISE_REPONSE_2 = "BonneReponse2";
 	private static final String COL_MAUVAISE_REPONSE_3 = "BonneReponse3";
-	private static final String COL_MAUVAISE_REPONSE_4 = "BonneReponse3";
+	private static final String COL_MAUVAISE_REPONSE_4 = "BonneReponse4";
 	
 	public static final String CREATE_BDD = 
 			"CREATE TABLE " + TABLE_QUIZZ + " (" + 

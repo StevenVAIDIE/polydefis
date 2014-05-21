@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.sql.SQL_Etudiant;
 
@@ -211,6 +212,13 @@ public class EtudiantBDD {
 		   
 		    cursor.moveToFirst();
 			return cursor.getCount();
+	}
+	
+	public int ajouterPoints(String id, int nbPts)
+	{
+		ContentValues values = new ContentValues();
+		values.put(COL_POINTS, nbPts);
+		return bdd.update(TABLE_ETUDIANT, values, COL_IDENTIFIANT + " = " + id, null);
 	}
 	
 }

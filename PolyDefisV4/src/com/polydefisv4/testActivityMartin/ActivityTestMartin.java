@@ -35,7 +35,9 @@ public class ActivityTestMartin extends Activity {
 		setContentView(R.layout.fragment_activity_test_martin);
 
 		final SQLManager bdd = new SQLManager(this);
-		//Connexion connexion = new Connexion("e111111s","123");
+		bdd.updateDefiDate();
+
+		
 		final Intent i = new Intent(this, FenetrePrincipaleActivity.class);
 		
 		
@@ -47,31 +49,15 @@ public class ActivityTestMartin extends Activity {
 			e.printStackTrace();
 		}
 		
-		//FileInputStream fis;
-		bdd.removeGeolocalisation(1);
-		Geolocalisation geoloc = new Geolocalisation(1,"e111111s","Test Defi Geoloc","Descriptioooooon",date,Defi.ETAT_EN_COURS_ACCEPTATION,6,Defi.PORTEE_PROMO,47.2440713, -1.5292213);
-		bdd.insertGeolocalisation(geoloc);
-		Geolocalisation geoloc2 = bdd.getGeolocalisation(1);
-		Debug.Log(geoloc2.getDescription());
-		bdd.accepterDefi(1);
-		/*Debug.Log("before");
-		try {
-			fis = new FileInputStream("conn_auto");
-			Debug.Log("avant");
-			Debug.Log(String.valueOf(fis.read()));
-			fis.close();
-		} 
-		catch (FileNotFoundException e) 
-		{
-			Debug.Log(e.getMessage());
-		}
-		catch (IOException e) {
-			Debug.Log(e.getMessage());
-		}
-		
-		Debug.Log("after");
-		*/
+		bdd.upgrade();
 		bdd.insererJeuDeTest();
+		
+		Geolocalisation geoloc = new Geolocalisation(66666666,"e111111s","Test Defi Geoloc","Descriptioooooon",date,Defi.ETAT_EN_COURS_ACCEPTATION,6,Defi.PORTEE_PROMO,47.2440713, -1.5292213);
+		bdd.insertGeolocalisation(geoloc);
+		//Geolocalisation geoloc2 = bdd.getGeolocalisation(1);
+		//Debug.Log(geoloc2.getDescription());
+		//bdd.accepterDefi(1);
+		
 		bouton = (Button) findViewById(R.id.button1);
 		cb = (CheckBox) findViewById(R.id.checkBox1);
 		bouton.setOnClickListener(new View.OnClickListener()
