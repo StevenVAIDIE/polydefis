@@ -17,7 +17,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.polydefisv4.R;
 import com.polydefisv4.administration.AjoutAdministrateurFragment;
@@ -117,10 +116,12 @@ public class FenetrePrincipaleActivity extends Activity implements OnItemClickLi
 
 	@Override
 	public void onBackPressed() {
+		Log.e("", getTitle().toString() + "!=" + getString(R.string.accueil));
 		if (getTitle().toString().equals(getString(R.string.accueil))) {
 			quitter();
 		} else {
-			displayView(getString(R.string.accueil));
+			super.onBackPressed();
+			//displayView(getString(R.string.accueil));
 		}
 	}
 

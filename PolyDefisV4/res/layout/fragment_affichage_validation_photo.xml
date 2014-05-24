@@ -9,19 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/logo_photo"
-        android:gravity="center_vertical"
-        android:text="TextView" />
+        android:gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/description"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/photoPrise"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1" />
 
     <LinearLayout

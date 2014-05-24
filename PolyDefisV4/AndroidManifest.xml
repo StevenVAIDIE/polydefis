@@ -12,8 +12,6 @@
         android:name="com.polydefisv4.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-    <uses-permission android:name="com.polydefisv4.permission.MAPS_RECEIVE" />
-
     <!-- Permission pour utiliser la connexion internet -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Permission permettant de vérifier l'état de la connexion -->
@@ -43,12 +41,20 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCpCRGKOqPc9ArH_zWuGjaqm7OcQmdOlj4" />
+            android:value="AIzaSyAMp8biLFCNiflzVWqhHBH-YNN5j6f-3lQ" />
 
         <activity
             android:name="com.polydefisv4.lanceur.LanceurActivity"
             android:label="@string/app_name"
             android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.polydefisv4.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

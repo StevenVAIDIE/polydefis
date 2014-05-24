@@ -29,7 +29,7 @@ public class AjoutDefiQuizzFragment extends Fragment implements OnClickListener 
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_ajout_defi_quizz, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_ajout_defi_quizz, container, false);
 		defi = (Quizz) getArguments().getSerializable("defis");
 		
 		editTextQuestion = ((EditText) rootView.findViewById(R.id.question));

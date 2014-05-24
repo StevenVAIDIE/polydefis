@@ -44,7 +44,7 @@ public class AffichageQuestionFragment extends Fragment implements OnClickListen
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.fragment_afficher_defis_question, container, false);
+		rootView = inflater.inflate(R.layout.fragment_affichage_question, container, false);
 		defis = (Quizz) getArguments().getSerializable("defis");
 
 		question = (TextView) rootView.findViewById(R.id.question);

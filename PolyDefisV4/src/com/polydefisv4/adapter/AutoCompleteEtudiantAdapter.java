@@ -13,14 +13,13 @@ import com.polydefisv4.bean.Etudiant;
 
 public class AutoCompleteEtudiantAdapter extends ArrayAdapter<Etudiant> implements
 		Filterable {
-
+	
 	private ArrayList<Etudiant> fullList;
 	private ArrayList<Etudiant> mOriginalValues;
 	private ArrayFilter mFilter;
-
+	
 	public AutoCompleteEtudiantAdapter(Context context, int resource,
 			int textViewResourceId, ArrayList<Etudiant> objects) {
-
 		super(context, resource, textViewResourceId, objects);
 		fullList = objects;
 		mOriginalValues = new ArrayList<Etudiant>(fullList);

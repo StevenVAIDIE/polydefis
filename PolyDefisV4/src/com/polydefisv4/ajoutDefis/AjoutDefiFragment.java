@@ -37,7 +37,7 @@ public class AjoutDefiFragment extends Fragment implements OnClickListener {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_ajout_defi, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_ajout_defi, container, false);
 		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 		
 		nomDefis = (EditText) rootView.findViewById(R.id.nomDefi);
@@ -66,26 +66,26 @@ public class AjoutDefiFragment extends Fragment implements OnClickListener {
 			Fragment newFragment = null;
 			String porteDefis = null;
 
-			if (portee.getSelectedItem().toString() == "Filleul") {
+			if (portee.getSelectedItem().toString().equals(getString(R.string.filleul))) {
 				porteDefis = Defi.PORTEE_FILLEUL;
-			} else if (portee.getSelectedItem().toString() == "Promo") {
+			} else if (portee.getSelectedItem().toString().equals(getString(R.string.promo))) {
 				porteDefis = Defi.PORTEE_PROMO;
-			} else if (portee.getSelectedItem().toString() == "Tous") {
+			} else if (portee.getSelectedItem().toString().equals(getString(R.string.tous))) {
 				porteDefis = Defi.PORTEE_ALL;
 			} else {
 				Log.e(getClass().getName(),"Portee inconnue");
 			}
 			
-			if (typeDefiChoisi.equals("Photo")) {
+			if (typeDefiChoisi.equals(getString(R.string.photo))) {
 				defis = new Photo(etudiant.getIdEtudiant(), nomDefis.getText().toString(), description.getText().toString(), EtatAcceptation.proposition, porteDefis);
 				newFragment = new AjoutDefiFinaFragment();
-			} else if (typeDefiChoisi.equals("GPS")) {
+			} else if (typeDefiChoisi.equals(getString(R.string.geo))) {
 				defis = new Geolocalisation(etudiant.getIdEtudiant(), nomDefis.getText().toString(), description.getText().toString(),EtatAcceptation.proposition, porteDefis);
 				newFragment = new AjoutDefiGeolocalisationFragment();
-			} else if (typeDefiChoisi.equals("Quizz")) {
+			} else if (typeDefiChoisi.equals(getString(R.string.quizz))) {
 				defis = new Quizz(etudiant.getIdEtudiant(), nomDefis.getText().toString(), description.getText().toString(), EtatAcceptation.proposition, porteDefis);
 				newFragment = new AjoutDefiQuizzFragment();
-			} else if (typeDefiChoisi.equals("QrCode")) {
+			} else if (typeDefiChoisi.equals(getString(R.string.qrcode))) {
 				defis = new QrCode(etudiant.getIdEtudiant(), nomDefis.getText().toString(), description.getText().toString(), EtatAcceptation.proposition, porteDefis);
 				newFragment = new AjoutDefiQRCodeFragment();
 			} else {

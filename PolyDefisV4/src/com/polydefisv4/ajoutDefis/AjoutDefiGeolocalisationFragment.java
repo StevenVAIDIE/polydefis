@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
-import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.defis.Geolocalisation;
 /**
  * @author Dorian KODELJA
@@ -25,7 +24,7 @@ public class AjoutDefiGeolocalisationFragment extends Fragment implements OnClic
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_ajout_defi_gps, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_ajout_defi_gps, container, false);
 		defi = (Geolocalisation) getArguments().getSerializable("defis");
 		
 		longitude = ((EditText) rootView.findViewById(R.id.longitude));		

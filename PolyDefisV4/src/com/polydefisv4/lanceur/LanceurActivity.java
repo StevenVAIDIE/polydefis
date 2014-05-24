@@ -22,6 +22,9 @@ public class LanceurActivity extends Activity implements OnClickListener {
 		//sqmlManager.create();
 		//sqmlManager.insererJeuDeTest();
 		
+		System.out.println(getClass().getName());
+		System.out.println(getClass().getSimpleName());
+
 	    Button bouton3A = (Button) findViewById(R.id.bouton_3_A);
 	    bouton3A.setOnClickListener(this);
 	    

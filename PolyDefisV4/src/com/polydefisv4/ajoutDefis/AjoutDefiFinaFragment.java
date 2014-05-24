@@ -3,6 +3,7 @@ import java.util.Date;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +15,12 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.bean.defis.Photo;
+import com.polydefisv4.bean.defis.QrCode;
+import com.polydefisv4.bean.defis.Quizz;
 
 public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	private RadioButton radioUnique;
@@ -27,7 +33,7 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.activity_ajout_defi_final, container, false);
+		View rootView = inflater.inflate(R.layout.fragment_ajout_defi_final, container, false);
 		defi = (Defi) getArguments().getSerializable("defis");
 		
 		radioUnique = (RadioButton) rootView.findViewById(R.id.radioUnique);
@@ -49,7 +55,6 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-
 		switch (v.getId()) {
 		case R.id.radioUnique:
 			dateDefis.setEnabled(false);
@@ -70,8 +75,18 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 					defi.setDateFin(new Date(dateDefis.getYear(), dateDefis.getMonth(), dateDefis.getDayOfMonth()));
 				}
 				
-				Toast.makeText(getActivity(), "Defi Validé",Toast.LENGTH_LONG).show();
-				
+				SQLManager manager = new SQLManager(getActivity());
+				if(defi instanceof QrCode) {
+					manager.insertQrCode((QrCode)defi);
+				} else if(defi instanceof Photo) {
+					manager.insertPhoto((Photo)defi);
+				} else if(defi instanceof Geolocalisation) {
+					manager.insertGeolocalisation((Geolocalisation)defi);
+				} else if(defi instanceof Quizz) {
+					manager.insertQuizz((Quizz)defi);
+				} else {
+					Log.e(getClass().getName(), "Instance inconnue");
+				}
 			}
 			break;
 		}

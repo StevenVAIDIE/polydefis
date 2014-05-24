@@ -22,7 +22,7 @@
     <string name="administration">Administration</string>
     <string name="quitter">Quitter</string>
     <string name="valider_proposition_defis">Proposition de défis à accepter</string>
-    <string name="valider_defis_realise">Défis réalisés à valider</string>
+    <string name="valider_defis_realise">Valider les photos prises</string>
     <string name="ajout_respo">Ajouter un responsable de promo</string>
     <string name="parrainage">Parrainage</string>
     <string name="connexion_troisieme_annee">Connexion en tant que 3A</string>
@@ -32,63 +32,12 @@
     <string name="accepter">Accepter</string>
     <string name="demande_Parrainage">Demander le parrainage</string>
     <string name="connexion">Se connecter</string>
-
-    <string-array name="menu3A">
-        <item>@string/liste_des_defis_a_realiser</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-    </string-array>
-    <string-array name="menu4A">
-        <item>@string/proposer_defi</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-    </string-array>
-    <string-array name="menu4AAdmin">
-        <item>@string/proposer_defi</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-        <item>@string/valider_proposition_defis</item>
-        <item>@string/valider_defis_realise</item>
-        <item>@string/ajout_respo</item>
-    </string-array>
-    <string-array name="menuLateral3A">
-        <item>@string/accueil</item>
-        <item>@string/liste_des_defis_a_realiser</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-        <item>@string/quitter</item>
-    </string-array>
-    <string-array name="menuLateral4A">
-        <item>@string/accueil</item>
-        <item>@string/proposer_defi</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-        <item>@string/quitter</item>
-    </string-array>
-    <string-array name="menuLateral4AAdmin">
-        <item>@string/accueil</item>
-        <item>@string/proposer_defi</item>
-        <item>@string/profil</item>
-        <item>@string/classement_des_3a</item>
-        <item>@string/classement_des_4a</item>
-        <item>@string/valider_proposition_defis</item>
-        <item>@string/valider_defis_realise</item>
-        <item>@string/ajout_respo</item>
-        <item>@string/quitter</item>
-    </string-array>
-
     <string name="titreClassementTotal">Total</string>
     <string name="titreClassementINFO">INFO</string>
     <string name="titreClassementETN">ETN</string>
     <string name="titreClassementTE">TE</string>
     <string name="titreClassementMAT">MAT</string>
     <string name="title_activity_activity_test_martin">ActivityTestMartin</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_activity_test">ActivityTest</string>
     <string name="photo">Photo</string>
@@ -102,4 +51,7 @@
     <string name="envoyerpositiongeo">Envoyer la position actuelle</string>
     <string name="envoyerrep">Question suivante</string>
     <string name="afficherdefi">Afficher un Defi</string>
+    <string name="filleul">Filleul</string>
+    <string name="promo">Promo</string>
+	<string name="tous">Tous</string>
 </resources>

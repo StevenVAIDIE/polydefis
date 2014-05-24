@@ -17,7 +17,7 @@ import com.polydefisv4.classement.PlaceClassement;
 public class ClassementPageAdapter extends FragmentPagerAdapter {
 	private Context contexte;
 	private Etudiant etudiant;
-	private static int anneeClassement;
+	private int anneeClassement;
 	
 	public ClassementPageAdapter(Context contexte, FragmentManager fm, Etudiant etudiant, int anneeClassement) {
 		super(fm);

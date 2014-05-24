@@ -78,6 +78,7 @@ public abstract class Defi implements Serializable {
 		
 		return listeDefis;
 	}
+	
 	public int getId() {
 		return id;
 	}

@@ -1,7 +1,10 @@
-package com.polydefisv4.affichageDefis;
+package com.polydefisv4.administration;
+
+import java.io.File;
 
 import android.app.Fragment;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +24,7 @@ public class AffichageValidationPhoto extends Fragment implements OnClickListene
 
 	private TextView titreDefis;
 	private TextView descriptionDefi;
-	private ImageView MyImageView;
+	private ImageView myImageView;
 	private Button boutonOk;
 	private Button boutonAnnuler;
 	
@@ -36,9 +39,15 @@ public class AffichageValidationPhoto extends Fragment implements OnClickListene
 		descriptionDefi = (TextView) rootView.findViewById(R.id.description);
 		descriptionDefi.setText(defis.getDescription());
 
-		MyImageView = (ImageView)rootView.findViewById(R.id.imageView1);
-		Drawable d = Drawable.createFromPath(defis.getUrlPhoto());
-		MyImageView.setImageDrawable(d);
+		File imgFile = new  File(defis.getUrlPhoto());
+		if(imgFile.exists()){
+
+		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+		    ImageView myImage = (ImageView) rootView.findViewById(R.id.photoPrise);
+		    myImage.setImageBitmap(myBitmap);
+
+		}
 		
 		boutonOk = (Button) rootView.findViewById(R.id.boutonValider);
 		boutonOk.setOnClickListener(this);

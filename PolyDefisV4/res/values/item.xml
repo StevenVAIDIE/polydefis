@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<resources> 
+    <string-array name="typeDefi"> 
+        <item >@string/quizz</item> 
+        <item >@string/geo</item> 
+        <item >@string/qrcode</item> 
+        <item >@string/photo</item> 
+    </string-array> 
+     <string-array name="portee"> 
+        <item >@string/filleul</item> 
+        <item >@string/promo</item> 
+        <item >@string/tous</item>  
+    </string-array> 
+    
+	<string-array name="menu3A">
+        <item>@string/liste_des_defis_a_realiser</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+    </string-array>
+    <string-array name="menu4A">
+        <item>@string/proposer_defi</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+    </string-array>
+    <string-array name="menu4AAdmin">
+        <item>@string/proposer_defi</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+        <item>@string/valider_proposition_defis</item>
+        <item>@string/valider_defis_realise</item>
+        <item>@string/ajout_respo</item>
+    </string-array>
+    <string-array name="menuLateral3A">
+        <item>@string/accueil</item>
+        <item>@string/liste_des_defis_a_realiser</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+        <item>@string/quitter</item>
+    </string-array>
+    <string-array name="menuLateral4A">
+        <item>@string/accueil</item>
+        <item>@string/proposer_defi</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+        <item>@string/quitter</item>
+    </string-array>
+    <string-array name="menuLateral4AAdmin">
+        <item>@string/accueil</item>
+        <item>@string/proposer_defi</item>
+        <item>@string/profil</item>
+        <item>@string/classement_des_3a</item>
+        <item>@string/classement_des_4a</item>
+        <item>@string/valider_proposition_defis</item>
+        <item>@string/valider_defis_realise</item>
+        <item>@string/ajout_respo</item>
+        <item>@string/quitter</item>
+    </string-array>
+</resources> 

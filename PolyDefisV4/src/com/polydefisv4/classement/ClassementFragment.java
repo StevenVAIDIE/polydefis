@@ -33,7 +33,6 @@ public class ClassementFragment extends Fragment implements TabListener {
         
 	    actionBar = getActivity().getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-	    actionBar.removeAllTabs();
 	    
 	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager(), etudiant, anneeClassement);
 	    
@@ -63,4 +62,11 @@ public class ClassementFragment extends Fragment implements TabListener {
 
 	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+	    actionBar.removeAllTabs();
+	}
 }

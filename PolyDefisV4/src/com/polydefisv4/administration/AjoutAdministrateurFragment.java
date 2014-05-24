@@ -51,11 +51,8 @@ public class AjoutAdministrateurFragment extends Fragment implements OnClickList
 				Toast.LENGTH_LONG).show();
 	}
 
-
-
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		System.out.println(listePotencielAdministrateur.get(position).getNom());
 	}
 }

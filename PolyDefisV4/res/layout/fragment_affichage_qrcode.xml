@@ -2,25 +2,24 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical" >
-
+	
     <FrameLayout
         android:id="@+id/fragmentAffichageDefis"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-   <TextView
+	<TextView
         android:id="@+id/nb_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
         
     <Button
-        android:id="@+id/bouton_demarrage_quizz"
+        android:id="@+id/prendre_qr_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="10dp"
         android:background="@drawable/bouton_application"
-        android:text="Démarrer le questionnaire" />
+        android:text="@string/envoyerqrcode" />
 
 </LinearLayout>
