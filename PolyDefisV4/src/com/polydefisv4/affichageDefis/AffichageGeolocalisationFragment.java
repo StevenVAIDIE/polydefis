@@ -1,13 +1,13 @@
 package com.polydefisv4.affichageDefis;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +21,13 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.polydefisv4.R;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.defis.Geolocalisation;
+import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 
 public class AffichageGeolocalisationFragment extends Fragment implements
@@ -52,12 +53,6 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 
     			TextView nbPoint = (TextView) rootView.findViewById(R.id.nb_point);
     			nbPoint.setText(defis.getNombrePoint() + " points");
-
-    			map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-    			map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-    			map.setMyLocationEnabled(true);
-    			map.getUiSettings().setCompassEnabled(true);
-    			map.addMarker(new MarkerOptions().position(new LatLng(defis.getLatitude(), defis.getLongitude())));
     			
     			boutonActiverGeolocalisation = (Button) rootView.findViewById(R.id.bouton_activer_geolocalisation);
     			boutonActiverGeolocalisation.setOnClickListener(this);
@@ -78,11 +73,17 @@ public class AffichageGeolocalisationFragment extends Fragment implements
         } else {
         	Log.e(getClass().getName(), "Type d'utilisation incorrect");
         }
-		
+
+		map = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		map.setMyLocationEnabled(true);
+		map.getUiSettings().setCompassEnabled(true);
+		map.addMarker(new MarkerOptions().position(new LatLng(defis.getLatitude(), defis.getLongitude())));
+
     	AffichageDefi fragmentDefi = new AffichageDefi();
     	fragmentDefi.setArguments(getArguments());
     
-    	FragmentManager fragmentManager = getFragmentManager();
+    	FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
     	FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
     	fragmentTransaction.replace(R.id.fragmentAffichageDefis, fragmentDefi);
     	fragmentTransaction.commit();
@@ -94,6 +95,7 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 	public void onClick(View v) {
 		if(v.equals(boutonActiverGeolocalisation)) {
 			activerGeolocalisation();
+			
 		} else if(v.equals(boutonRefuser)) {
 			//defis.setEtatAcceptation();
 		} else if(v.equals(boutonValider)) {
@@ -118,7 +120,18 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 			location.setLongitude(defis.getLongitude());
 			float distance = location.distanceTo(locationDefis);
 
-			Toast.makeText(getActivity(), "Distance avec le marqueur : " + distance, Toast.LENGTH_LONG).show();
+			if (distance < 100) {
+				Toast.makeText(getActivity(), "Défi validé", Toast.LENGTH_LONG);
+				ListeDefisRealiseFragment newFragment = new ListeDefisRealiseFragment();
+
+				FragmentManager fragmentManager = getFragmentManager();
+				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+				fragmentTransaction.replace(R.id.frame_container, newFragment);
+				fragmentTransaction.addToBackStack(null);
+				fragmentTransaction.commit();
+			} else {
+				Toast.makeText(getActivity(), "Désolé votre derniere position connue est a " + distance + "m du lieu souhaité", Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 

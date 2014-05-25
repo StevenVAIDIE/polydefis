@@ -6,15 +6,15 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.listeDefis.TypeUtilisation;
@@ -134,7 +135,7 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 		try {
 			String pathPhoto = fileUri.getPath();
 			defis.setUrlPhoto(pathPhoto);
-			Toast.makeText(getActivity(), "Image enregistrée a l'adresse suivante : "+pathPhoto, Toast.LENGTH_LONG).show();
+			defis.setEtatAcceptation(Defi.ETAT_ATTENTE_VALIDATION);
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
@@ -158,17 +159,8 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 	    outState.putParcelable("file_uri", fileUri);
 	}
 
-	/*
-	 * returning image / video
-	 */
-
 	private static File getOutputMediaFile(int type) {
-
-		// External sdcard location
-		File mediaStorageDir = new File(
-				Environment
-						.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-				IMAGE_DIRECTORY_NAME);
+		File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), IMAGE_DIRECTORY_NAME);
 
 		// Create the storage directory if it does not exist
 		if (!mediaStorageDir.exists()) {
@@ -188,8 +180,6 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 		} else {
 			return null;
 		}
-		Log.d("Fichier retour", "afficher le fichier " + mediaFile);
 		return mediaFile;
-
 	}
 }

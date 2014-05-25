@@ -1,9 +1,9 @@
 package com.polydefisv4.ajoutDefis;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,8 @@ import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
+
+
 
 /**
  * @author Dorian KODELJA

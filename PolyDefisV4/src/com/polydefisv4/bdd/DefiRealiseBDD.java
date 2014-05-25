@@ -77,7 +77,5 @@ public class DefiRealiseBDD {
  
 	public int removeDefiRealise(int idDefi, String idEtudiant){
 		return bdd.delete(TABLE_DEFIREALISE, COL_ID_ETUDIANT + " = " + idEtudiant + " AND " + COL_ID_DEFI + " = " + idDefi, null);
-	}
-	
-	
+	}	
 }

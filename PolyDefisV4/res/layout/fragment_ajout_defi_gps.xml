@@ -4,48 +4,12 @@
     android:layout_margin="20dp"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <fragment
+        android:id="@+id/map"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitude" />
-
-        <EditText
-            android:id="@+id/longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:singleLine="true" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitude" />
-
-        <EditText
-            android:id="@+id/latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:singleLine="true" >
-
-            <requestFocus />
-        </EditText>
-
-    </LinearLayout>
+        android:layout_height="0dp"
+        class="com.google.android.gms.maps.SupportMapFragment" />
 
     <Button
         android:id="@+id/boutonValider"
@@ -54,5 +18,4 @@
         android:layout_gravity="center_horizontal"
         android:background="@drawable/bouton_application"
         android:text="Valider" />
-
 </LinearLayout>

@@ -2,11 +2,10 @@ package com.polydefisv4.adapter;
 
 import java.util.Locale;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
 import com.polydefisv4.R;
@@ -14,33 +13,30 @@ import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragmentFragment;
 import com.polydefisv4.classement.PlaceClassement;
 
-public class ClassementPageAdapter extends FragmentPagerAdapter {
+
+public class ClassementPageAdapter extends FragmentStatePagerAdapter  {
 	private Context contexte;
 	private Etudiant etudiant;
 	private int anneeClassement;
+	final static int NB_PAGE = 5;
 	
 	public ClassementPageAdapter(Context contexte, FragmentManager fm, Etudiant etudiant, int anneeClassement) {
 		super(fm);
 		this.contexte = contexte;
 		this.etudiant = etudiant;
 		this.anneeClassement = anneeClassement;
+		Log.e("ClassementPageAdapter", "anneeClassement : "+anneeClassement);
 	}
 	
 	@Override
 	public Fragment getItem(int position) {
-		Bundle bundle = new Bundle();
-		ClassementFragmentFragment classementFragmentFragment = new ClassementFragmentFragment();
-		bundle.putInt("section_number", position);
-		Log.e("getItem", "anneeClassement " + anneeClassement);
-		bundle.putSerializable("etudiant", etudiant);
-		bundle.putInt("anneePromotion", anneeClassement);
-		classementFragmentFragment.setArguments(bundle);
-		return classementFragmentFragment;
+		Log.e("", anneeClassement+"");
+	    return ClassementFragmentFragment.newInstance(position, anneeClassement, etudiant);
 	}
-
+	
 	@Override
 	public int getCount() {
-		return 5;
+		return NB_PAGE;
 	}
 
 	@Override

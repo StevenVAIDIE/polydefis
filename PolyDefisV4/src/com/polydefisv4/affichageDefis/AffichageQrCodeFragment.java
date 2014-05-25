@@ -1,10 +1,10 @@
 package com.polydefisv4.affichageDefis;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,7 @@ import com.polydefisv4.R;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.listeDefis.TypeUtilisation;
+
 
 public class AffichageQrCodeFragment extends Fragment implements OnClickListener {
 	private QrCode defis;
@@ -77,8 +78,11 @@ public class AffichageQrCodeFragment extends Fragment implements OnClickListener
 		IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 		if (scanningResult != null) {
 			String scanContent = scanningResult.getContents();
-			defis.setQrCode(scanContent);
-			Toast.makeText(getActivity(), "Resultat du scan : "+scanContent, Toast.LENGTH_LONG).show();
+			if (scanContent.equals(defis.getQrCode())) {
+				defis.setEtatAcceptation(Defi.ETAT_TERMINE);
+			} else {
+				Toast.makeText(getActivity(), "Désolé il ne s'agit pas du bon QrCode", Toast.LENGTH_LONG).show();
+			}
 		} else {
 			Toast.makeText(getActivity(),"No scan data received!", Toast.LENGTH_SHORT).show();
 		}

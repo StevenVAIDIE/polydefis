@@ -1,8 +1,8 @@
 package com.polydefisv4.ajoutDefis;
 import java.util.Date;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +21,8 @@ import com.polydefisv4.bean.defis.Geolocalisation;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
+
+
 
 public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	private RadioButton radioUnique;

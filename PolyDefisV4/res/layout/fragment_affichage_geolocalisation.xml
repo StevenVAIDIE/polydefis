@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
-        class="com.google.android.gms.maps.MapFragment" />
+        class="com.google.android.gms.maps.SupportMapFragment" />
     
     <Button
         android:id="@+id/bouton_activer_geolocalisation"

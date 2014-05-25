@@ -3,9 +3,9 @@ package com.polydefisv4.classement;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.ActionBar.TabListener;
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.SimpleOnPageChangeListener;
 import android.util.Log;
@@ -34,10 +34,11 @@ public class ClassementFragment extends Fragment implements TabListener {
 	    actionBar = getActivity().getActionBar();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 	    
-	    adapter = new ClassementPageAdapter(getActivity(),getFragmentManager(), etudiant, anneeClassement);
-	    
+	    adapter = new ClassementPageAdapter(getActivity().getApplicationContext(), getFragmentManager(), etudiant, anneeClassement);
+
 	    viewPager = (ViewPager) rootView.findViewById(R.id.pager);
 		viewPager.setAdapter(adapter);
+		viewPager.setCurrentItem(0);
 
 		for (int i = 0; i < adapter.getCount(); i++) {
 			actionBar.addTab(actionBar.newTab().setText(adapter.getPageTitle(i)).setTabListener(this));
@@ -53,6 +54,12 @@ public class ClassementFragment extends Fragment implements TabListener {
     }
 	
 	@Override
+	public void onPause() {
+		super.onPause();
+		adapter.notifyDataSetChanged();
+	}
+	
+	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
 		viewPager.setCurrentItem(tab.getPosition());
 	}
@@ -66,6 +73,8 @@ public class ClassementFragment extends Fragment implements TabListener {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+		viewPager.removeAllViewsInLayout();
+		viewPager.removeAllViews();
 	    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 	    actionBar.removeAllTabs();
 	}

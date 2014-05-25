@@ -2,8 +2,8 @@ package com.polydefisv4.administration;
 
 import java.util.ArrayList;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +18,8 @@ import com.polydefisv4.R;
 import com.polydefisv4.adapter.AutoCompleteEtudiantAdapter;
 import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
+
+
 
 public class AjoutAdministrateurFragment extends Fragment implements OnClickListener, OnItemClickListener {
 	private AutoCompleteTextView nomParrain = null;

@@ -76,7 +76,8 @@ public class Etudiant implements Serializable {
 		listeEtudiants.add(new Etudiant("E113001M", "KODELJA", "Dorian", INFO, 3, false,12));
 		listeEtudiants.add(new Etudiant("E1101601M", "GUINARD", "Arnaud", INFO, 3, false,12));
 		listeEtudiants.add(new Etudiant("E110081M", "GOUDAUX", "Thomas", INFO, 3, false,9));
-		
+		listeEtudiants.add(new Etudiant("E1101601M", "GUINARD", "Arnaud", INFO, 3, false,12));
+
 		return listeEtudiants;
 	}
 

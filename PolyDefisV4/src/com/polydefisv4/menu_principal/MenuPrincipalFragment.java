@@ -1,9 +1,9 @@
 package com.polydefisv4.menu_principal;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,7 @@ import com.polydefisv4.classement.ClassementFragment;
 import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 import com.polydefisv4.profil.ProfilFragment;
+
 
 public class MenuPrincipalFragment extends Fragment implements
 		OnItemClickListener {
