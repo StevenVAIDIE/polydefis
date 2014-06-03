@@ -1,5 +1,7 @@
 package com.polydefisv4.ajoutDefis;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,8 +24,6 @@ import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
 
-
-
 public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	private RadioButton radioUnique;
 	private RadioButton radioDate;
@@ -37,7 +37,7 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_ajout_defi_final, container, false);
 		defi = (Defi) getArguments().getSerializable("defis");
-		
+
 		radioUnique = (RadioButton) rootView.findViewById(R.id.radioUnique);
 		radioDate = (RadioButton) rootView.findViewById(R.id.radioDate);
 		dateDefis = (DatePicker) rootView.findViewById(R.id.dateDefi);
@@ -48,7 +48,11 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 		valider = (Button) rootView.findViewById(R.id.FinalValidation);
 		valider.setOnClickListener(this);
 
-		dateDefis.setMinDate((int) System.currentTimeMillis());
+		dateDefis.setMinDate(System.currentTimeMillis() + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
+		GregorianCalendar calendar = new java.util.GregorianCalendar(); 
+		calendar.add(GregorianCalendar.YEAR, 1);
+		dateDefis.setMaxDate(calendar.getTimeInMillis());
+
 		numPickerPoints.setMinValue(0);
 		numPickerPoints.setMaxValue(15);
 		
@@ -57,14 +61,11 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 	
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.radioUnique:
+		if (v.equals(radioUnique)) {
 			dateDefis.setEnabled(false);
-			break;
-		case R.id.radioDate:
+		} else if(v.equals(radioDate)) {
 			dateDefis.setEnabled(true);
-			break;
-		case R.id.FinalValidation: // Si l'utilisateur clique sur valider
+		} else if (v.equals(valider)) {
 			if (numPickerPoints.getValue() == 0) {
 				Toast.makeText(getActivity(), "Veuillez selectionner un nombre de points a attribuer au défi", Toast.LENGTH_LONG).show();
 			}
@@ -72,11 +73,14 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 			else {
 				defi.setNombrePoint(numPickerPoints.getValue());
 				if (radioUnique.isChecked()) {
-					defi.setDateFin(new Date());
+					defi.setDateFin(null);
 				} else if (radioDate.isChecked()) {
-					defi.setDateFin(new Date(dateDefis.getYear(), dateDefis.getMonth(), dateDefis.getDayOfMonth()));
+				    Calendar calendar = Calendar.getInstance();
+				    calendar.set(dateDefis.getYear(), dateDefis.getMonth(), dateDefis.getDayOfMonth());
+
+					defi.setDateFin(calendar.getTime());
 				}
-				
+								
 				SQLManager manager = new SQLManager(getActivity());
 				if(defi instanceof QrCode) {
 					manager.insertQrCode((QrCode)defi);
@@ -89,8 +93,11 @@ public class AjoutDefiFinaFragment extends Fragment implements OnClickListener {
 				} else {
 					Log.e(getClass().getName(), "Instance inconnue");
 				}
+				
+				getActivity().onBackPressed();
 			}
-			break;
+		} else {
+			Log.e(getClass().getName(), "OnClickInconnu");
 		}
 	}
 }

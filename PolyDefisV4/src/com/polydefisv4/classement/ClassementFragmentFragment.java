@@ -1,5 +1,6 @@
 package com.polydefisv4.classement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -18,13 +19,13 @@ import com.polydefisv4.bean.Etudiant;
 public class ClassementFragmentFragment extends Fragment {
 	private int numeroPage;
 	private int anneeClassement;
-	private Etudiant etudiant;
+	private ArrayList<Etudiant> etudiantAMettreEnSurbrillance;
 	
-	public static Fragment newInstance(int position, int anneeClassement, Etudiant etudiant) {
+	public static Fragment newInstance(int position, int anneeClassement, ArrayList<Etudiant> etudiantAMettreEnSurbrillance) {
 		ClassementFragmentFragment classementFragmentFragment = new ClassementFragmentFragment();
 		Bundle bundle = new Bundle();
 		bundle.putInt("section_number", position);
-		bundle.putSerializable("etudiant", etudiant);
+		bundle.putSerializable("etudiantAMettreEnSurbrillance", etudiantAMettreEnSurbrillance);
 		bundle.putInt("anneePromotion", anneeClassement);
 		classementFragmentFragment.setArguments(bundle);
 		return classementFragmentFragment;
@@ -35,10 +36,7 @@ public class ClassementFragmentFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		numeroPage = getArguments().getInt("section_number");
 		anneeClassement = getArguments().getInt("anneePromotion");
-		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
-		Log.e("OnCreate", "Nouvelle année "+anneeClassement+"");
-		Log.e("OnCreate","numero page " + numeroPage);
-
+		etudiantAMettreEnSurbrillance = (ArrayList<Etudiant>) getArguments().getSerializable("etudiantAMettreEnSurbrillance");
 	}
 	
 	@Override
@@ -46,7 +44,6 @@ public class ClassementFragmentFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_fragment_classement, container, false);
 		List<Etudiant> listeEtudiant = null;
 		
-		Log.e("", "année = "+ anneeClassement);
 		SQLManager manager = new SQLManager(getActivity());
 		if (numeroPage == PlaceClassement.placeClassementTotal.getEmplacement()) {
 			listeEtudiant = manager.getEtudiantAnnee(anneeClassement);
@@ -63,7 +60,8 @@ public class ClassementFragmentFragment extends Fragment {
 		}
 		
 		ListView listView = (ListView) rootView.findViewById(R.id.listViewClassement);
-		listView.setAdapter(new ClassementAdapter(this, listeEtudiant, etudiant));
+		listView.setEmptyView(rootView.findViewById(R.id.empty));
+		listView.setAdapter(new ClassementAdapter(this, listeEtudiant, etudiantAMettreEnSurbrillance));
 		
 		return rootView;
 	}

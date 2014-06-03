@@ -3,28 +3,20 @@ package com.polydefisv4.bean;
 import java.util.Date;
 
 public class DefiRealise {
+	public final static String ETAT_ECHEC = "Echec"; 
+	public final static String ETAT_REUSSI = "Reussi"; 
 
-	public static final int EN_COURS_VALIDATION = 1;
-	public static final int VALIDE = 2;
-	
 	private int idDefi;
-	private String idEtudiant;
+	private int idEtudiant;
 	private Date dateRealise;
-	private int etat;
-	
-	public DefiRealise(int idDefi, String idEtudiant) {
-		this.idDefi = idDefi;
-		this.idEtudiant = idEtudiant;
-		this.dateRealise = null;
-		this.etat = EN_COURS_VALIDATION;
-	}
+	private String etat;
 
-	public DefiRealise(int idDefi, String idEtudiant, Date dateRealise) {
+	public DefiRealise(int idDefi, int idEtudiant, Date dateRealise, String etat) {
 		super();
 		this.idDefi = idDefi;
 		this.idEtudiant = idEtudiant;
 		this.dateRealise = dateRealise;
-		this.etat = VALIDE;
+		this.etat = etat;
 	}
 
 	public int getIdDefi() {
@@ -35,11 +27,11 @@ public class DefiRealise {
 		this.idDefi = idDefi;
 	}
 	
-	public String getIdEtudiant() {
+	public int getIdEtudiant() {
 		return idEtudiant;
 	}
 	
-	public void setIdEtudiant(String idEtudiant) {
+	public void setIdEtudiant(int idEtudiant) {
 		this.idEtudiant = idEtudiant;
 	}
 	
@@ -50,15 +42,12 @@ public class DefiRealise {
 	public void setDateRealise(Date dateRealise) {
 		this.dateRealise = dateRealise;
 	}
-	
-	public int getEtat() {
+
+	public String getEtat() {
 		return etat;
 	}
-	
-	public void setEtat(int etat) {
+
+	public void setEtat(String etat) {
 		this.etat = etat;
 	}
-	
-	
-	
 }

@@ -18,7 +18,7 @@ public class SQL_Etudiant extends SQLiteOpenHelper {
 	
 	public static final String CREATE_BDD = 
 			"CREATE TABLE " + TABLE_CONNEXION + " (" + 
-					COL_IDENTIFIANT + " TEXT PRIMARY KEY, " + 
+					COL_IDENTIFIANT + " INT PRIMARY KEY, " + 
 					COL_NOM + " TEXT NOT NULL," + 
 					COL_PRENOM + " TEXT NOT NULL," + 
 					COL_DEPARTEMENT + " TEXT NOT NULL," +

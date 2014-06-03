@@ -1,36 +1,43 @@
 package com.polydefisv4.bean;
 
 public class Parrainage {
-
-	private String parrain;
-	private String filleul;
+	private int idParrain;
+	private int idFilleul;
 	private int etat;
 	
 	public static final int DEMANDE_EN_COURS = 0;
 	public static final int DEMANDE_ACCEPTE = 1;
 	
-	public Parrainage(String parrain, String filleul, int etat) {
+	public Parrainage(int idParrain, int idFilleul, int etat) {
 		super();
-		this.parrain = parrain;
-		this.filleul = filleul;
+		this.idParrain = idParrain;
+		this.idFilleul = idFilleul;
 		this.etat = etat;
 	}
 
-	public String getParrain() {
-		return parrain;
+	public int getIdParrain() {
+		return idParrain;
 	}
 
-	public void setParain(String parain) {
-		this.parrain = parain;
+
+
+	public void setIdParrain(int idParrain) {
+		this.idParrain = idParrain;
 	}
 
-	public String getFilleul() {
-		return filleul;
+
+
+	public int getIdFilleul() {
+		return idFilleul;
 	}
 
-	public void setFilleul(String filleul) {
-		this.filleul = filleul;
+
+
+	public void setIdFilleul(int idFilleul) {
+		this.idFilleul = idFilleul;
 	}
+
+
 
 	public int getEtat() {
 		return etat;
@@ -39,5 +46,4 @@ public class Parrainage {
 	public void setEtat(int etat) {
 		this.etat = etat;
 	}
-	
 }

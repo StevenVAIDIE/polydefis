@@ -39,7 +39,7 @@
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
-        <item>@string/quitter</item>
+        <item>@string/deconnexion</item>
     </string-array>
     <string-array name="menuLateral4A">
         <item>@string/accueil</item>
@@ -47,7 +47,7 @@
         <item>@string/profil</item>
         <item>@string/classement_des_3a</item>
         <item>@string/classement_des_4a</item>
-        <item>@string/quitter</item>
+        <item>@string/deconnexion</item>
     </string-array>
     <string-array name="menuLateral4AAdmin">
         <item>@string/accueil</item>
@@ -58,6 +58,6 @@
         <item>@string/valider_proposition_defis</item>
         <item>@string/valider_defis_realise</item>
         <item>@string/ajout_respo</item>
-        <item>@string/quitter</item>
+        <item>@string/deconnexion</item>
     </string-array>
 </resources> 

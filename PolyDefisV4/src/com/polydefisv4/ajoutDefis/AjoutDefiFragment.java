@@ -40,6 +40,8 @@ public class AjoutDefiFragment extends Fragment implements OnClickListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_ajout_defi, container, false);
+		getActivity().setTitle("Ajout d'un défi");
+		
 		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 		
 		nomDefis = (EditText) rootView.findViewById(R.id.nomDefi);
@@ -95,13 +97,13 @@ public class AjoutDefiFragment extends Fragment implements OnClickListener {
 			}
 
 			Bundle bundle = new Bundle();
+			bundle.putSerializable("etudiant", etudiant);
 			bundle.putSerializable("defis", defis);
 			newFragment.setArguments(bundle);
 
 			FragmentManager fragmentManager = getFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, newFragment);
-			fragmentTransaction.addToBackStack(null);
 			fragmentTransaction.commit();
 		}
 	}

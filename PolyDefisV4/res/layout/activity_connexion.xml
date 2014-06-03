@@ -1,65 +1,62 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.polydefi.MainActivity"
-    tools:ignore="MergeRootFrame" >
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#3A5A97" >
 
-<RelativeLayout 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.polydefi.MainActivity$PlaceholderFragment" >
-
-    <EditText
-        android:id="@+id/intituleDefi"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="42dp"
-        android:layout_marginTop="100dp"
-        android:ems="10" />
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/rep1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/intituleDefi"
-        android:layout_alignRight="@+id/intituleDefi"
-        android:layout_below="@+id/intituleDefi"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:inputType="textPassword" >
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher" />
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Username"
+            android:imeOptions="actionNext"
+            android:inputType="textNoSuggestions" />
 
-    <Button
-        android:id="@+id/newQuizz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/rep1"
-        android:layout_below="@+id/rep1"
-        android:layout_marginLeft="48dp"
-        android:clickable="true"
-        android:background="@drawable/bouton_application"
-        android:text="Connexion" />
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:hint="Password"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword" />
 
-    <TextView
-        android:id="@+id/profilNom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/rep1"
-        android:layout_alignRight="@+id/rep1"
-        android:layout_below="@+id/newQuizz"
-        android:layout_marginTop="53dp"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <CheckBox
+            android:id="@+id/saveLoginCheckBox"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            android:text="Se souvenir de moi" />
 
-</RelativeLayout>
-</FrameLayout>
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bouton_accueil"
+            android:padding="15dp"
+            android:text="Se connecter" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</ScrollView>

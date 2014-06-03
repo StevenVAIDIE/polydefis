@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.QuestionQuizz;
 import com.polydefisv4.bean.defis.Quizz;
 
@@ -27,12 +28,14 @@ public class AjoutDefiQuizzFragment extends Fragment implements OnClickListener 
 	private EditText editTextRep4;
 	
 	private Quizz defi;
+	private Etudiant etudiant;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_ajout_defi_quizz, container, false);
 		defi = (Quizz) getArguments().getSerializable("defis");
-		
+		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
+
 		editTextQuestion = ((EditText) rootView.findViewById(R.id.question));
 		editTextRep1 = ((EditText) rootView.findViewById(R.id.rep1));
 		editTextRep2 = ((EditText) rootView.findViewById(R.id.rep2));
@@ -68,16 +71,17 @@ public class AjoutDefiQuizzFragment extends Fragment implements OnClickListener 
 				editTextRep2.setText(null);
 				editTextRep3.setText(null);
 				editTextRep4.setText(null);
+				editTextQuestion.requestFocus();
 			} else {
 				Fragment newFragment = new AjoutDefiFinaFragment();
 				Bundle bundle = new Bundle();
 				bundle.putSerializable("defis", defi);
+				bundle.putSerializable("etudiant", etudiant);
 				newFragment.setArguments(bundle);
 
 				FragmentManager fragmentManager = getFragmentManager();
 				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 				fragmentTransaction.replace(R.id.frame_container, newFragment);
-				fragmentTransaction.addToBackStack(null);
 				fragmentTransaction.commit();
 			}
 		}

@@ -15,15 +15,19 @@
     <string name="liste_des_defis_realises">Liste des défis réalisés</string>
     <string name="liste_des_defis_a_realiser">Liste des défis à réaliser</string>
     <string name="profil">Profil</string>
+    <string name="intitule">Intitulé</string>
     <string name="classement_des_3a">Classement des 3A</string>
     <string name="classement_des_4a">Classement des 4A</string>
     <string name="accueil">Accueil</string>
+    <string name="parrainageAvec">Parrainage avec : </string>
     <string name="proposer_defi">Proposer un défi</string>
     <string name="administration">Administration</string>
-    <string name="quitter">Quitter</string>
+    <string name="deconnexion">Se deconnecter</string>
     <string name="valider_proposition_defis">Proposition de défis à accepter</string>
     <string name="valider_defis_realise">Valider les photos prises</string>
+    <string name="valider">Valider</string>
     <string name="ajout_respo">Ajouter un responsable de promo</string>
+    <string name="description">Description</string>
     <string name="parrainage">Parrainage</string>
     <string name="connexion_troisieme_annee">Connexion en tant que 3A</string>
     <string name="connexion_quatrieme_annee">Connexion en tant que 4A</string>
@@ -53,5 +57,6 @@
     <string name="afficherdefi">Afficher un Defi</string>
     <string name="filleul">Filleul</string>
     <string name="promo">Promo</string>
-	<string name="tous">Tous</string>
+    <string name="tous">Tous</string>
+
 </resources>

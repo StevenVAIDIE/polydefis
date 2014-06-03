@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQL_DefiQrCode extends SQLiteOpenHelper {
-
 	private static final String TABLE_QRCODE = "D_QRCODE";
 	private static final String COL_ID_DEFI = "IdDefi";
 	private static final String COL_QRCODE = "QrCode";
@@ -33,6 +32,4 @@ public class SQL_DefiQrCode extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_QRCODE + ";");
 		onCreate(db);
 	}
-	
-	
 }

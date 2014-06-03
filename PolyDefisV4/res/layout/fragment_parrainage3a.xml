@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:orientation="vertical" >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,26 +12,27 @@
         android:layout_weight="1"
         android:gravity="bottom"
         android:text="Veuillez entrer le nom et prenom de votre parrain" />
-  
-  <AutoCompleteTextView
-      android:id="@+id/nomParrain"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="30dp" />
 
-  <Space
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_weight="1" />
+    <AutoCompleteTextView
+        android:id="@+id/nomParrain"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:textColor="#000000" />
 
-  <Button
-      android:id="@+id/boutonDemandeParrainage"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:layout_marginBottom="20dp"
-      android:gravity="center_vertical|center_horizontal"
-      android:text="@string/demande_Parrainage"         
-      android:background="@drawable/bouton_application"/>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/boutonDemandeParrainage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bouton_application"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/demande_Parrainage" />
 
 </LinearLayout>

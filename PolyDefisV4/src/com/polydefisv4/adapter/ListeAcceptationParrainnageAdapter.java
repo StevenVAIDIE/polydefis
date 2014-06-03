@@ -48,7 +48,7 @@ public class ListeAcceptationParrainnageAdapter extends BaseAdapter{
 		}
 
 		TextView nom = (TextView) layoutItem.findViewById(R.id.nomDemandeParrainage);
-		nom.setText(listeEtudiant.get(position).getNom() + " " + listeEtudiant.get(position).getPrenom());
+		nom.setText(listeEtudiant.get(position).getNom()+" "+listeEtudiant.get(position).getPrenom());
 		
 		Button boutonValiderParrainage = (Button) layoutItem.findViewById(R.id.buttonAccepterParrainage);
 		boutonValiderParrainage.setTag(position);

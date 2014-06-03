@@ -2,10 +2,11 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="20dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/background" >
 
     <fragment
-        android:id="@+id/map"
+        android:id="@+id/map1"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"

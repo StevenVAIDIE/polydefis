@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.polydefisv4.R;
 import com.polydefisv4.adapter.ListeDefisAdapter;
@@ -21,6 +22,7 @@ import com.polydefisv4.affichageDefis.AffichageGeolocalisationFragment;
 import com.polydefisv4.affichageDefis.AffichagePhotoFragment;
 import com.polydefisv4.affichageDefis.AffichageQrCodeFragment;
 import com.polydefisv4.affichageDefis.AffichageQuizzFragment;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Defi;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Geolocalisation;
@@ -28,7 +30,7 @@ import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.bean.defis.QrCode;
 import com.polydefisv4.bean.defis.Quizz;
 
-public class ListeDefisRealiseFragment extends Fragment implements
+public class ListeDefisFragment extends Fragment implements
 		OnItemClickListener {
 	private Etudiant etudiant;
 	private ArrayList<Defi> listeDefisEtudiant;
@@ -37,27 +39,32 @@ public class ListeDefisRealiseFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View rootView = inflater.inflate(R.layout.fragment_liste_defis_realise,
-				container, false);
-		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
-		typeUtilisation = (TypeUtilisation) getArguments().getSerializable(
-				"typeUtilisation");
+		View rootView = inflater.inflate(R.layout.fragment_liste_defis_realise, container, false);
+		etudiant =  (Etudiant) getArguments().getSerializable("etudiant");
+		typeUtilisation =  (TypeUtilisation) getArguments().getSerializable("typeUtilisation");
 
-		ListView listViewDefis = (ListView) rootView
-				.findViewById(R.id.listViewDefis);
-
+		ListView listViewDefis = (ListView) rootView.findViewById(R.id.listViewDefis);
+		TextView texteRemplacement = (TextView) rootView.findViewById(R.id.empty);
+		
+		SQLManager manager = new SQLManager(getActivity());
 		if (typeUtilisation == TypeUtilisation.AdministrationPropositionDefis) {
-			listeDefisEtudiant = Defi.getAllDefis();
+			getActivity().setTitle("Liste des défis à administrer");
+			texteRemplacement.setText("Aucun défi à administrer");
+			listeDefisEtudiant = manager.getAllDefiAAccepter();
 		} else if (typeUtilisation == TypeUtilisation.AdministrationValidationPhoto) {
-			listeDefisEtudiant = Defi.getAllDefis();
+			getActivity().setTitle("Liste des photos à valider");
+			texteRemplacement.setText("Aucune photo à valider");
+			listeDefisEtudiant = manager.getAllPhotoAValider();
 		} else if (typeUtilisation == TypeUtilisation.VisualisationDefisARealiser) {
-			listeDefisEtudiant = Defi.getAllDefis();
+			getActivity().setTitle("Liste des défis à effectuer");
+			texteRemplacement.setText("Aucun défi à réaliser");
+			listeDefisEtudiant = manager.getAllDefiARealiser(etudiant);
 		} else {
 			Log.e("ListeDefisRealiseFragment", "Type d'utilisation inconnu");
 		}
-
-		listViewDefis.setAdapter(new ListeDefisAdapter(this.getActivity(),
-				listeDefisEtudiant));
+ 
+		listViewDefis.setEmptyView(texteRemplacement);
+		listViewDefis.setAdapter(new ListeDefisAdapter(this.getActivity(), listeDefisEtudiant));
 		listViewDefis.setOnItemClickListener(this);
 		return rootView;
 	}
@@ -68,6 +75,7 @@ public class ListeDefisRealiseFragment extends Fragment implements
 		Fragment newFragment = null;
 		Bundle bundle = new Bundle();
 
+		bundle.putSerializable("etudiant", etudiant);
 		bundle.putSerializable("defis", listeDefisEtudiant.get(position));
 		bundle.putSerializable("typeUtilisation", typeUtilisation);
 

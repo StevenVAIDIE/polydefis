@@ -5,7 +5,6 @@ import java.util.Collections;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
+import com.polydefisv4.bean.DefiRealise;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Quizz;
 
 public class AffichageQuestionFragment extends Fragment implements OnClickListener {
@@ -35,17 +37,17 @@ public class AffichageQuestionFragment extends Fragment implements OnClickListen
 
 	private ArrayList<String> monRandom = new ArrayList<String>();
 	private View rootView;
-
-	public AffichageQuestionFragment() {
-		index = 0;
-		donnerPoints = true;
-	}
+	private Etudiant etudiant;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_affichage_question, container, false);
+		getActivity().setTitle("Affichage d'une question");
+		index = 0;
+		donnerPoints = true;
 		defis = (Quizz) getArguments().getSerializable("defis");
+		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 
 		question = (TextView) rootView.findViewById(R.id.question);
 		reponses = (RadioGroup) rootView.findViewById(R.id.reponses);
@@ -91,11 +93,7 @@ public class AffichageQuestionFragment extends Fragment implements OnClickListen
 			Toast.makeText(getActivity(), "Veuillez cochez une réponse", Toast.LENGTH_LONG).show();
 		} else {
 			RadioButton radioButton = (RadioButton) rootView.findViewById(selectedId);
-			Log.e("", defis.getQuestions(index).getReponse());
-			Log.e("", radioButton.getText().toString());
-
 			if (!radioButton.getText().toString().equals(defis.getQuestions(index).getReponse())) {
-				Log.e("", "Reponse fause");
 				donnerPoints = false;
 			}
 			index++;
@@ -106,11 +104,15 @@ public class AffichageQuestionFragment extends Fragment implements OnClickListen
 			}
 
 			else {
+				SQLManager manager = new SQLManager(getActivity());
 				if (donnerPoints) {
-					Toast.makeText(getActivity(), "Quizz terminé : " + defis.getNombrePoint()	+ " points attribués", Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "Quizz terminé : " + defis.getNombrePoint() + " points attribués", Toast.LENGTH_LONG).show();
+					manager.defiEffectue(defis, etudiant.getIdEtudiant(),DefiRealise.ETAT_REUSSI);
 				} else {
 					Toast.makeText(getActivity(), "Quizz terminé : Pas de points attribués", Toast.LENGTH_LONG).show();
+					manager.defiEffectue(defis, etudiant.getIdEtudiant(),DefiRealise.ETAT_ECHEC);
 				}
+				getActivity().onBackPressed();
 			}
 		}
 	}

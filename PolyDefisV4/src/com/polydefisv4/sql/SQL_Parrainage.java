@@ -14,8 +14,8 @@ public class SQL_Parrainage extends SQLiteOpenHelper {
  
 	private static final String CREATE_BDD = 
 			"CREATE TABLE " + TABLE_PARRAINAGE + " (" + 
-					COL_PARRAIN + " TEXT NOT NULL, " + 
-					COL_FILLEUL + " TEXT NOT NULL, " +
+					COL_PARRAIN + " INT NOT NULL, " + 
+					COL_FILLEUL + " INT NOT NULL, " +
 					COL_ETAT + " INT NOT NULL, " +
 					" PRIMARY KEY (" + COL_PARRAIN + "," + COL_FILLEUL + "));";
  
@@ -36,6 +36,4 @@ public class SQL_Parrainage extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_PARRAINAGE + ";");
 		onCreate(db);
 	}
-	
-	
 }

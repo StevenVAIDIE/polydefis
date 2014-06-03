@@ -5,15 +5,17 @@ import java.util.Date;
 import com.polydefisv4.bean.Defi;
 
 public class Geolocalisation extends Defi {
+	private static final long serialVersionUID = 559705636230518845L;
+	
 	private double latitude;
 	private double longitude;
 	
-	public Geolocalisation(String idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
+	public Geolocalisation(int idEtudiant, String intitule, String description, int etatAcceptation, String portee) {
 		super(idEtudiant, intitule, description, etatAcceptation, portee);
 	}
 	
-	public Geolocalisation(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, double latitude, double longitude) {
-		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
+	public Geolocalisation(int id, int idEtudiant, String intitule, String description, Date dateFin, int nombrePoint, int etatAcceptation, String portee, double latitude, double longitude) {
+		super(id, idEtudiant, intitule, description, dateFin, nombrePoint, etatAcceptation, portee);
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}

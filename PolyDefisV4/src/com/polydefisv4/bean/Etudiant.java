@@ -1,31 +1,28 @@
 package com.polydefisv4.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Etudiant implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 	public static final String INFO = "INFO";
 	public static final String MAT = "MAT";
 	public static final String TE = "TE";
 	public static final String ETN = "ETN";
 	
+	private int idEtudiant;
 	private String nom;
 	private String prenom;
-	private String idEtudiant;
 	private boolean respo;
 	private int points;
 	private int anneePromo;
 	private String departement;
 	
-	public Etudiant(String idEtudiant, String nom, String prenom, String departement, int anneePromo, boolean respo,int points) {
+	public Etudiant(int idEtudiant, String nom, String prenom, String departement, int anneePromo, boolean respo,int points) {
 		super();
 		
+		this.idEtudiant = idEtudiant;
 		this.nom =  nom;
 		this.prenom = prenom;
-		this.idEtudiant = idEtudiant;
 		if(anneePromo == 3)
 			this.respo = false;
 		else
@@ -33,7 +30,6 @@ public class Etudiant implements Serializable {
 		this.points = points;
 		this.anneePromo = anneePromo;
 		this.departement = departement;
-		
 	}
 	
 	
@@ -67,20 +63,6 @@ public class Etudiant implements Serializable {
 		return true;
 	}
 
-
-	public static List<Etudiant> getAllEtudiant() {
-		List<Etudiant> listeEtudiants = new ArrayList<Etudiant>();
-		listeEtudiants.add(new Etudiant("E116143S", "VAIDIE", "Steven", INFO, 3, false,10));
-		listeEtudiants.add(new Etudiant("E110001M", "PAYEN", "Mathieu", INFO, 3, false,19));
-		listeEtudiants.add(new Etudiant("E110151M", "GUERRE", "Martin", INFO, 3, false,13));
-		listeEtudiants.add(new Etudiant("E113001M", "KODELJA", "Dorian", INFO, 3, false,12));
-		listeEtudiants.add(new Etudiant("E1101601M", "GUINARD", "Arnaud", INFO, 3, false,12));
-		listeEtudiants.add(new Etudiant("E110081M", "GOUDAUX", "Thomas", INFO, 3, false,9));
-		listeEtudiants.add(new Etudiant("E1101601M", "GUINARD", "Arnaud", INFO, 3, false,12));
-
-		return listeEtudiants;
-	}
-
 	public String getPrenom() {
 		return prenom;
 	}
@@ -89,11 +71,11 @@ public class Etudiant implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public String getIdEtudiant() {
+	public int getIdEtudiant() {
 		return idEtudiant;
 	}
 
-	public void setIdEtudiant(String idEtudiant) {
+	public void setIdEtudiant(int idEtudiant) {
 		this.idEtudiant = idEtudiant;
 	}
 
@@ -129,9 +111,7 @@ public class Etudiant implements Serializable {
 		this.departement = departement;
 	}
 
-	public String toString()
-	{
+	public String toString() {
 		return(this.prenom + " " + this.nom);
 	}
-	
 }

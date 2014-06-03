@@ -1,8 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="20dp"
-    android:orientation="vertical" >
+    android:layout_weight="1"
+    android:background="@color/background" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,28 +15,24 @@
             android:id="@+id/nbrQuizz"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Disponibilité du défi: " />
 
         <RadioGroup
             android:id="@+id/radioDuree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1" >
+            android:layout_marginLeft="10dp" >
 
             <RadioButton
                 android:id="@+id/radioUnique"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Unique" />
 
             <RadioButton
                 android:id="@+id/radioDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Date:" />
         </RadioGroup>
 
@@ -44,20 +41,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
-            android:layout_weight="1"
             android:calendarViewShown="false"
             android:paddingLeft="5dp"
             android:scaleX="0.8"
             android:scaleY="0.8" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:orientation="vertical" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -66,19 +53,16 @@
 
         <NumberPicker
             android:id="@+id/Points"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/FinalValidation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
             android:background="@drawable/bouton_application"
             android:text="Valider" />
-
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

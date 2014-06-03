@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        android:background="@drawable/bouton_application"
+        android:background="@drawable/bouton_vert"
         android:text="@string/accepter" />
 
     <Button
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="5dp"
-        android:background="@drawable/bouton_application"
+        android:background="@drawable/bouton_rouge"
         android:text="@string/refuser" />
 
 </LinearLayout>

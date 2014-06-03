@@ -1,6 +1,12 @@
 package com.polydefisv4.bean.defis;
 
-public class QuestionQuizz {
+import java.io.Serializable;
+
+public class QuestionQuizz implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4954379652824410785L;
 	private String question;
 	private String reponse1;
 	private String reponse2;

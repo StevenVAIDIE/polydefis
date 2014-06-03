@@ -11,9 +11,9 @@ public class SQL_Defi extends SQLiteOpenHelper {
 	private static final String TABLE_DEFI = "D_DEFI";
 	private static final String COL_IDENTIFIANT_DEFI = "IdentifiantDefi";
 	private static final String COL_IDENTIFIANT_ETUDIANT = "IdentifiantEtudiant";
+	private static final String COL_TYPE = "Type";
 	private static final String COL_INTITULE = "Intitule";
 	private static final String COL_DESCRIPTION = "Description";
-	private static final String COL_TYPE_DEFI = "TypeDefi";
 	private static final String COL_DATE_FIN = "DateFin";
 	private static final String COL_POINTS = "Points";
 	private static final String COL_PORTEE = "Portee";
@@ -23,9 +23,9 @@ public class SQL_Defi extends SQLiteOpenHelper {
 			"CREATE TABLE " + TABLE_DEFI + " (" + 
 					COL_IDENTIFIANT_DEFI + " INTEGER PRIMARY KEY AUTOINCREMENT, " + 
 					COL_IDENTIFIANT_ETUDIANT + " TEXT NOT NULL, " +
+					COL_TYPE + " INTEGER NOT NULL," +
 					COL_INTITULE + " TEXT NOT NULL, " + 
 					COL_DESCRIPTION + " TEXT NOT NULL, " + 
-					COL_TYPE_DEFI + " INTEGER NOT NULL, " + 
 					COL_DATE_FIN + " TEXT, " + 
 					COL_POINTS + " INTEGER NOT NULL, " + 
 					COL_PORTEE + " TEXT NOT NULL, " + 
@@ -48,5 +48,4 @@ public class SQL_Defi extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_DEFI + ";");
 		onCreate(db);
 	}
-	
 }

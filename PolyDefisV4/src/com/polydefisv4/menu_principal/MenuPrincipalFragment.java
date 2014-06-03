@@ -1,5 +1,7 @@
 package com.polydefisv4.menu_principal;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,14 +14,17 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.polydefisv4.R;
 import com.polydefisv4.adapter.MenuPrincipalAdapter;
 import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
-import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
+import com.polydefisv4.listeDefis.ListeDefisFragment;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 import com.polydefisv4.profil.ProfilFragment;
 
@@ -31,13 +36,39 @@ public class MenuPrincipalFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
 		View rootView = inflater.inflate(R.layout.fragment_acceuil, container, false);
+		getActivity().setTitle("Menu principal");
+		SQLManager manager = new SQLManager(getActivity());
+		
 		etudiant = (Etudiant) getArguments().getSerializable("etudiant");
 
+		TextView nomEtudiant = (TextView) rootView.findViewById(R.id.nomEtudiant);
+		nomEtudiant.setText(etudiant.getNom()+" "+etudiant.getPrenom());
+		
+		TextView promo = (TextView) rootView.findViewById(R.id.promo);
+		promo.setText(etudiant.getDepartement()+" "+etudiant.getAnneePromo());
+		
+		ArrayList<Etudiant> listeEtudiant = new ArrayList<Etudiant>();
+		if(etudiant.getAnneePromo() == 3) {
+			Etudiant temp = manager.getParrain(etudiant.getIdEtudiant());
+			if(temp != null) {
+				listeEtudiant.add(temp);
+			}
+		} else if (etudiant.getAnneePromo() == 4){
+			ArrayList<Etudiant> temp = manager.getAllFilleul(etudiant); 
+			if(temp != null) {
+				listeEtudiant.addAll(temp);
+			}
+		}
+		
+		ListView listeParrainage = (ListView) rootView.findViewById(R.id.listeParrainage);
+		listeParrainage.setAdapter(new ListeParrainageAdapter(this, listeEtudiant));
+		
 		GridView gridView = (GridView) rootView.findViewById(R.id.gridviewS);
 		gridView.setAdapter(new MenuPrincipalAdapter(getActivity(), etudiant));
 		gridView.setOnItemClickListener(this);
-
+		
 		return rootView;
 	}
 
@@ -50,7 +81,7 @@ public class MenuPrincipalFragment extends Fragment implements
 		Bundle bundle = new Bundle();
 
 		if (boutonclique.getText().toString().equals(getString(R.string.liste_des_defis_a_realiser))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.VisualisationDefisARealiser);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
@@ -63,18 +94,16 @@ public class MenuPrincipalFragment extends Fragment implements
 		} else if (boutonclique.getText().toString().equals(getString(R.string.proposer_defi))) {
 			fragment = new AjoutDefiFragment();
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_proposition_defis))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationPropositionDefis);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.valider_defis_realise))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationValidationPhoto);
 		} else if (boutonclique.getText().toString().equals(getString(R.string.ajout_respo))) {
 			fragment = new AjoutAdministrateurFragment();
 		}
 		
 		if (fragment != null) {
-			getActivity().setTitle(boutonclique.getText());
-
 			bundle.putSerializable("etudiant", etudiant);
 			fragment.setArguments(bundle);
 

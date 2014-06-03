@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import com.polydefisv4.R;
 import com.polydefisv4.bdd.SQLManager;
-import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Photo;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 
@@ -48,16 +48,19 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 	private Button boutonRefuser;
 
 	private TypeUtilisation typeUtilisation;
+	private Etudiant etudiant;
 	
 	@Override
 	 public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = null;
         defis = (Photo) getArguments().getSerializable("defis");
         typeUtilisation = (TypeUtilisation) getArguments().getSerializable("typeUtilisation");
+        etudiant = (Etudiant) getArguments().getSerializable("etudiant");
         
         if(typeUtilisation == TypeUtilisation.VisualisationDefisARealiser) {
         	rootView = inflater.inflate(R.layout.fragment_affichage_photo, container, false);
-        
+    		getActivity().setTitle("Affichage d'un défi");
+
         	TextView nbPoint = (TextView) rootView.findViewById(R.id.nb_point);
     		nbPoint.setText(defis.getNombrePoint() + " points");
     		
@@ -69,11 +72,12 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 			}
         } else if (typeUtilisation == TypeUtilisation.AdministrationPropositionDefis) {
         	rootView = inflater.inflate(R.layout.fragment_affichage_photo_administration, container, false);
-    		
+    		getActivity().setTitle("Administration d'un défi");
+
         	nbPoint = (NumberPicker) rootView.findViewById(R.id.nb_point);
-    		nbPoint.setValue(defis.getNombrePoint());
     		nbPoint.setMinValue(0);
     		nbPoint.setMaxValue(15);
+    		nbPoint.setValue(defis.getNombrePoint());
     		
         	boutonValider = (Button) rootView.findViewById(R.id.bouton_valider);
         	boutonValider.setOnClickListener(this);
@@ -97,35 +101,36 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 	
 	@Override
 	public void onClick(View v) {
+		SQLManager manager = new SQLManager(getActivity());
 		if(v.equals(btnCapturePicture)) {
 			Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 			fileUri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
 			intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 			startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
 		} else if(v.equals(boutonRefuser)) {
-			//defis.setEtatAcceptation();
+			Toast.makeText(getActivity(), "Le défi photo a bien été supprimé", Toast.LENGTH_LONG).show();
+			manager.removePhoto(defis);
+			getActivity().onBackPressed();
 		} else if(v.equals(boutonValider)) {
-			defis.setNombrePoint(nbPoint.getValue());
-			defis.setEtatAcceptation(Defi.ETAT_ACCEPTE);
+			Toast.makeText(getActivity(), "Le défi photo a bien été validé", Toast.LENGTH_LONG).show();
+			manager.validerDefi(defis, nbPoint.getValue());
+			getActivity().onBackPressed();
+		} else {
+			Log.e(getClass().getName(),"OnClick inconnu");
+			return;
 		}
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
 		// if the result is capturing Image
 		if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
-			getActivity();
 			if (resultCode == Activity.RESULT_OK) {
-				// successfully captured the image
-				// display it in image view
 				previewCapturedImage();
 			} else if (resultCode == Activity.RESULT_CANCELED) {
-				// user cancelled Image capture
 				Toast.makeText(getActivity(), "User cancelled image capture", Toast.LENGTH_SHORT).show();
 			} else {
-				// failed to capture image
 				Toast.makeText(getActivity(), "Sorry! Failed to capture image", Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -135,9 +140,13 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 		try {
 			String pathPhoto = fileUri.getPath();
 			defis.setUrlPhoto(pathPhoto);
-			defis.setEtatAcceptation(Defi.ETAT_ATTENTE_VALIDATION);
+			SQLManager manager = new SQLManager(getActivity());
+			manager.photoEffectue(defis, etudiant);
+			Toast.makeText(getActivity(), "La photo à bien été prise et vient d'etre soumise à un administrateur", Toast.LENGTH_LONG).show();
+			getActivity().onBackPressed();
 		} catch (NullPointerException e) {
-			e.printStackTrace();
+			Log.e(getClass().getName(), "Path de la photo null");
+			Toast.makeText(getActivity(), "Une erreur est survenue lors de l'enregistrement veuillez reprendre la photo", Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -175,7 +184,6 @@ public class AffichagePhotoFragment extends Fragment implements OnClickListener 
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
 		File mediaFile;
 		if (type == MEDIA_TYPE_IMAGE) {
-			//.getPath()
 			mediaFile = new File(mediaStorageDir + File.separator + "IMG_" + timeStamp + ".jpg");
 		} else {
 			return null;

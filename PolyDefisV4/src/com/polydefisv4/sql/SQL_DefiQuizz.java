@@ -10,6 +10,7 @@ public class SQL_DefiQuizz extends SQLiteOpenHelper {
 	private static final String TABLE_QUIZZ = "D_QUIZZ";
 	private static final String COL_IDENTIFIANT_DEFI = "IdDefi";
 	private static final String COL_NUMERO_QUESTION = "NumeroQuestion";
+	private static final String COL_QUESTION = "Question";
 	private static final String COL_BONNE_REPONSE_1 = "BonneReponse1";
 	private static final String COL_MAUVAISE_REPONSE_2 = "BonneReponse2";
 	private static final String COL_MAUVAISE_REPONSE_3 = "BonneReponse3";
@@ -19,6 +20,7 @@ public class SQL_DefiQuizz extends SQLiteOpenHelper {
 			"CREATE TABLE " + TABLE_QUIZZ + " (" + 
 					COL_IDENTIFIANT_DEFI + " INT NOT NULL, " + 
 					COL_NUMERO_QUESTION + " INT NOT NULL," + 
+					COL_QUESTION + " TEXT NOT NULL," + 
 					COL_BONNE_REPONSE_1 + " TEXT NOT NULL," + 
 					COL_MAUVAISE_REPONSE_2 + " TEXT NOT NULL," + 
 					COL_MAUVAISE_REPONSE_3 + " TEXT NOT NULL," + 
@@ -44,5 +46,4 @@ public class SQL_DefiQuizz extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZZ + ";");
 		onCreate(db);
 	}
-
 }

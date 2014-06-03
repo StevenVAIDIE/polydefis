@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,9 +26,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.polydefisv4.R;
-import com.polydefisv4.bean.Defi;
+import com.polydefisv4.bdd.SQLManager;
+import com.polydefisv4.bean.DefiRealise;
+import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.bean.defis.Geolocalisation;
-import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 
 public class AffichageGeolocalisationFragment extends Fragment implements
@@ -40,16 +42,27 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 	private TypeUtilisation typeUtilisation;
 	private Button boutonValider;
 	private Button boutonRefuser;
+	private Etudiant etudiant;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		defis = (Geolocalisation) getArguments().getSerializable("defis");
         typeUtilisation = (TypeUtilisation) getArguments().getSerializable("typeUtilisation");
+        etudiant = (Etudiant) getArguments().getSerializable("etudiant");
+        
+        if (rootView != null) {
+            ViewGroup parent = (ViewGroup) rootView.getParent();
+            if (parent != null) {
+                parent.removeView(rootView);
+            }
+        }
         
         if(typeUtilisation == TypeUtilisation.VisualisationDefisARealiser) {
         	if (servicesOK()) {   
-    			rootView = inflater.inflate(R.layout.fragment_affichage_geolocalisation, container,false);
+            	try {
+        			rootView = inflater.inflate(R.layout.fragment_affichage_geolocalisation, container,false);
+                } catch (InflateException e) {}
+        		getActivity().setTitle("Affichage d'un défi");
 
     			TextView nbPoint = (TextView) rootView.findViewById(R.id.nb_point);
     			nbPoint.setText(defis.getNombrePoint() + " points");
@@ -58,12 +71,16 @@ public class AffichageGeolocalisationFragment extends Fragment implements
     			boutonActiverGeolocalisation.setOnClickListener(this);
         	}
         } else if (typeUtilisation == TypeUtilisation.AdministrationPropositionDefis) {
-        	rootView = inflater.inflate(R.layout.fragment_affichage_geolocalisation_administration, container, false);
-    		
+        	try {
+               	rootView = inflater.inflate(R.layout.fragment_affichage_geolocalisation_administration, container, false);
+            } catch (InflateException e) {}
+
+    		getActivity().setTitle("Administration d'un défi");
+
         	nbPoint = (NumberPicker) rootView.findViewById(R.id.nb_point);
-    		nbPoint.setValue(defis.getNombrePoint());
     		nbPoint.setMinValue(0);
     		nbPoint.setMaxValue(15);
+    		nbPoint.setValue(defis.getNombrePoint());
     		
         	boutonValider = (Button) rootView.findViewById(R.id.bouton_valider);
         	boutonValider.setOnClickListener(this);
@@ -75,11 +92,11 @@ public class AffichageGeolocalisationFragment extends Fragment implements
         }
 
 		map = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-		map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 		map.setMyLocationEnabled(true);
 		map.getUiSettings().setCompassEnabled(true);
+		map.clear();
 		map.addMarker(new MarkerOptions().position(new LatLng(defis.getLatitude(), defis.getLongitude())));
-
     	AffichageDefi fragmentDefi = new AffichageDefi();
     	fragmentDefi.setArguments(getArguments());
     
@@ -93,14 +110,21 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
+		SQLManager manager = new SQLManager(getActivity());
+
 		if(v.equals(boutonActiverGeolocalisation)) {
 			activerGeolocalisation();
-			
 		} else if(v.equals(boutonRefuser)) {
-			//defis.setEtatAcceptation();
+			Toast.makeText(getActivity(), "Le défi géolocalisation a bien été supprimé", Toast.LENGTH_LONG).show();
+			manager.removeGeolocalisation(defis);
+			getActivity().onBackPressed();
 		} else if(v.equals(boutonValider)) {
-			defis.setNombrePoint(nbPoint.getValue());
-			defis.setEtatAcceptation(Defi.ETAT_ACCEPTE);
+			Toast.makeText(getActivity(), "Le défi géolocalisation a bien été validé", Toast.LENGTH_LONG).show();
+			manager.validerDefi(defis, nbPoint.getValue());
+			getActivity().onBackPressed();
+		} else {
+			Log.e(getClass().getName(),"OnClick inconnu");
+			return;
 		}
 	}
 	
@@ -112,26 +136,23 @@ public class AffichageGeolocalisationFragment extends Fragment implements
 		Location location = locationManager.getLastKnownLocation(meilleurFournisseur);
 
 		if (location == null) {
-			Toast.makeText(getActivity(), "Location Not found",
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(getActivity(), "Location non trouvée", Toast.LENGTH_LONG).show();
 		} else {
+			SQLManager manager = new SQLManager(getActivity());
 			Location locationDefis = new Location("Point");
 			location.setLatitude(defis.getLatitude());
 			location.setLongitude(defis.getLongitude());
 			float distance = location.distanceTo(locationDefis);
 
-			if (distance < 100) {
-				Toast.makeText(getActivity(), "Défi validé", Toast.LENGTH_LONG);
-				ListeDefisRealiseFragment newFragment = new ListeDefisRealiseFragment();
-
-				FragmentManager fragmentManager = getFragmentManager();
-				FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-				fragmentTransaction.replace(R.id.frame_container, newFragment);
-				fragmentTransaction.addToBackStack(null);
-				fragmentTransaction.commit();
+			if (distance < 200) {
+				manager.defiEffectue(defis, etudiant.getIdEtudiant(), DefiRealise.ETAT_REUSSI);
+				Toast.makeText(getActivity(), "Félicitation vous etes bien au bonne endroit", Toast.LENGTH_LONG).show();
 			} else {
+				manager.defiEffectue(defis, etudiant.getIdEtudiant(), DefiRealise.ETAT_ECHEC);
 				Toast.makeText(getActivity(), "Désolé votre derniere position connue est a " + distance + "m du lieu souhaité", Toast.LENGTH_LONG).show();
 			}
+			getActivity().onBackPressed();
+
 		}
 	}
 

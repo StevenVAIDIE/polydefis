@@ -15,44 +15,40 @@ public class EtudiantBDD {
 	private static final int VERSION_BDD = 1;
 	private static final String NOM_BDD = "polydefi.db";
  
-	private static final String TABLE_ETUDIANT = "U_ETUDIANT";
-	private static final String COL_IDENTIFIANT = "Identifiant";
-	private static final String COL_NOM = "Nom";
-	private static final String COL_PRENOM = "Prenom";
-	private static final String COL_DEPARTEMENT = "Departement";
-	private static final String COL_ANNEE = "Annee";
-	private static final String COL_RESPO = "Respo";
-	private static final String COL_POINTS = "Points";	
-	private static final int NUM_COL_IDENTIFIANT = 0;
-	private static final int NUM_COL_NOM = 1;
-	private static final int NUM_COL_PRENOM = 2;
-	private static final int NUM_COL_DEPARTEMENT = 3;
-	private static final int NUM_COL_ANNEE = 4;
-	private static final int NUM_COL_RESPO = 5;
-	private static final int NUM_COL_POINTS = 6;
+	public static final String TABLE_ETUDIANT = "U_ETUDIANT";
+	public static final String COL_IDENTIFIANT = "Identifiant";
+	public static final String COL_NOM = "Nom";
+	public static final String COL_PRENOM = "Prenom";
+	public static final String COL_DEPARTEMENT = "Departement";
+	public static final String COL_ANNEE = "Annee";
+	public static final String COL_RESPO = "Respo";
+	public static final String COL_POINTS = "Points";	
+	public static final int NUM_COL_IDENTIFIANT = 0;
+	public static final int NUM_COL_NOM = 1;
+	public static final int NUM_COL_PRENOM = 2;
+	public static final int NUM_COL_DEPARTEMENT = 3;
+	public static final int NUM_COL_ANNEE = 4;
+	public static final int NUM_COL_RESPO = 5;
+	public static final int NUM_COL_POINTS = 6;
 	
 	private SQLiteDatabase bdd;
 	 
 	private SQL_Etudiant SQLEtudiant;
  
 	public EtudiantBDD(Context context){
-		//On crée la BDD et sa table
 		SQLEtudiant = new SQL_Etudiant(context, NOM_BDD, null, VERSION_BDD);
 	}
 	
 
 	public void open(){
-		//on ouvre la BDD en écriture
 		bdd = SQLEtudiant.getWritableDatabase();
 	}
 	
 	public void openReadable(){
-		//on ouvre la BDD en lecture
 		bdd = SQLEtudiant.getReadableDatabase();
 	}
  
 	public void close(){
-		//on ferme l'accès à la BDD
 		bdd.close();
 	}
  
@@ -82,9 +78,7 @@ public class EtudiantBDD {
 		return bdd.insert(TABLE_ETUDIANT, null, values);
 	}
  
-	public int updateEtudiant(String identifiant, Etudiant etudiant){
-		//La mise à jour d'un livre dans la BDD fonctionne plus ou moins comme une insertion
-		//il faut simplement préciser quel livre on doit mettre à jour grâce à l'ID
+	public int updateEtudiant(Etudiant etudiant){
 		ContentValues values = new ContentValues();
 		values.put(COL_NOM, etudiant.getNom());
 		values.put(COL_PRENOM, etudiant.getPrenom());
@@ -95,7 +89,8 @@ public class EtudiantBDD {
 		else
 			values.put(COL_RESPO, 0);
 		values.put(COL_POINTS, etudiant.getPoints());
-		return bdd.update(TABLE_ETUDIANT, values, COL_IDENTIFIANT + " = " + identifiant, null);
+
+		return bdd.update(TABLE_ETUDIANT, values, COL_IDENTIFIANT + " = " + etudiant.getIdEtudiant(), null);
 	}
  
 	public int removeEtudiantWithID(String identifiant){
@@ -103,8 +98,7 @@ public class EtudiantBDD {
 		return bdd.delete(TABLE_ETUDIANT, COL_IDENTIFIANT + " = " +identifiant, null);
 	}
  
-	public Etudiant getEtudiant(String id){
-		
+	public Etudiant getEtudiant(int id){
 		   Cursor cursor =
 		    		bdd.query(TABLE_ETUDIANT, // table
 		    		new String[] {COL_IDENTIFIANT, COL_NOM, COL_PRENOM, COL_DEPARTEMENT, COL_ANNEE, COL_RESPO, COL_POINTS}, // column names
@@ -114,25 +108,18 @@ public class EtudiantBDD {
 		            null, // having
 		            null, // order by
 		            null); // limit
-		 
 
 		    cursor.moveToFirst();
 
 		    // Si aucun enregistrement n'est retourné
 		    if(cursor.getCount() < 1)
 		    	return null;
-		    Etudiant etudiant;
 		    
-			if(cursor.getInt(NUM_COL_RESPO) == 1)
-				etudiant = new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS));
-			else
-				etudiant = new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS));
-			
+		    Etudiant etudiant = new Etudiant(cursor.getInt(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), cursor.getInt(NUM_COL_RESPO) == 1, cursor.getInt(NUM_COL_POINTS));
 			return etudiant;
 		}
 	
-	public ArrayList<Etudiant> getEtudiantsPromo(String departement, int annee)
-	{
+	public ArrayList<Etudiant> getEtudiantsPromo(String departement, int annee) {
 		   Cursor cursor =
 		    		bdd.query(TABLE_ETUDIANT, // table
 		    		new String[] {COL_IDENTIFIANT, COL_NOM, COL_PRENOM, COL_DEPARTEMENT, COL_ANNEE,  COL_RESPO, COL_POINTS}, // column names
@@ -148,9 +135,9 @@ public class EtudiantBDD {
 		    while(!cursor.isAfterLast())
 		    {
 				if(cursor.getInt(NUM_COL_RESPO) == 1)
-					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS)));
+					etudiant.add(new Etudiant(cursor.getInt(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS)));
 				else
-					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS)));			
+					etudiant.add(new Etudiant(cursor.getInt(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS)));			
 				cursor.moveToNext();
 		    }
 			return etudiant;
@@ -173,16 +160,15 @@ public class EtudiantBDD {
 		    while(!cursor.isAfterLast())
 		    {
 				if(cursor.getInt(NUM_COL_RESPO) == 1)
-					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS)));
+					etudiant.add(new Etudiant(cursor.getInt(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), true, cursor.getInt(NUM_COL_POINTS)));
 				else
-					etudiant.add(new Etudiant(cursor.getString(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS)));			
+					etudiant.add(new Etudiant(cursor.getInt(NUM_COL_IDENTIFIANT),cursor.getString(NUM_COL_NOM),cursor.getString(NUM_COL_PRENOM), cursor.getString(NUM_COL_DEPARTEMENT), cursor.getInt(NUM_COL_ANNEE), false, cursor.getInt(NUM_COL_POINTS)));			
 				cursor.moveToNext();
 		    }
 			return etudiant;
 	}
 	
-	public int getNumberOfEtudiantsPromo(String departement, int annee)
-	{
+	public int getNumberOfEtudiantsPromo(String departement, int annee) {
 		   Cursor cursor =
 		    		bdd.query(TABLE_ETUDIANT, // table
 		    		new String[] {COL_IDENTIFIANT, COL_NOM, COL_PRENOM, COL_DEPARTEMENT, COL_ANNEE,  COL_RESPO, COL_POINTS}, // column names
@@ -197,8 +183,7 @@ public class EtudiantBDD {
 			return cursor.getCount();
 	}
 	
-	public int getNumberOfEtudiants()
-	{
+	public int getNumberOfEtudiants() {
 		   Cursor cursor =
 		    		bdd.query(TABLE_ETUDIANT, // table
 		    		new String[] {COL_IDENTIFIANT, COL_NOM, COL_PRENOM, COL_DEPARTEMENT, COL_ANNEE,  COL_RESPO, COL_POINTS}, // column names
@@ -213,11 +198,9 @@ public class EtudiantBDD {
 			return cursor.getCount();
 	}
 	
-	public int ajouterPoints(String id, int nbPts)
-	{
-		ContentValues values = new ContentValues();
-		values.put(COL_POINTS, nbPts);
-		return bdd.update(TABLE_ETUDIANT, values, COL_IDENTIFIANT + " = " + id, null);
+	public void ajouterPoints(int idEtudiant, int nbPts) {
+		bdd.execSQL("UPDATE " + TABLE_ETUDIANT + " SET "
+                 + COL_POINTS + " = " + COL_POINTS +"+"+ nbPts +" WHERE "
+                 + COL_IDENTIFIANT + "=" +idEtudiant);
 	}
-	
 }

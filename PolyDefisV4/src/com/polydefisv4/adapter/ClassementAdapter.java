@@ -1,5 +1,6 @@
 package com.polydefisv4.adapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Color;
@@ -16,12 +17,12 @@ import com.polydefisv4.bean.Etudiant;
 public class ClassementAdapter extends BaseAdapter{
 	private List <Etudiant> listeEtudiant;
 	private Fragment contexte;
-	private Etudiant etudiantConcerne;
+	private ArrayList<Etudiant> etudiantAMettreEnSurbrillance;
 
-	public ClassementAdapter(Fragment contexte, List<Etudiant> listeEtudiant, Etudiant etudiantConcerne) {
+	public ClassementAdapter(Fragment contexte, List<Etudiant> listeEtudiant, ArrayList<Etudiant> etudiantAMettreEnSurbrillance) {
 		this.listeEtudiant = listeEtudiant;
 		this.contexte = contexte;
-		this.etudiantConcerne = etudiantConcerne;
+		this.etudiantAMettreEnSurbrillance = etudiantAMettreEnSurbrillance;
 	}
 
 	@Override
@@ -54,8 +55,8 @@ public class ClassementAdapter extends BaseAdapter{
 		TextView nbPoint = (TextView) layoutItem.findViewById(R.id.nbPoint);
 		nbPoint.setText(String.valueOf(listeEtudiant.get(position).getPoints()));
 		
-		if (listeEtudiant.get(position).equals(etudiantConcerne)) {
-			layoutItem.setBackgroundColor(Color.BLUE);
+		if (etudiantAMettreEnSurbrillance.contains(listeEtudiant.get(position))) {
+			layoutItem.setBackgroundColor(Color.CYAN);
 		} 
 		
 		return layoutItem;

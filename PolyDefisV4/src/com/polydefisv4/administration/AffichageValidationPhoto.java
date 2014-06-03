@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.polydefisv4.R;
+import com.polydefisv4.bdd.SQLManager;
 import com.polydefisv4.bean.defis.Photo;
 
 public class AffichageValidationPhoto extends Fragment implements OnClickListener {
@@ -31,22 +32,26 @@ public class AffichageValidationPhoto extends Fragment implements OnClickListene
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_affichage_validation_photo, container, false);
-		defis = (Photo) getArguments().getSerializable("defis");
+		getActivity().setTitle("Validation d'un photo prise");
 
+		defis = (Photo) getArguments().getSerializable("defis");
+		
 		titreDefis = (TextView) rootView.findViewById(R.id.intitule);
 		titreDefis.setText(defis.getIntitule());
 
 		descriptionDefi = (TextView) rootView.findViewById(R.id.description);
 		descriptionDefi.setText(defis.getDescription());
 
+	    myImageView = (ImageView) rootView.findViewById(R.id.photoPrise);
+
 		File imgFile = new  File(defis.getUrlPhoto());
 		if(imgFile.exists()){
-
-		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-		    ImageView myImage = (ImageView) rootView.findViewById(R.id.photoPrise);
-		    myImage.setImageBitmap(myBitmap);
-
+		    BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inSampleSize = 8;
+		    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath(),options);
+		    myImageView.setImageBitmap(myBitmap);
+		} else {
+			Log.e(getClass().getName(), "Url de la photo n'existe pas ("+defis.getUrlPhoto()+")");
 		}
 		
 		boutonOk = (Button) rootView.findViewById(R.id.boutonValider);
@@ -60,13 +65,18 @@ public class AffichageValidationPhoto extends Fragment implements OnClickListene
 
 	@Override
 	public void onClick(View v) {
-		Button bouton = (Button) v;
-		if(bouton.equals(boutonAnnuler)) {
-			Toast.makeText(getActivity(), "Refus du defis " + defis.getIntitule(), Toast.LENGTH_LONG).show();
-		} else if(bouton.equals(boutonOk)) {
-			Toast.makeText(getActivity(), "Acceptation du defis " + defis.getIntitule(), Toast.LENGTH_LONG).show();
+		SQLManager manager = new SQLManager(getActivity());
+		if(v.equals(boutonAnnuler)) {
+			Toast.makeText(getActivity(), "La photo à bien été refusée", Toast.LENGTH_LONG).show();
+			manager.refuserPhotoPrise(defis);
+		} else if(v.equals(boutonOk)) {
+			Toast.makeText(getActivity(), "La photo à bien été validée", Toast.LENGTH_LONG).show();
+			manager.validerPhotoPrise(defis);
 		} else {
 			Log.e("AffichageValidationPhoto", "On click inconnu");
+			return;
 		}
+		
+		getActivity().onBackPressed();
 	}
 }

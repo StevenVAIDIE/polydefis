@@ -1,55 +1,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="20dp"
+    android:background="@color/background"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/profilNom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="20dp"
-        android:text="Intitulé" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
-    <EditText
-        android:id="@+id/nomDefi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:singleLine="true" >
-        <requestFocus />
-    </EditText>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/profilPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:text="Description" />
+            <TextView
+                android:id="@+id/profilNom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:labelFor="@+id/nomDefi"
+                android:text="@string/intitule" />
 
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ems="10"
-        android:inputType="textMultiLine" />
+            <EditText
+                android:id="@+id/nomDefi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:inputType="text"
+                android:singleLine="true" >
 
-    <Spinner
-        android:id="@+id/typeDefi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/typeDefi"
-        android:paddingTop="15dp" >
-    </Spinner>
+                <requestFocus />
+            </EditText>
 
-    <Spinner
-        android:id="@+id/portee"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/portee"
-        android:paddingTop="15dp" />
+            <TextView
+                android:id="@+id/profilPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:labelFor="@id/description"
+                android:text="@string/description" />
+
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textMultiLine" />
+
+            <Spinner
+                android:id="@+id/typeDefi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/typeDefi"
+                android:paddingTop="15dp" >
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/portee"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/portee"
+                android:paddingTop="15dp" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/validation"
@@ -58,5 +76,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="10dp"
         android:background="@drawable/bouton_application"
-        android:text="Valider" />
+        android:text="@string/valider" />
+
 </LinearLayout>

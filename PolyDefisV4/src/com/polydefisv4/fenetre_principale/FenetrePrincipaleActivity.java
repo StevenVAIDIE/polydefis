@@ -1,5 +1,8 @@
 package com.polydefisv4.fenetre_principale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -23,12 +26,10 @@ import com.polydefisv4.administration.AjoutAdministrateurFragment;
 import com.polydefisv4.ajoutDefis.AjoutDefiFragment;
 import com.polydefisv4.bean.Etudiant;
 import com.polydefisv4.classement.ClassementFragment;
-import com.polydefisv4.listeDefis.ListeDefisRealiseFragment;
+import com.polydefisv4.listeDefis.ListeDefisFragment;
 import com.polydefisv4.listeDefis.TypeUtilisation;
 import com.polydefisv4.menu_principal.MenuPrincipalFragment;
 import com.polydefisv4.profil.ProfilFragment;
-
-
 
 public class FenetrePrincipaleActivity extends FragmentActivity implements OnItemClickListener {
 	private DrawerLayout layoutMenuLateral;
@@ -86,14 +87,37 @@ public class FenetrePrincipaleActivity extends FragmentActivity implements OnIte
 		layoutMenuLateral.setDrawerListener(mDrawerToggle);
 
 		if (savedInstanceState == null) {
-			displayView(getString(R.string.accueil));
+			displayView(getString(R.string.accueil),true);
 		}
 	}
 
+	@Override
+	public void onBackPressed() {
+		if(getSupportFragmentManager().getBackStackEntryCount()==0) {
+			quitterApplication();
+		} else {
+			super.onBackPressed();
+		}
+	}
+	
+	private void quitterApplication() {
+		new AlertDialog.Builder(this).setTitle("Quitter").setMessage("Voulez vous vraiment quitter ?")
+        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+          	  System.exit(0);
+            }
+        })
+        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+            	dialog.cancel();
+            }
+        }).create().show();	
+	}
+	
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		TextView bouton = (TextView) view;
-		displayView(bouton.getText().toString());
+		displayView(bouton.getText().toString(),false);
 	}
 
 	@Override
@@ -108,46 +132,38 @@ public class FenetrePrincipaleActivity extends FragmentActivity implements OnIte
 			return true;
 		}
 		switch (item.getItemId()) {
-		case R.id.menu_quitter:
-			quitter();
+		case R.id.menu_deconnexion:
+			deconnexion();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
-	@Override
-	public void onBackPressed() {
-		Log.e("", getTitle().toString() + "!=" + getString(R.string.accueil));
-		if (getTitle().toString().equals(getString(R.string.accueil))) {
-			quitter();
-		} else {
-			super.onBackPressed();
-			//displayView(getString(R.string.accueil));
-		}
-	}
-
-	private void quitter() {
+	private void deconnexion() {
+		SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+		SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
+		loginPrefsEditor.clear();
+		loginPrefsEditor.commit();
 		finish();
-		System.exit(0);
 	}
-
+	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		boolean menuLateralOuvert = layoutMenuLateral
 				.isDrawerOpen(listViewMenuLateral);
-		menu.findItem(R.id.menu_quitter).setVisible(!menuLateralOuvert);
+		menu.findItem(R.id.menu_deconnexion).setVisible(!menuLateralOuvert);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	private void displayView(String nomFragment) {
+	private void displayView(String nomFragment, boolean debut) {
 		Fragment fragment = null;
 		Bundle bundle = new Bundle();
 
 		if (nomFragment.equals(getString(R.string.accueil))) {
 			fragment = new MenuPrincipalFragment();
 		} else if (nomFragment.equals(getString(R.string.liste_des_defis_a_realiser))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.VisualisationDefisARealiser);
 		} else if (nomFragment.equals(getString(R.string.profil))) {
 			fragment = new ProfilFragment();
@@ -162,13 +178,13 @@ public class FenetrePrincipaleActivity extends FragmentActivity implements OnIte
 		} else if (nomFragment.equals(getString(R.string.ajout_respo))) {
 			fragment = new AjoutAdministrateurFragment();
 		} else if (nomFragment.equals(getString(R.string.valider_proposition_defis))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationPropositionDefis);
 		} else if (nomFragment.equals(getString(R.string.valider_defis_realise))) {
-			fragment = new ListeDefisRealiseFragment();
+			fragment = new ListeDefisFragment();
 			bundle.putSerializable("typeUtilisation", TypeUtilisation.AdministrationValidationPhoto);
-		} else if (nomFragment.equals(getString(R.string.quitter))) {
-			quitter();
+		} else if (nomFragment.equals(getString(R.string.deconnexion))) {
+			deconnexion();
 		} else {
 			Log.e(getClass().getName(), "Fragment introuvable");
 		}
@@ -180,13 +196,12 @@ public class FenetrePrincipaleActivity extends FragmentActivity implements OnIte
 			FragmentManager fragmentManager = getSupportFragmentManager();
 			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.frame_container, fragment);
-			fragmentTransaction.addToBackStack(null);
+			
+			if(!debut) {
+				fragmentTransaction.addToBackStack(null);
+			}
 			fragmentTransaction.commit();
 
-			// update selected item and title, then close the drawer
-			listViewMenuLateral.setItemChecked(3, true);
-			listViewMenuLateral.setSelection(4);
-			setTitle(nomFragment);
 			layoutMenuLateral.closeDrawer(listViewMenuLateral);
 		} else {
 			Log.e("FenetrePrincipaleActivity",

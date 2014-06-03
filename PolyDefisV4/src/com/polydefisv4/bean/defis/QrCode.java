@@ -5,14 +5,18 @@ import java.util.Date;
 import com.polydefisv4.bean.Defi;
 
 public class QrCode extends Defi {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 876780732416078189L;
 	private String qrCode; 
 	
-	public QrCode(int id, String idEtudiant, String intitule, String description, Date dateFin, int etatAcceptation, int nombrePoint, String portee, String qrCode) {
-		super(id, idEtudiant, intitule, description, dateFin, etatAcceptation, nombrePoint, portee);
+	public QrCode(int id, int idEtudiant, String intitule, String description, Date dateFin, int nombrePoint, int etatAcceptation, String portee, String qrCode) {
+		super(id, idEtudiant, intitule, description, dateFin, nombrePoint, etatAcceptation, portee);
 		this.qrCode = qrCode;
 	}
 	
-	public QrCode(String idEtudiant, String intitule, String description, int etatAcceptation, 
+	public QrCode(int idEtudiant, String intitule, String description, int etatAcceptation, 
 			String portee) {
 		super(idEtudiant, intitule, description, etatAcceptation, portee);
 	}
